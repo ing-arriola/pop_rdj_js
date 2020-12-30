@@ -16,9 +16,9 @@
 
 ## Prototypes - Mockups
 ### Main page
-![Optional Text](./Prototypes/Main.png)
-![Optional Text](./Prototypes/About us.png)
-![Optional Text](./Prototypes/Mission.png)
+![Optional Text](./Prototypes/Main.PNG)
+![Optional Text](./Prototypes/About%20us.PNG)
+![Optional Text](./Prototypes/Mission.PNG)
 ### Sign up form
 ![Optional Text](./Prototypes/S-up%201.PNG)
 ![Optional Text](./Prototypes/S-up%202.PNG)
