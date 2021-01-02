@@ -5,7 +5,13 @@ const Register = () => (
   <div>
     <h1>Any place in your app!</h1>
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{
+        name: "",
+        lastname: "",
+        age: "",
+        email: "",
+        password: "",
+      }}
       validate={(values) => {
         const errors = {};
         if (!values.email) {
