@@ -12,7 +12,7 @@ import HomeSection from "../Container/HomeSection";
 const HomePage = () => {
     return (
         <>
-            <div className="vh-100">
+            <div>
                 <NavbarContainer/>
                 <HomeSection/>
                 <FooterContainer/>
