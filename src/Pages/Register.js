@@ -4,7 +4,7 @@ import FormContainer from "../Container/FormContainer";
 
 const Register = () => (
   <div>
-    <h1>Registrate!</h1>
+    <h1>Crea tu perfil de usuario</h1>
 
     <FormContainer isSubmitting />
   </div>
