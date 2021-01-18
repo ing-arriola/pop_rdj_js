@@ -1,19 +1,21 @@
 import "./App.css";
-import {Route, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Layout from "./Components/Hoc/Layout";
 import HomePage from "./Pages/HomePage";
 import React from "react";
 import Register from "./Pages/Register";
 
 function App() {
-    return (
+  return (
+    <Router>
+      <Layout>
         <Switch>
-            <Route path="/home">
-                <HomePage/>
-            </Route>
-            <Route path="/register">
-                <Register/>
-            </Route>
-        </Switch>);
+          <Route path="/signup" component={Register}></Route>
+          <Route path="/" component={HomePage}></Route>
+        </Switch>
+      </Layout>
+    </Router>
+  );
 }
 
 export default App;
