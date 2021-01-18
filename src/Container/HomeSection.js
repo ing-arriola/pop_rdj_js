@@ -14,9 +14,11 @@ export default function HomeSection() {
             <h1 className="text-center">
               Programa de oportunidades profesionales
             </h1>
-            <Button className="btn btn-primary btn-lg btn-block ">
-              Unirme
-            </Button>
+            <Link to={"/signup"} style={{width: 300}}>
+                            <Button className="btn btn-primary btn-lg btn-block ">
+                                Unirme
+                            </Button>
+            </Link>
             <p>
               ¿Ya tienes cuenta?<Link> Iniciar Sesion</Link>
             </p>
