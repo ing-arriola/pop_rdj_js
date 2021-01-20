@@ -11,7 +11,7 @@ export default function NavbarContainer (){
                     {/*<Nav.Link href="#link">Ingresa </Nav.Link>
                     <p className="m-auto">/</p>
                     <Nav.Link>Registrate</Nav.Link>*/}
-                    <Nav.Link href="#home">Sobre nosotros</Nav.Link>
+                    <Nav.Link href="https://rdjfuturo.netlify.app/about/" target="_blank">Sobre nosotros</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
