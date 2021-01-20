@@ -15,13 +15,13 @@ export default function HomeSection() {
               Programa de oportunidades profesionales
             </h1>
             <Link to={"/signup"} style={{width: 300}}>
-                            <Button className="btn btn-primary btn-lg btn-block ">
-                                Unirme
-                            </Button>
+              <Button className="btn btn-lg btn-block " style={{backgroundColor: "#F9A826", borderBlockColor: "#F9A826", boxShadow: "#F9A826", borderBottomColor: "#F9A826", borderColor: "#F9A826"}}>
+                Unirme
+              </Button>
             </Link>
-            <p>
+            {/*<p>
               ¿Ya tienes cuenta?<Link> Iniciar Sesion</Link>
-            </p>
+            </p>*/}
           </div>
           <div className="col-md-7">
             <img
