@@ -5,7 +5,9 @@ import imgLop from "../Resources/undraw_investment_data_yfvt.svg";
 import imtAbout from "../Resources/undraw_Business_decisions_re_84ag.svg";
 import imtOurMission from "../Resources/undraw_Social_ideas_re_j5v4.svg";
 import Mode from "../Resources/undraw_working_remotely_jh40.svg";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
 export default function HomeSection() {
     return (
         <div>
@@ -40,6 +42,7 @@ export default function HomeSection() {
                         <img
                             src={imgLop}
                             width={700}
+                            data-aos="zoom-in-left"
                             className="p-3 img-fluid"
                             alt="Responsive image"
                         />
@@ -64,6 +67,7 @@ export default function HomeSection() {
                         <img
                             src={imtAbout}
                             width={450}
+                            data-aos="zoom-in-right"
                             className="img-fluid"
                             alt="Responsive image"
                         />
@@ -87,6 +91,7 @@ export default function HomeSection() {
                         <img
                             src={imtOurMission}
                             width={450}
+                            data-aos="zoom-in-left"
                             className="img-fluid"
                             alt="Responsive image"
                         />
@@ -107,7 +112,8 @@ export default function HomeSection() {
                         <img
                             src={Mode}
                             width={450}
-                            className="img-fluid"
+                            className="img-fluid data"
+                            data-aos="zoom-in-right"
                             alt="Responsive image"
                         />
                     </div>
