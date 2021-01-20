@@ -25,12 +25,12 @@ export default function FooterContainer() {
                             <li>
                                 <a href="https://www.facebook.com/Red-de-J%C3%B3venes-del-Futuro-101271765014839" target="_blank" className="text-dark">Facebook</a>
                             </li>
-                            <li>
+                            {/*<li>
                                 <a href="/" target="_blank" className="text-dark">Twitter</a>
                             </li>
                             <li>
                                 <a href="/" target="_blank" className="text-dark">LinkedIn</a>
-                            </li>
+                            </li>*/}
                         </ul>
                     </div>
                 </div>

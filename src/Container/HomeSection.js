@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import imgLop from "../Resources/undraw_investment_data_yfvt.svg";
 import imtAbout from "../Resources/undraw_Business_decisions_re_84ag.svg";
 import imtOurMission from "../Resources/undraw_Social_ideas_re_j5v4.svg";
+import Mode from "../Resources/undraw_working_remotely_jh40.svg";
 
 export default function HomeSection() {
     return (
@@ -82,7 +83,7 @@ export default function HomeSection() {
                             Leer mas
                         </a>
                     </div>
-                    <div className="col-sm order-md-1">
+                    <div className="col-sm order-md-1" >
                         <img
                             src={imtOurMission}
                             width={450}
@@ -91,16 +92,26 @@ export default function HomeSection() {
                         />
                     </div>
                 </Row>
-                <div className="pt-5">
-                    <h1>Modalidades</h1>
-                    <ul>
-                        <li>Pasantías virtuales</li>
-                        <li>La cual podrás realizar de forma remota desde tu hogar.</li>
-                        <li>Pasantías presenciales</li>
-                        <li>Asistiendo a las instalaciones de instituciones públicas, privadas y no gubernamentales.
-                        </li>
-                    </ul>
-                </div>
+                <Row className="pt-5">
+                    <div className="col-sm d-flex flex-column align-items-center justify-content-center">
+                        <h1>Modalidades</h1>
+                        <ul>
+                            <li>Pasantías virtuales</li>
+                            <li>La cual podrás realizar de forma remota desde tu hogar.</li>
+                            <li>Pasantías presenciales</li>
+                            <li>Asistiendo a las instalaciones de instituciones públicas, privadas y no gubernamentales.
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="col-sm order-md-1">
+                        <img
+                            src={Mode}
+                            width={450}
+                            className="img-fluid"
+                            alt="Responsive image"
+                        />
+                    </div>
+                </Row>
             </Container>
         </div>
     );
