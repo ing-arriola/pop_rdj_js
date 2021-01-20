@@ -1,31 +1,24 @@
 import React from "react";
-import { Formik } from "formik";
 import FormContainer from "../Container/FormContainer";
+import signUp from "../Resources/signup.svg";
+
 const Register = () => (
-  <div>
-    <h1>Any place in your app!</h1>
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      validate={(values) => {
-        const errors = {};
-        if (!values.email) {
-          errors.email = "Required";
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = "Invalid email address";
-        }
-        return errors;
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
-    >
-      {({ isSubmitting }) => <FormContainer isSubmitting={isSubmitting} />}
-    </Formik>
+  <div className="my-3">
+    <h1 className="text-center ">¡Bienvenido!👋</h1>
+    <h3 className="text-center ">
+      ¡Estas a un paso de una gran experiencia!😃
+    </h3>
+    <h3 className="text-center ">
+      Crea tu perfil, ingresando la siguiente informacion
+    </h3>
+    <img
+      src={signUp}
+      width={450}
+      className="p-3 img-fluid mx-auto d-block"
+      alt="Responsive image"
+    />
+
+    <FormContainer isSubmitting />
   </div>
 );
 

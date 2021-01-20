@@ -1,7 +1,15 @@
 import React from "react";
 
+import HomeSection from "../Container/HomeSection";
+
 const HomePage = () => {
-  return <div>This is the website home page, please create it :)</div>;
+  return (
+    <>
+      <div>
+        <HomeSection />
+      </div>
+    </>
+  );
 };
 
 export default HomePage;
