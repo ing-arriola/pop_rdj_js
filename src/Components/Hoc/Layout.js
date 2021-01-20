@@ -1,5 +1,5 @@
 import React from "react";
-import Aux from "./Aux";
+import Aux from "./_Aux";
 import NavbarContainer from "../../Container/NavbarContainer";
 import FooterContainer from "../../Container/FooterContainer";
 
