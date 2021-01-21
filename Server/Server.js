@@ -21,6 +21,6 @@ mongoose.connect(uri,
 const authRoutes = require('./controller/action');
 app.use('/api/user', authRoutes);
 // start the server in the port 3005 !
-app.listen(3000, function () {
+app.listen(3005, function () {
     console.log('App listening on port 3005.');
 });
