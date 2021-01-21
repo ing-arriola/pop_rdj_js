@@ -6,13 +6,27 @@ const FormContainer = () => {
     name: "",
     lastname: "",
     age: "",
+    location: "",
     phone: "",
     phone2: "",
     email: "",
+    education: "",
+    profession: "",
     about: "",
   });
 
-  const { name, lastname, age, phone, phone2, email, about } = newUser;
+  const {
+    name,
+    lastname,
+    age,
+    location,
+    phone,
+    phone2,
+    email,
+    education,
+    profession,
+    about,
+  } = newUser;
 
   const onChange = (e) =>
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
@@ -60,21 +74,30 @@ const FormContainer = () => {
       </Form.Group>
       <Form.Group controlId="formLocation">
         <Form.Label>Departamento de residencia</Form.Label>
-        <Form.Control as="select">
-          <option>Ahuchapan</option>
-          <option>Cabañas</option>
-          <option>Chalatenango</option>
-          <option>Cuscatlan</option>
-          <option>La Libertad</option>
-          <option>La Paz</option>
-          <option>La Union</option>
-          <option>Morazan</option>
-          <option>Santa Ana</option>
-          <option>San Salvador</option>
-          <option>San Miguel</option>
-          <option>San Vicente</option>
-          <option>Sonsonate</option>
-          <option>Usulutan</option>
+        <Form.Control
+          as="select"
+          name="location"
+          value={location}
+          onChange={onChange}
+          required
+        >
+          <option value="" selected hidden>
+            Selecciona tu departamento
+          </option>
+          <option value="Ahuchapan">Ahuchapan</option>
+          <option value="Cabañas">Cabañas</option>
+          <option value="Chalatenango">Chalatenango</option>
+          <option value="Cuscatlan">Cuscatlan</option>
+          <option value="La Libertad">La Libertad</option>
+          <option value="La Paz">La Paz</option>
+          <option value="La Union">La Union</option>
+          <option value="Morazan">Morazan</option>
+          <option value="Santa Ana">Santa Ana</option>
+          <option value="San Salvador">San Salvador</option>
+          <option value="San Miguel">San Miguel</option>
+          <option value="San Vicente">San Vicente</option>
+          <option value="Sonsonate">Sonsonate</option>
+          <option value="Usulutan">Usulutan</option>
         </Form.Control>
       </Form.Group>
       <Form.Group controlId="formPhone">
@@ -113,30 +136,50 @@ const FormContainer = () => {
           onChange={onChange}
           required
         />
+        <Form.Text className="text-muted">
+          Utiliza un email con aspecto profesional
+        </Form.Text>
       </Form.Group>
 
       <Form.Group controlId="formEducation">
-        <Form.Label>Nivel de estudios</Form.Label>
-        <Form.Control as="select">
-          <option>Bachillerato</option>
-          <option>Universidad (No graduado) </option>
-          <option>Universidad (Gradudado)</option>
+        <Form.Label>Respecto a la universidad eres</Form.Label>
+        <Form.Control
+          name="education"
+          as="select"
+          value={education}
+          onChange={onChange}
+          required
+        >
+          <option value="" selected hidden>
+            Elige una opcion
+          </option>
+          <option>Estudiante activo</option>
+          <option>Egresado</option>
+          <option>Gradudado</option>
         </Form.Control>
       </Form.Group>
 
       <Form.Group controlId="formProfession">
-        <Form.Label>Selecciona tu area de estudios</Form.Label>
-        <Form.Control as="select">
+        <Form.Label>Selecciona tu area de estudios </Form.Label>
+        <Form.Control
+          name="profession"
+          as="select"
+          value={profession}
+          onChange={onChange}
+          required
+        >
+          <option value="" selected hidden>
+            Selecciona tu area de estudios
+          </option>
+          <option>Adminstracion de empresas turisticas</option>
           <option>Comunicaciones</option>
-          <option>Docencia</option>
-          <option>Economia</option>
-          <option>Humanidades</option>
+          <option>Diseño grafico</option>
           <option>Idiomas</option>
-          <option>Ingenieria</option>
-          <option>Leyes</option>
-          <option>Salud</option>
-          <option>Tecnico</option>
-          <option>Mi area de estudio no esta en la lista</option>
+          <option>Periodismo</option>
+          <option>Publicidad</option>
+          <option>Psicologia</option>
+          <option>Relaciones publicas</option>
+          <option>Salud (enfermeria)</option>
         </Form.Control>
       </Form.Group>
 
@@ -148,7 +191,7 @@ const FormContainer = () => {
           as="textarea"
           name="about"
           value={about}
-          rows={5}
+          rows={4}
           onChange={onChange}
           required
         />
