@@ -57,3 +57,17 @@ const userSchema = mongoose.Schema({
 })
 
 module.exports = mongoose.model('User', userSchema);
+/*
+*{
+    "name": "Raul",
+    "lastname": "sda",
+    "age": 12,
+    "location": "SS",
+    "phone": 78452123,
+    "phone2": 78452123,
+    "email": "kira200017717@uca.sdas",
+    "education": "Universdad",
+    "profession": "ING",
+    "about": "MEE"
+  }
+* */
