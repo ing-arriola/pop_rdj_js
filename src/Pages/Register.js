@@ -3,7 +3,7 @@ import FormContainer from "../Container/FormContainer";
 import signUp from "../Resources/signup.svg";
 
 const Register = () => (
-  <div className="my-3">
+  <div className="mt-3 form-container mb-5">
     <h1 className="text-center ">¡Bienvenido!👋</h1>
     <h3 className="text-center ">
       ¡Estas a un paso de una gran experiencia!😃

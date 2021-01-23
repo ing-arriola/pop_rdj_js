@@ -1,0 +1,42 @@
+.heading {
+  font-size: 3rem;
+}
+
+.sub-title {
+  font-size: 2.5rem;
+}
+
+.weight-300 {
+  font-weight: 300;
+}
+
+.no-undeline:hover {
+  text-decoration: none;
+  transform: scale(1.08);
+  transition: transform 330ms ease-in-out;
+}
+
+.form-container {
+  animation: moveFromBottom 0.7s ease-in;
+}
+
+.btn-form {
+  width: 40%;
+}
+
+.btn-form:hover {
+  transform: scale(1.08);
+  transition: transform 330ms ease-in-out;
+}
+
+@keyframes moveFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(4rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}

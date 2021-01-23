@@ -197,8 +197,19 @@ const FormContainer = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit
+      <Button
+        className="btn btn-lg btn-block btn-form mx-auto"
+        variant="primary"
+        type="submit"
+        style={{
+          backgroundColor: "#FE3E00",
+          borderBlockColor: "#FE3E00",
+          boxShadow: "#FE3E00",
+          borderBottomColor: "#FE3E00",
+          borderColor: "#FE3E00",
+        }}
+      >
+        Enviar
       </Button>
     </Form>
   );
