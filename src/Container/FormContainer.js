@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Form, Button, Modal} from "react-bootstrap";
 import AuthServices from "../configs/AuthServices"
-
+import gifTenor from "../Resources/tenor.gif"
 const FormContainer = () => {
     const [show, setShow] = useState(false);
 
@@ -219,11 +219,15 @@ const FormContainer = () => {
                 Enviar
             </Button>
         </Form>
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose}
+           aria-labelledby="contained-modal-title-vcenter"
+           centered>
         <Modal.Header closeButton>
             <Modal.Title>Formulario enviado</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Hemos recibido tus datos correctamente.</Modal.Body>
+        <Modal.Body ><div className="d-flex flex-column justify-content-center align-items-center">
+            Hemos recibido tus datos correctamente. <img src={gifTenor} alt="" width={100}/>
+        </div></Modal.Body>
         <Modal.Footer>
             <Button variant="primary" onClick={handleClose} style={{
                 backgroundColor: "#FE3E00",
