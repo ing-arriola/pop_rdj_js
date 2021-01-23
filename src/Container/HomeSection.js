@@ -86,14 +86,14 @@ export default function HomeSection() {
 
       <Container className="pt-5 mb-5 pb-5">
         <Row>
-          <div className="col-sm d-flex flex-column align-items-center justify-content-center">
+          <div className="col-md d-flex flex-column align-items-center justify-content-center">
             <h2 className="sub-title">¿Quiénes puede participar?</h2>
             <p className="lead">
               Estudiantes, egresados y graduados de:
               <ul className="list-unstyled">{whoCan}</ul>
             </p>
           </div>
-          <div className="col-sm ">
+          <div className="col-md ">
             <img
               src={imtAbout}
               width={450}
@@ -106,14 +106,14 @@ export default function HomeSection() {
       </Container>
       <Container className="mb-5 pb-5">
         <Row>
-          <div className="col-sm order-md-2 d-flex flex-column align-items-center justify-content-center">
+          <div className="col-md order-md-2 d-flex flex-column align-items-center justify-content-center">
             <h2 className="sub-title">¿Cuáles son los beneficios?</h2>
 
             <p className="lead">
               <ul className="list-unstyled">{popBenefits}</ul>
             </p>
           </div>
-          <div className="col-sm order-md-1">
+          <div className="col-md order-md-1">
             <img
               src={imtOurMission}
               width={450}
@@ -124,7 +124,7 @@ export default function HomeSection() {
           </div>
         </Row>
         <Row className=" mt-5 pt-5">
-          <div className="col-sm d-flex flex-column align-items-center justify-content-center">
+          <div className="col-md d-flex flex-column align-items-center justify-content-center">
             <h2 className="sub-title">Modalidades</h2>
             <ul className="lead list-unstyled ">
               <li>
@@ -140,7 +140,7 @@ export default function HomeSection() {
               </li>
             </ul>
           </div>
-          <div className="col-sm order-md-1">
+          <div className="col-md order-md-1">
             <img
               src={Mode}
               width={450}
