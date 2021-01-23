@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-
+import AuthServices from "../configs/AuthServices"
 const FormContainer = () => {
   const [newUser, setNewUser] = useState({
     name: "",
@@ -34,6 +34,7 @@ const FormContainer = () => {
   const sendData = (e) => {
     e.preventDefault();
     //here you just need to send this the newUser Object
+      AuthServices.register(newUser);
     console.log(newUser);
   };
 
