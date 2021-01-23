@@ -58,9 +58,18 @@ export default function HomeSection() {
           <div className="col-sm d-flex flex-column align-items-center justify-content-center">
             <h2 className="sub-title">¿Quiénes puede participar?</h2>
             <p className="lead">
-              Estudiantes, egresados y graduados de comunicaciones, periodismo,
-              publicidad, diseño gráfico, relaciones públicas, psicología,
-              idiomas, administración de empresas turísticas y salud.
+              Estudiantes, egresados y graduados de:
+              <ul>
+                <li>Comunicaciones</li>
+                <li>Periodismo</li>
+                <li>Publicidad</li>
+                <li>Diseño gráfico</li>
+                <li>Relaciones públicas</li>
+                <li>Psicología</li>
+                <li>Idiomas</li>
+                <li>Administración de empresas turísticas</li>
+                <li>Salud</li>
+              </ul>
             </p>
           </div>
           <div className="col-sm ">
@@ -74,7 +83,7 @@ export default function HomeSection() {
           </div>
         </Row>
       </Container>
-      <Container className="pt-5 mb-5 pb-5">
+      <Container className="mb-5 pb-5">
         <Row>
           <div className="col-sm order-md-2 d-flex flex-column align-items-center justify-content-center">
             <h2 className="sub-title">¿Cuáles son los beneficios?</h2>
@@ -96,7 +105,7 @@ export default function HomeSection() {
             />
           </div>
         </Row>
-        <Row className="pt-5">
+        <Row className=" mt-5 pt-5">
           <div className="col-sm d-flex flex-column align-items-center justify-content-center">
             <h2 className="sub-title">Modalidades</h2>
             <ul className="lead">

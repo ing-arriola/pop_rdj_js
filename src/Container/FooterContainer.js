@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFacebook, FaGlobeAmericas } from "react-icons/fa";
 import logo from "../Resources/logo_rjf.png";
 
 export default function FooterContainer() {
@@ -27,35 +28,27 @@ export default function FooterContainer() {
             </p>
           </div>
 
-          <div className="col-lg-3 col-md-12 mb-4 mb-md-0 ml-auto">
-            <ul className="list-unstyled">
-              <li>
-                <a
-                  href="https://rdjfuturo.netlify.app/about/"
-                  target="_blank"
-                  className="text-dark"
-                >
-                  Pagina web
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/Red-de-J%C3%B3venes-del-Futuro-101271765014839"
-                  target="_blank"
-                  className="text-dark"
-                >
-                  Facebook
-                </a>
-              </li>
-            </ul>
+          <div className="d-flex justify-content-center align-items-center col-lg-2 col-md-12 mb-4 mb-md-0 ml-auto main-footer__social ">
+            <a
+              href="https://rdjfuturo.netlify.app"
+              target="_blank"
+              className="text-dark"
+            >
+              <FaGlobeAmericas size={30} color={"#FE3E00"} />
+            </a>
+
+            <a
+              href="https://www.facebook.com/Red-de-J%C3%B3venes-del-Futuro-101271765014839"
+              target="_blank"
+              className="text-dark"
+            >
+              <FaFacebook size={30} color={"#FE3E00"} />
+            </a>
           </div>
         </div>
       </div>
       <div className="text-center p-3">
-        © 2020 Copyright:
-        <a className="text-dark" href="https://rdjfuturo.netlify.app/">
-          rdjfuturo.netlify.app/
-        </a>
+        Red de jóvenes del futuro {new Date().getFullYear()} ©
       </div>
     </footer>
   );
