@@ -84,13 +84,13 @@ const FormContainer = () => {
           <option value="" selected hidden>
             Selecciona tu departamento
           </option>
-          <option value="Ahuchapan">Ahuchapan</option>
+          <option value="Ahuchapan">Ahuchapán</option>
           <option value="Cabañas">Cabañas</option>
           <option value="Chalatenango">Chalatenango</option>
           <option value="Cuscatlan">Cuscatlan</option>
           <option value="La Libertad">La Libertad</option>
           <option value="La Paz">La Paz</option>
-          <option value="La Union">La Union</option>
+          <option value="La Union">La Unión</option>
           <option value="Morazan">Morazan</option>
           <option value="Santa Ana">Santa Ana</option>
           <option value="San Salvador">San Salvador</option>
@@ -101,23 +101,23 @@ const FormContainer = () => {
         </Form.Control>
       </Form.Group>
       <Form.Group controlId="formPhone">
-        <Form.Label>Telefono</Form.Label>
+        <Form.Label>Teléfono</Form.Label>
         <Form.Control
           name="phone"
           value={phone}
           type="text"
-          placeholder="Telefono principal"
+          placeholder="Teléfono principal"
           onChange={onChange}
           required
         />
       </Form.Group>
       <Form.Group controlId="formPhone2">
-        <Form.Label>Telefono secundario</Form.Label>
+        <Form.Label>Teléfono secundario</Form.Label>
         <Form.Control
           name="phone2"
           value={phone2}
           type="text"
-          placeholder="Telefono secundario"
+          placeholder="Teléfono secundario"
           onChange={onChange}
           required
         />
@@ -127,12 +127,12 @@ const FormContainer = () => {
         </Form.Text>
       </Form.Group>
       <Form.Group controlId="formEmail">
-        <Form.Label>Correo electronico</Form.Label>
+        <Form.Label>Correo electrónico</Form.Label>
         <Form.Control
           name="email"
           value={email}
           type="email"
-          placeholder="correo electronico"
+          placeholder="correo electrónico"
           onChange={onChange}
           required
         />
@@ -151,7 +151,7 @@ const FormContainer = () => {
           required
         >
           <option value="" selected hidden>
-            Elige una opcion
+            Elige una opción
           </option>
           <option>Estudiante activo</option>
           <option>Egresado</option>
@@ -160,7 +160,7 @@ const FormContainer = () => {
       </Form.Group>
 
       <Form.Group controlId="formProfession">
-        <Form.Label>Selecciona tu area de estudios </Form.Label>
+        <Form.Label>Selecciona tu área de estudios </Form.Label>
         <Form.Control
           name="profession"
           as="select"
@@ -169,9 +169,9 @@ const FormContainer = () => {
           required
         >
           <option value="" selected hidden>
-            Selecciona tu area de estudios
+            Selecciona tu área de estudios
           </option>
-          <option>Adminstracion de empresas turisticas</option>
+          <option>Adminstración de empresas turísticas</option>
           <option>Comunicaciones</option>
           <option>Diseño grafico</option>
           <option>Idiomas</option>

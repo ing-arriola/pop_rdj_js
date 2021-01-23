@@ -6,9 +6,40 @@ import imtAbout from "../Resources/participants.svg";
 import imtOurMission from "../Resources/benefit.svg";
 import Mode from "../Resources/kinda.svg";
 import AOS from "aos";
+import { FaRegCheckCircle, FaCheck, FaCheckCircle } from "react-icons/fa";
 import "aos/dist/aos.css";
+
 AOS.init();
 export default function HomeSection() {
+  const listProfessions = [
+    "Periodismo",
+    "Publicidad",
+    "Diseño gráfico",
+    "Relaciones públicas",
+    "Psicología",
+    "Idiomas",
+    "Administración de empresas turísticas",
+    "Salud",
+  ];
+
+  const benefits = [
+    "Podrás poner en práctica tu conocimiento, competencias y habilidades",
+    "Adquirirás experiencia laboral y competencias profesionales",
+    "Al finalizar tu pasantía, recibirás carta de recomendación y diploma de participación del Programa de Oportunidades Profesionales.",
+  ];
+
+  const whoCan = listProfessions.map((profession) => (
+    <li>
+      <FaRegCheckCircle color={"#FE3E00"} /> {profession}
+    </li>
+  ));
+
+  const popBenefits = benefits.map((benefit) => (
+    <li>
+      <FaCheck color={"#FE3E00"} /> {benefit}
+    </li>
+  ));
+
   return (
     <div>
       <Container fluid className="mt-5 mb-5 pb-5 pt-5">
@@ -59,17 +90,7 @@ export default function HomeSection() {
             <h2 className="sub-title">¿Quiénes puede participar?</h2>
             <p className="lead">
               Estudiantes, egresados y graduados de:
-              <ul>
-                <li>Comunicaciones</li>
-                <li>Periodismo</li>
-                <li>Publicidad</li>
-                <li>Diseño gráfico</li>
-                <li>Relaciones públicas</li>
-                <li>Psicología</li>
-                <li>Idiomas</li>
-                <li>Administración de empresas turísticas</li>
-                <li>Salud</li>
-              </ul>
+              <ul className="list-unstyled">{whoCan}</ul>
             </p>
           </div>
           <div className="col-sm ">
@@ -87,12 +108,9 @@ export default function HomeSection() {
         <Row>
           <div className="col-sm order-md-2 d-flex flex-column align-items-center justify-content-center">
             <h2 className="sub-title">¿Cuáles son los beneficios?</h2>
+
             <p className="lead">
-              Podrás poner en práctica tu conocimiento, competencias y
-              habilidades. Además adquirirás experiencia laboral, competencias
-              profesionales y al finalizar tu pasantía, recibirás carta de
-              recomendación y diploma de participación del Programa de
-              Oportunidades Profesionales.
+              <ul className="list-unstyled">{popBenefits}</ul>
             </p>
           </div>
           <div className="col-sm order-md-1">
@@ -108,13 +126,14 @@ export default function HomeSection() {
         <Row className=" mt-5 pt-5">
           <div className="col-sm d-flex flex-column align-items-center justify-content-center">
             <h2 className="sub-title">Modalidades</h2>
-            <ul className="lead">
+            <ul className="lead list-unstyled ">
               <li>
+                <FaCheckCircle color={"#FE3E00"} />
                 <strong> Pasantías virtuales:</strong> La cual podrás realizar
                 de forma remota desde tu hogar
               </li>
-
               <li>
+                <FaCheckCircle color={"#FE3E00"} />
                 <strong> Pasantías presenciales:</strong> Asistiendo a las
                 instalaciones de instituciones públicas, privadas y no
                 gubernamentales.

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import logo from "../Resources/logo_rjf.png";
+import logo from "../Resources/logo_pop.png";
 
 export default function NavbarContainer() {
   return (

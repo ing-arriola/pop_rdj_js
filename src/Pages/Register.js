@@ -9,7 +9,7 @@ const Register = () => (
       ¡Estas a un paso de una gran experiencia!😃
     </h3>
     <h3 className="text-center ">
-      Crea tu perfil, ingresando la siguiente informacion
+      Crea tu perfil, ingresando la siguiente información
     </h3>
     <img
       src={signUp}
