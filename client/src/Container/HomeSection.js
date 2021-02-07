@@ -54,7 +54,7 @@ export default function HomeSection() {
               Salvador. Apostando a la reducción de desigualdades, fomentando el
               trabajo decente y crecimiento económico en el país
             </p>
-            <Link className="no-undeline" to={"/signup"} style={{ width: 300 }}>
+            <a className="no-undeline" href='https://rdjfuturo.netlify.app/contactus/' target="_blank" rel="noreferrer" style={{ width: 300 }}>
               <Button
                 className="btn btn-lg btn-block hero-button"
                 style={{
@@ -67,7 +67,7 @@ export default function HomeSection() {
               >
                 Unirme
               </Button>
-            </Link>
+            </a>
             {/*<p>
               ¿Ya tienes cuenta?<Link> Iniciar Sesion</Link>
             </p>*/}

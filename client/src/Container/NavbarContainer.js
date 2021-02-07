@@ -1,5 +1,8 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import LoginButton from '../Components/LoginButton'
+import LogoutButton from '../Components/LogoutButton'
 import logo from "../Resources/logo_pop.png";
 
 export default function NavbarContainer() {
@@ -23,6 +26,13 @@ export default function NavbarContainer() {
           <Nav.Link href="https://rdjfuturo.netlify.app/about/" target="_blank">
             Conocenos!
           </Nav.Link>
+        {/*  <Link to="/users" >
+            Login
+          </Link>
+         
+        <LoginButton/>
+        <LogoutButton/>
+        */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

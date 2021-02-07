@@ -32,6 +32,7 @@ export default function FooterContainer() {
             <a
               href="https://rdjfuturo.netlify.app"
               target="_blank"
+              rel="noreferrer"
               className="text-dark"
             >
               <FaGlobeAmericas size={30} color={"#FE3E00"} />
@@ -39,6 +40,7 @@ export default function FooterContainer() {
 
             <a
               href="https://www.facebook.com/Red-de-J%C3%B3venes-del-Futuro-101271765014839"
+              rel="noreferrer"
               target="_blank"
               className="text-dark"
             >
@@ -51,7 +53,7 @@ export default function FooterContainer() {
         Red de jóvenes del futuro {new Date().getFullYear()} ©
       </div>
       <div style={{width: "100%", height: "50px", backgroundColor: "#c9c9c9"}}>
-          <h5 style={{lineHeight: "50px"}}> Website developed by: <a href="https://jaime-arriola.netlify.app/" target="_blank" style={{fontWeight: "bold" , color: "black"}}>Jaime Arriola</a> and <a href="https://raupro.herokuapp.com/" target="_blank" style={{fontWeight: "bold", color: "black"}}>Raul Guillen</a>
+          <h5 style={{lineHeight: "50px"}}> Website developed by: <a href="https://jaime-arriola.netlify.app/" target="_blank" rel="noreferrer" style={{fontWeight: "bold" , color: "black"}}>Jaime Arriola</a> and <a href="https://raupro.herokuapp.com/" target="_blank" style={{fontWeight: "bold", color: "black"}}>Raul Guillen</a>
           </h5>
       </div>
     </footer>
