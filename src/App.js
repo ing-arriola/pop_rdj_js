@@ -19,14 +19,14 @@ function App() {
       <Router>
       <Layout>
         <Switch>
-        <Route path="/users" component={Users}></Route>
-          <Route path="/signup" component={Register}></Route>
+          {/*<Route path="/users" component={Users}></Route>*/}
+          {/*<Route path="/signup" component={Register}></Route>*/}
           <Route path="/" component={HomePage}></Route>
         </Switch>
       </Layout>
     </Router>
     </Auth0Provider>
-    
+
   );
 }
 
