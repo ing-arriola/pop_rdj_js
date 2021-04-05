@@ -8,7 +8,6 @@ import gifTenor from "../Resources/tenor.gif"
 import Calendar from '../Components/Calendar'
 import SvgWithMessage from '../Components/SvgWithMessage'
 import { ReactComponent as Empty } from './empty.svg'
-import firebase from "firebase";
 
 const TableContainer = () => {
     const [show, setShow] = useState(false)
@@ -27,13 +26,26 @@ const TableContainer = () => {
     const [data,setData] = useState([])
     const [answers,setAnswers] = useState([])
     const [validUsersForcurrentUser,serValidUsersForcurrentUser] = useState([])
+    const [currentUserData,setCurrentUserData] = useState({})
 
 
     useEffect(() => {
         writeFirebaseData("companies")
         writeFirebaseData("users")
         writeFirebaseData("answers")
+        db.ref("auth").on("value", snapshot => {
+            const authUsers = snapshot.val()
+            let currentUser=undefined
+            authUsers.forEach(user => {
+                if(user.email === auth.currentUser.email){
+                    currentUser=user
+                }
+            })
+            setCurrentUserData(currentUser)
+        }, (error) => console.log(error))
     }, [])
+
+
 
     const writeFirebaseData = (refTable) => {
         const userRef= firebaseConfig.database().ref(refTable)
@@ -69,6 +81,7 @@ const TableContainer = () => {
                 })
                 validAnswer && validAnswers.push(validAnswer)
             })
+            console.log(validAnswers)
             const usersToBlock = []
             validAnswers.forEach(item => {
                 if (item.weekToEvaluate[0] === moment(selectedDays[1]).format('LL') &&
@@ -83,19 +96,16 @@ const TableContainer = () => {
     },[selectedDays,answers])
 
     useEffect(()=>{
-        const validUsers = data.filter( userEvaluated => userEvaluated.company.includes(''))
+        console.log(data)
+        console.log(currentUserData.idCompany)
+        const validUsers = data.filter( userEvaluated => userEvaluated.company.includes(currentUserData.idCompany))
         console.log(validUsers)
         serValidUsersForcurrentUser(validUsers)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[data])
+    },[currentUserData])
 
-    useEffect(() => {
-        db.ref("auth").on("value", snapshot => {
-            const authUsers = snapshot.val();
-            const currentUser = authUsers.filter((user) => user.email === auth.currentUser.email);
-            console.log(currentUser);
-        }, (error) => console.log(error));
-    }, [])
+   
+
     const showEvaluation = (name,type,id) => {
         if (selectedDays.length === 7) {
             const companyToShow = companies.find(element => element.id === parseInt(''))
