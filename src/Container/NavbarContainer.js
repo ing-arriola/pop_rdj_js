@@ -1,11 +1,14 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {useAuth0} from '@auth0/auth0-react'
 import LoginButton from '../Components/LoginButton'
 import LogoutButton from '../Components/LogoutButton'
 import logo from "../Resources/logo_pop.png";
 
 export default function NavbarContainer() {
+  const {isAuthenticated} = useAuth0()
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand href="/">
@@ -20,21 +23,12 @@ export default function NavbarContainer() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          {/*<Nav.Link href="#link">Ingresa </Nav.Link>
-                    <p className="m-auto">/</p>
-                    <Nav.Link>Registrate</Nav.Link>*/}
-          <Nav.Link href="https://rdjfuturo.netlify.app/about/" target="_blank">
-            Conocenos!
-          </Nav.Link>
-        {/*  <Link to="/users" >
-            Login
-          </Link>
-         
-        <LoginButton/>
-        <LogoutButton/>
-        */}
+         {
+           isAuthenticated ? (<LogoutButton/>) : (<LoginButton/>) 
+         }        
         </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
 }
+
