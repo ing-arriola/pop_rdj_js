@@ -7,18 +7,18 @@ const LoginButton = () => {
     
     return (
         <Button
-        onClick={()=>loginWithRedirect()}
-        className="btn btn-lg btn-block hero-button"
-        style={{
-          backgroundColor: "#FE3E00",
-          borderBlockColor: "#FE3E00",
-          boxShadow: "#FE3E00",
-          borderBottomColor: "#FE3E00",
-          borderColor: "#FE3E00",
-        }}
-      >
-        Log in
-      </Button>
+          onClick={()=>loginWithRedirect()}
+          className="btn btn-lg btn-block hero-button"
+          style={{
+            backgroundColor: "#FE3E00",
+            borderBlockColor: "#FE3E00",
+            boxShadow: "#FE3E00",
+            borderBottomColor: "#FE3E00",
+            borderColor: "#FE3E00",
+          }}
+        >
+          Log in
+        </Button>
     )
 }
 
