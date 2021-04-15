@@ -1,0 +1,15 @@
+{
+    "questions": [
+        {"text":"Respeto del horario para el cumplimiento de sus actividades.","type":"closed"},
+        {"text":"Demostró en todo momento dominio de los temas a impartir","type":"closed"},
+        {"text":"Su actitud fue siempre de respeto hacia las personas en su entorno.","type":"closed"},
+        {"text":"Cumplimiento con las normas de la institución.","type":"closed"},
+        {"text":"Mostró compromiso en enseñar y ayudar a los alumnos a comprender los temas de Orientación para la Vida impartidos","type":"closed"},
+        {"text":"Integración al equipo de trabajo.","type":"closed"},
+        {"text":"Hizo uso de materiales didácticos interactivos para abordar los temas.","type":"closed"},
+        {"text":"Realizó actividades que estimularon el interés del estudiante en los temas impartidos.","type":"closed"},
+        {"text":"Por favor, déjenos saber su opinión respecto a los siguientes ítems","type":"label"},
+        {"text":"¿Cómo considera que el/la pasante puede mejorar su desempeño en la institución?","type":"open"},
+        {"text":"Comentarios adicionales","type":"open"}
+    ]
+}

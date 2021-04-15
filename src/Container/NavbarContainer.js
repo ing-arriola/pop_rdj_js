@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {useAuth0} from '@auth0/auth0-react'
 import LoginButton from '../Components/LoginButton'
 import LogoutButton from '../Components/LogoutButton'
@@ -23,6 +23,12 @@ export default function NavbarContainer() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
+          {
+            isAuthenticated && (
+              <NavLink className="nav-item" to="/survey" exact >
+                Evaluacion
+              </NavLink>)
+          }
          {
            isAuthenticated ? (<LogoutButton/>) : (<LoginButton/>) 
          }        
