@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
