@@ -6,6 +6,20 @@
   font-size: 2.5rem;
 }
 
+.nav-item {
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 12px;
+  margin-right: 20px;
+  background: #3f3d56;
+  color: #fff;
+}
+
+.nav-item:hover{
+  color: #fff;
+}
+
+
 .weight-300 {
   font-weight: 300;
 }
@@ -14,6 +28,17 @@
   text-decoration: none;
   transform: scale(1.08);
   transition: transform 330ms ease-in-out;
+}
+
+.survey-form-container {
+  background: rgba(254, 62, 0, 0.9);
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+input[type=radio]{
+  transform:scale(1.5);
 }
 
 .form-container {
