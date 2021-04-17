@@ -104,12 +104,12 @@ const SurveyContainer= ({hideModal,nameToShow,company}) => {
             variant="primary"
             type="submit"
             style={{
-              color:"#000",
-              backgroundColor: "#FFF",
-              borderBlockColor: "#FFF",
-              boxShadow: "#FFF",
-              borderBottomColor: "#FFF",
-              borderColor: "#FFF",
+              color:"#FFF",
+              backgroundColor: "#FE3E00",
+              borderBlockColor: "#FE3E00",
+              boxShadow: "#FE3E00",
+              borderBottomColor: "#FE3E00",
+              borderColor: "#FE3E00",
             }}
           >
             Enviar
