@@ -19,6 +19,18 @@
   color: #fff;
 }
 
+.spinner {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 
 .weight-300 {
   font-weight: 300;
@@ -31,14 +43,20 @@
 }
 
 .survey-form-container {
-  background: rgba(254, 62, 0, 0.9);
+  background: rgba(255, 64, 0, 0.9);
   color: #fff;
   border-radius: 5px;
   padding: 10px;
 }
 
+.survey-question {
+  background:rgba(255, 255, 255, 0.90);
+  color:rgba(254, 62, 0);
+}
+
 input[type=radio]{
   transform:scale(1.5);
+  margin-left: 30px;
 }
 
 .form-container {
