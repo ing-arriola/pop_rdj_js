@@ -8,7 +8,7 @@ import LogoutButton from '../Components/LogoutButton'
 import logo from "../Resources/logo_pop.png";
 
 export default function NavbarContainer() {
-  const {isAuthenticated} = useAuth0()
+  const {isAuthenticated, user} = useAuth0()
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand href="/">
@@ -25,7 +25,7 @@ export default function NavbarContainer() {
         <Nav className="ml-auto">
           {
             isAuthenticated && (
-              <NavLink className="nav-item" to="/survey" exact >
+              <NavLink className="nav-item" to="/users" exact >
                 Evaluacion
               </NavLink>)
           }
