@@ -6,6 +6,32 @@
   font-size: 2.5rem;
 }
 
+.nav-item {
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 12px;
+  margin-right: 20px;
+  background: #3f3d56;
+  color: #fff;
+}
+
+.nav-item:hover{
+  color: #fff;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
 .weight-300 {
   font-weight: 300;
 }
@@ -14,6 +40,32 @@
   text-decoration: none;
   transform: scale(1.08);
   transition: transform 330ms ease-in-out;
+}
+
+.survey-form-container {
+  background: rgb(230, 228, 228);
+  /*background: rgba(255, 64, 0, 0.9);*/
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.survey-question {
+  background:rgb(255, 255, 255);
+  /*background:rgba(255, 255, 255, 0.90);*/
+  color:rgba(248, 116, 72, 0.863);
+  border-color: rgb(197, 197, 197);
+  border-width: 1px;
+  border-style: solid;
+  /*color:rgba(254, 62, 0);*/
+}
+
+.survey-label {
+  color:rgba(248, 116, 72, 0.863);
+}
+
+input[type=radio]{
+  transform:scale(1.5);
 }
 
 .form-container {

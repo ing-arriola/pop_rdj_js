@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { Button, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import imgLop from "../Resources/hero_section.svg";
 import imtAbout from "../Resources/participants.svg";
 import imtOurMission from "../Resources/benefit.svg";

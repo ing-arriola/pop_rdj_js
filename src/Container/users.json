@@ -1,0 +1,9 @@
+{
+    "users": [
+        {"id":"1","name":"John Mansilla","company":"school1"},
+        {"id":"2","name":"Alonso Hernandez","company":"school2"},
+        {"id":"3","name":"Susan Rodriguez","company":"school3"},
+        {"id":"4","name":"Roberto Martinez","company":"school3"},
+        {"id":"5","name":"Jaime Arriola","company":"dunno"}
+    ]
+}
