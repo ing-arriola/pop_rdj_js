@@ -1,39 +1,104 @@
 import React, { useState } from "react";
-import { Form, Button, Modal  } from "react-bootstrap"
-import {useAuth0} from '@auth0/auth0-react'
-import NotAuth from '../Components/NotAuth'
+import { Form, Button } from "react-bootstrap"
+//import {useAuth0} from '@auth0/auth0-react'
 import Question from '../Components/Question'
-import gifTenor from "../Resources/tenor.gif";
 import data from "./questions.json"
-const SurveyComnainer= () => {
-  console.log(data.questions)
-  const {isAuthenticated} = useAuth0()
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+
+const SurveyContainer= ({hideModal,nameToShow,company}) => {
+  
+  const [newAnswer, setNewAnswer] = useState({
+    question1: "",
+    question2: "",
+    question3: "",
+    question4: "",
+    question5: "",
+    question6: "",
+    question7: "",
+    question8: "",
+    question9: "",
+    question10: "",
+  })
+
+  const {question9,question10} = newAnswer
+
+  const instructions = `En los siguientes ítems, favor calificar según considere conveniente 
+  a ${nameToShow} en el desempeño de sus actividades como pasante en la institución ${company}`
+
+  const openQuestion = (index,questionText) =>  {
+    let question
+    if (index === 9) {
+        question = (
+          <Form.Group className="d-flex flex-column survey-question p-3 rounded">
+            <Form.Label className=" h3 text-center mb-3" >{questionText}</Form.Label>
+              <Form.Control
+                  as="textarea"
+                  name="question9"
+                  value={question9}
+                  rows={4}
+                  onChange={handleOpenQuestion}
+                  required
+              />
+          </Form.Group>
+        )
+    }else{
+        question = (
+          <Form.Group className="d-flex flex-column survey-question p-3 rounded">
+            <Form.Label className=" h3 text-center mb-3" >{questionText}</Form.Label>
+              <Form.Control
+                  as="textarea"
+                  name="question10"
+                  value={question10}
+                  rows={4}
+                  onChange={handleOpenQuestion}
+                  required
+              />
+          </Form.Group>
+        )
+    }
+    return question
+  }
+
+  const handleAnswer = (e) => {
+    setNewAnswer({ ...newAnswer, [e.target.name]: e.target.id })
+  }
+
+  const handleOpenQuestion = (e) => {
+    console.log(e.target.value)
+    console.log(e.target.name)
+    setNewAnswer({ ...newAnswer, [e.target.name]: e.target.value })
+  }
   
   const sendData = (e) => {
     e.preventDefault()
-    setShow(true)
+    hideModal()
     //here you just need to send this the newUser Object
-    console.log(e);
+    console.log(newAnswer);
   }
 
   return (
     <div className="d-flex flex-column align-items-center mt-5  justify-content-center" >
-      <label className="h3 d-flex text-center">
-      En los siguientes ítems, calificar según considere conveniente a [NOMBRE Y APELLIDO] en el desempeño de sus actividades como pasante en la institución [NOMBRE DE INSTITUCIÓN]
-      </label>
-      {
-        isAuthenticated ?
-      (
-        <>
-        <Form className="survey-form-container my-5 w-50 p-5" onSubmit={sendData}>
+      <p className="h3 d-flex text-center mx-4 ">
+        {instructions}
+      </p>
+      <p className="h3 d-flex text-center mx-4">
+      Recuerde tener en cuenta que en la escala del 1 al 5, a mayor puntaje mejor es el desempeño que mostró el pasante. 
+      </p>
+        <Form className="survey-form-container my-5 p-5" onSubmit={sendData}>
           {
             data.questions.map((question,index) => (
-              <Question questionText={question.text} index={index} type={question.type}/>
+              question.type === "closed" || question.type === "label"   ? (
+                <Question 
+                  questionText={question.text} 
+                  index={index} 
+                  type={question.type} 
+                  handleAnswer={handleAnswer} 
+                />
+              ): openQuestion(index,question.text)
             ))
           }
-        
+
+          
+
           <Button
             className="btn btn-lg btn-block btn-form mx-auto"
             variant="primary"
@@ -50,46 +115,9 @@ const SurveyComnainer= () => {
             Enviar
           </Button>
         </Form>
-        <Modal
-          show={show}
-          onHide={handleClose}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Formulario enviado</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="d-flex flex-column justify-content-center align-items-center">
-              Hemos recibido tus datos correctamente.{" "}
-              <img src={gifTenor} alt="" width={100} />
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="primary"
-              onClick={handleClose}
-              style={{
-                backgroundColor: "#FE3E00",
-                borderBlockColor: "#FE3E00",
-                boxShadow: "#FE3E00",
-                borderBottomColor: "#FE3E00",
-                borderColor: "#FE3E00",
-              }}
-            >
-              Aceptar
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        </>
-      )
-      :
-      (
-        <NotAuth />
-      )
-      }
+        
     </div>
   );
 };
 
-export default SurveyComnainer
+export default SurveyContainer
