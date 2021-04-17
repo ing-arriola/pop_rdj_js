@@ -46,8 +46,8 @@ const Question = ({questionText,index,handleAnswer,type}) => {
 
 
     return (
-        <Form.Group className={`d-flex flex-column ${type !== "label" ? "survey-question p-3 rounded" : null}`} onChange={handleAnswer} >
-            <Form.Label className=" h3 text-center mb-3" >{questionText}</Form.Label>
+        <Form.Group className={`d-flex flex-column ${type !== "label" ? "survey-question p-4 mb-5 rounded" : "survey-label mt-5"}`} onChange={handleAnswer} >
+            <Form.Label className=" h3 text-center mb-4" >{questionText}</Form.Label>
             {type !== "label" && closedQuestion }
         </Form.Group>
     )

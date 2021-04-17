@@ -22,15 +22,29 @@ const TableContainer = () => {
     <Table striped bordered hover className="w-75">
   <thead>
     <tr>
-      <th>Nombre</th>
-      <th>Accion</th>
+      <th className="text-center">Nombre</th>
+      <th className="text-center" >Accion</th>
     </tr>
   </thead>
   <tbody>
     { data.users.filter(info => info.company === user.name).map(person  => (
          <tr>
-         <td>{person.name}</td>
-         <td> <button onClick={()=>showEvaluation(person.name)}>Evaluar</button></td>
+         <td className="text-center"  >{person.name}</td>
+         <td className="d-flex justify-content-center"> 
+          <Button
+                  variant="primary"
+                  onClick={()=>showEvaluation(person.name)}
+                  style={{
+                    backgroundColor: "#FE3E00",
+                    borderBlockColor: "#FE3E00",
+                    boxShadow: "#FE3E00",
+                    borderBottomColor: "#FE3E00",
+                    borderColor: "#FE3E00",
+                  }}
+                >
+                  Evaluar
+                </Button>
+         </td>
        </tr>
     ))}
   </tbody>
