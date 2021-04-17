@@ -1,66 +1,106 @@
-import React from 'react'
-import {Table} from 'react-bootstrap'
+import React,{useState} from 'react'
+import {useAuth0} from '@auth0/auth0-react'
+import {Table,Modal,Button} from 'react-bootstrap'
+import SurveyContainer from './SurveyContainer'
+import logoRdf from "../Resources/logo_rjf.png";
 
-const dummie=[
-    {
-        'name':'name1',
-        'lastname':'last2',
-        'phone':'12345',
-        'email':'user123@gmail.com',
-        'education':'university',
-        'profession':'psicologia'
-    },
-    {
-        'name':'name2',
-        'lastname':'last2',
-        'phone':'12345',
-        'email':'user123@gmail.com',
-        'education':'university',
-        'profession':'psicologia'
-    },
-    {
-        'name':'name3',
-        'lastname':'last2',
-        'phone':'12345',
-        'email':'user123@gmail.com',
-        'education':'university',
-        'profession':'psicologia'
-    },
-]
+import data from "./users.json"
+import gifTenor from "../Resources/tenor.gif";
 
-const tableToRender=(
-    <Table striped bordered hover>
+const TableContainer = () => {
+  const {user} = useAuth0()
+  const [show, setShow] = useState(false)
+  const [confirm,setConfirm] = useState(false)
+  const [userToEvaluate,setUserToEvaluate] = useState ("")
+
+  const showEvaluation = (name) => {
+    setUserToEvaluate(name)
+    setShow(true)
+  }
+
+  const tableToRender=(
+    <Table striped bordered hover className="w-75">
   <thead>
     <tr>
       <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Telefono</th>
-      <th>Correo</th>
-      <th>Educacion</th>
-      <th>Profesion</th>
+      <th>Accion</th>
     </tr>
   </thead>
   <tbody>
-    {dummie.map(data  => (
+    { data.users.filter(info => info.company === user.name).map(person  => (
          <tr>
-         <td>{data.name}</td>
-         <td>{data.lastname}</td>
-         <td>{data.phone}</td>
-         <td>{data.email} </td>
-         <td>{data.education} </td>
-         <td>{data.profession} </td>
+         <td>{person.name}</td>
+         <td> <button onClick={()=>showEvaluation(person.name)}>Evaluar</button></td>
        </tr>
     ))}
   </tbody>
 </Table>
 )
 
+  const hideFormShowConfirm = () => {
+    setShow(false)
+    setConfirm(true)
+  } 
 
-
-const TableContainer = () => {
     return (
-        <div>
+        <div className="d-flex align-items-center container-fluid min-vh-100 mt-5 flex-column" >
+          <img
+            src={logoRdf}
+            width={350}
+            className="p-3 img-fluid"
+            alt="RDF Logo"
+          />
+          <h1 className="mb-4" > Bienvenido a la evaluacion de pasantes </h1>
+          <h3 className="text-center w-75"  >A continuacion podra ver un listado de los pasantes que colaboran en su institucion, para 
+              proceder a evaluarlos, por favor haga click en el boton correspondiente al pasante que desea evaluar
+          </h3>
            {tableToRender} 
+           <Modal
+            show={show}
+            onHide={()=>{setShow(false)}}
+            aria-labelledby="contained-modal-title-vcenter"
+            size="xl"
+            centered
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Evaluar a pasante</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <SurveyContainer hideModal={hideFormShowConfirm} nameToShow={userToEvaluate} company={user.name} />
+              </Modal.Body>
+             
+            </Modal>
+
+            <Modal
+              show={confirm}
+              onHide={()=>{setConfirm(false)}}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Formulario enviado</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  Hemos recibido tus datos correctamente.{" "}
+                  <img src={gifTenor} alt="" width={100} />
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="primary"
+                  onClick={()=>{setConfirm(false)}}
+                  style={{
+                    backgroundColor: "#FE3E00",
+                    borderBlockColor: "#FE3E00",
+                    boxShadow: "#FE3E00",
+                    borderBottomColor: "#FE3E00",
+                    borderColor: "#FE3E00",
+                  }}
+                >
+                  Aceptar
+                </Button>
+              </Modal.Footer>
+            </Modal>
         </div>
     )
 }
