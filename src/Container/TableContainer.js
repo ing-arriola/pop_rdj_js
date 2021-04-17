@@ -30,7 +30,21 @@ const TableContainer = () => {
     { data.users.filter(info => info.company === user.name).map(person  => (
          <tr>
          <td className="text-center"  >{person.name}</td>
-         <td className="d-flex justify-content-center"> <button onClick={()=>showEvaluation(person.name)}>Evaluar</button></td>
+         <td className="d-flex justify-content-center"> 
+          <Button
+                  variant="primary"
+                  onClick={()=>showEvaluation(person.name)}
+                  style={{
+                    backgroundColor: "#FE3E00",
+                    borderBlockColor: "#FE3E00",
+                    boxShadow: "#FE3E00",
+                    borderBottomColor: "#FE3E00",
+                    borderColor: "#FE3E00",
+                  }}
+                >
+                  Evaluar
+                </Button>
+         </td>
        </tr>
     ))}
   </tbody>
