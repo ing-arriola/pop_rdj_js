@@ -2,73 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7491f86-2544-499e-a260-506618574eac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Server.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pop_rdj_js.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.eslintcache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/pop_rdj_js.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/Prototypes/About us.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/Prototypes/Main.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/Prototypes/Mission.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/Prototypes/S-up 1.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/Prototypes/S-up 2.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/Hoc/Layout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/Hoc/_Aux.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/LoginButton.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Components/LogoutButton.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Container/FooterContainer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Container/FormContainer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Container/HomeSection.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Container/NavbarContainer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Container/TableContainer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Pages/HomePage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Pages/Register.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Pages/Users.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Resources/benefit.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Resources/hero_section.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Resources/kinda.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Resources/logo_pop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Resources/logo_rjf.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Resources/participants.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Resources/signup.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/Resources/tenor.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/configs/AuthServices.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/yarn.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/action.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Users.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Pages/Results.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Container/NavbarContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/NavbarContainer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -83,8 +33,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="c7491f86-2544-499e-a260-506618574eac" name="Default Changelist" comment="" />
@@ -93,7 +45,11 @@
       <option name="presentableId" value="Default" />
       <updated>1612752334022</updated>
       <workItem from="1612752337178" duration="12000" />
+      <workItem from="1618763265663" duration="2793000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

@@ -23,12 +23,19 @@ export default function NavbarContainer() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
+            {
+                isAuthenticated && (
+                    <NavLink className="nav-item" to="/results" exact >
+                        Resultados
+                    </NavLink>)
+            }
           {
             isAuthenticated && (
               <NavLink className="nav-item" to="/users" exact >
                 Evaluacion
               </NavLink>)
           }
+
          {
            isAuthenticated ? (<LogoutButton/>) : (<LoginButton/>) 
          }        
