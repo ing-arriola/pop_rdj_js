@@ -1,10 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {useAuth0} from '@auth0/auth0-react'
 import {Table,Modal,Button} from 'react-bootstrap'
 import SurveyContainer from './SurveyContainer'
-import logoRdf from "../Resources/logo_rjf.png";
-
+import logoRdf from "../Resources/logo_rjf.png"
 import data from "./users.json"
+
+import companies from "./companies.json"
 import gifTenor from "../Resources/tenor.gif";
 
 const TableContainer = () => {
@@ -12,6 +13,12 @@ const TableContainer = () => {
   const [show, setShow] = useState(false)
   const [confirm,setConfirm] = useState(false)
   const [userToEvaluate,setUserToEvaluate] = useState ("")
+  const [company,setCompany] = useState("")
+
+  useEffect(() => {    
+    const companyToShow = companies.companies.find(element => element.id === user.name)
+    setCompany(companyToShow.name)
+  }, [user.name])
 
   const showEvaluation = (name) => {
     setUserToEvaluate(name)
@@ -27,9 +34,9 @@ const TableContainer = () => {
     </tr>
   </thead>
   <tbody>
-    { data.users.filter(info => info.company === user.name).map(person  => (
+    { data.users.filter(info => info.company.includes(user.name)).map(person  => (
          <tr>
-         <td className="text-center"  >{person.name}</td>
+         <td className="text-center">{person.name}</td>
          <td className="d-flex justify-content-center"> 
           <Button
                   variant="primary"
@@ -65,9 +72,9 @@ const TableContainer = () => {
             alt="RDF Logo"
           />
           <h1 className="mb-4" > Bienvenido a la evaluacion de pasantes </h1>
-          <h3 className="text-center w-75"  >A continuacion podra ver un listado de los pasantes que colaboran en su institucion, para 
+          <h4 className="text-center w-75 mb-4"  >A continuacion podra ver un listado de los pasantes que colaboran en su institucion, para 
               proceder a evaluarlos, por favor haga click en el boton correspondiente al pasante que desea evaluar
-          </h3>
+          </h4>
            {tableToRender} 
            <Modal
             show={show}
@@ -80,7 +87,7 @@ const TableContainer = () => {
                 <Modal.Title>Evaluar a pasante</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <SurveyContainer hideModal={hideFormShowConfirm} nameToShow={userToEvaluate} company={user.name} />
+                <SurveyContainer hideModal={hideFormShowConfirm} nameToShow={userToEvaluate} company={company} />
               </Modal.Body>
              
             </Modal>

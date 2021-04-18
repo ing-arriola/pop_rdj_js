@@ -1,9 +1,11 @@
 {
     "users": [
-        {"id":"1","name":"John Mansilla","company":"school1"},
-        {"id":"2","name":"Alonso Hernandez","company":"school2"},
-        {"id":"3","name":"Susan Rodriguez","company":"school3"},
-        {"id":"4","name":"Roberto Martinez","company":"school3"},
-        {"id":"5","name":"Jaime Arriola","company":"dunno"}
+        {"id":"1","name":"Alejandra Hurtado","company":"[1,2,3]"},
+        {"id":"2","name":"Sara Maravilla","company":"[1,2,3]"},
+        {"id":"3","name":"Wilfredo Martínez","company":"[1,2]"},
+        {"id":"4","name":"Abigail Calix","company":"[1,2]"},
+        {"id":"5","name":"Grecia Moreno","company":"[1,2]"},
+        {"id":"6","name":"Jonathan Portillo","company":"[1,2]"},
+        {"id":"7","name":"Ernesto José Orellana","company":"[4]"}
     ]
 }
