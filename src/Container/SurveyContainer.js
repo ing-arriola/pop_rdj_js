@@ -21,9 +21,6 @@ const SurveyContainer= ({hideModal,nameToShow,company}) => {
 
   const {question9,question10} = newAnswer
 
-  const instructions = `En los siguientes ítems, favor calificar según considere conveniente 
-  a ${nameToShow} en el desempeño de sus actividades como pasante en la institución ${company}`
-
   const openQuestion = (index,questionText) =>  {
     let question
     if (index === 9) {
