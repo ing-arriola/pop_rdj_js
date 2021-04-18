@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Button, Table, Form} from 'react-bootstrap'
 import logoRdf from "../Resources/logo_rjf.png";
+import {Link} from "react-router-dom";
 
 const companies = [{
     name: "Applaudo Studios",
@@ -20,7 +21,7 @@ const companies = [{
     }];
 const ResultsContainer = () => {
     const [arrayCompanies, setCompanies] = useState(companies);
-    const handleOpenQuestion = (e) => {
+    const handleSearch = (e) => {
         const value = e.target.value;
         if (!value) {
             setCompanies(companies);
@@ -52,7 +53,7 @@ const ResultsContainer = () => {
                             <div>Nombre</div>
                             <Form>
                                 <Form.Group controlId="formBasicEmail" className="mb-0">
-                                    <Form.Control type="text" placeholder="Search" onChange={handleOpenQuestion}/>
+                                    <Form.Control type="text" placeholder="Search" onChange={handleSearch}/>
                                 </Form.Group>
                             </Form>
                         </th>
@@ -64,6 +65,7 @@ const ResultsContainer = () => {
                         <tr>
                             <td className="text-center">{company.name}</td>
                             <td className="d-flex justify-content-center">
+                                <Link to={{pathname: "/results/"+company.id}}>
                                 <Button
                                     variant="primary"
                                     onClick={() => console.log(company.name)}
@@ -76,7 +78,7 @@ const ResultsContainer = () => {
                                     }}
                                 >
                                     Ver
-                                </Button>
+                                </Button></Link>
                             </td>
                         </tr>
                     ))}
