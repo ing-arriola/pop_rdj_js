@@ -77,10 +77,11 @@ const SurveyContainer= ({hideModal,nameToShow,company}) => {
 
   return (
     <div className="d-flex flex-column align-items-center mt-5  justify-content-center" >
-      <p className="h3 d-flex text-center mx-4 ">
-        {instructions}
+      <p className="h3  text-justify mx-4 ">
+      En los siguientes ítems, favor calificar según considere conveniente 
+a <strong>{nameToShow}</strong>  en el desempeño de sus actividades como pasante en la institución <strong>{company}</strong>
       </p>
-      <p className="h3 d-flex text-center mx-4">
+      <p className="h3 d-flex text-justifyr mx-4">
       Recuerde tener en cuenta que en la escala del 1 al 5, a mayor puntaje mejor es el desempeño que mostró el pasante. 
       </p>
         <Form className="survey-form-container my-5 p-5" onSubmit={sendData}>
