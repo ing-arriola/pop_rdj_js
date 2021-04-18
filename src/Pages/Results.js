@@ -1,12 +1,12 @@
 import React from "react";
+import ResultsContainer from "../Container/ResultsContainer";
 
-import R from "../Container/HomeSection";
 
 const Results = () => {
     return (
         <>
             <div>
-                HOLA
+               <ResultsContainer/>
             </div>
         </>
     );
