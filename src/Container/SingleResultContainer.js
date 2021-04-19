@@ -2,39 +2,20 @@ import React, {useState} from "react";
 import ResultsContainer from "../Container/ResultsContainer";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-
+import data from "./users.json"
+import ModalResults from "../Components/ModalResults";
 const company = {
     name: "Applaudo Studios",
     id: 1,
-    participants: [
-        {
-            name: "Alexander",
-            id: 1
-        },
-        {
-            name: "Rodolfo",
-            id: 2
-        },
-        {
-            name: "Jaime",
-            id: 3
-        },
-        {
-            name: "Raul",
-            id: 4
-        },
-        {
-            name: "Antonio",
-            id: 5
-        },{
-            name: "Randal",
-            id: 6
-        }
-    ]
+    participants: data.users
 };
 
 const SingleResultContainer = () => {
+
     const [arrayUsers, setUsers] = useState(company.participants);
+    const [modalShow, setModalShow] = useState(false);
+    const [userId, setId] = useState(0);
+
     const handleSearch = (e) => {
         const value = e.target.value;
         if (!value) {
@@ -46,18 +27,20 @@ const SingleResultContainer = () => {
         <>
             <div className="container">
                <div className="d-flex justify-content-between p-5">
-                   <Button
-                       variant="primary"
-                       style={{
-                           backgroundColor: "#FE3E00",
-                           borderBlockColor: "#FE3E00",
-                           boxShadow: "#FE3E00",
-                           borderBottomColor: "#FE3E00",
-                           borderColor: "#FE3E00",
-                       }}
-                   >
-                       Regresar
-                   </Button>
+                   <Link to="/results">
+                       <Button
+                           variant="primary"
+                           style={{
+                               backgroundColor: "#FE3E00",
+                               borderBlockColor: "#FE3E00",
+                               boxShadow: "#FE3E00",
+                               borderBottomColor: "#FE3E00",
+                               borderColor: "#FE3E00",
+                           }}
+                       >
+                           Regresar
+                       </Button>
+                   </Link>
                    <h3>Resultados de {company.name}</h3>
                </div>
                 <div>
@@ -82,7 +65,10 @@ const SingleResultContainer = () => {
                                 <td className="d-flex justify-content-center">
                                         <Button
                                             variant="primary"
-                                            onClick={() => console.log(user.name)}
+                                            onClick={() => {
+                                                setModalShow(true);
+                                                setId(user)
+                                            }}
                                             style={{
                                                 backgroundColor: "#FE3E00",
                                                 borderBlockColor: "#FE3E00",
@@ -99,6 +85,11 @@ const SingleResultContainer = () => {
                         </tbody>
                     </Table>
                 </div>
+                <ModalResults
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    idUser={userId}
+                />
             </div>
         </>
     );
