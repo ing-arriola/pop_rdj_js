@@ -1,27 +1,47 @@
 import React,{useState,useEffect} from 'react'
 import {useAuth0} from '@auth0/auth0-react'
+import axios from 'axios'
 import {Table,Modal,Button} from 'react-bootstrap'
 import SurveyContainer from './SurveyContainer'
 import logoRdf from "../Resources/logo_rjf.png"
-import data from "./users.json"
-
-import companies from "./companies.json"
 import gifTenor from "../Resources/tenor.gif";
+import Calendar from '../Components/Calendar'
 
 const TableContainer = () => {
   const {user} = useAuth0()
   const [show, setShow] = useState(false)
   const [confirm,setConfirm] = useState(false)
-  const [userToEvaluate,setUserToEvaluate] = useState ("")
-  const [company,setCompany] = useState("")
+  const [dataModal,setDataModal] = useState(
+    { company:"",
+      userToEvaluate:"",
+      typeOfPerson:""
+    }
+  )
+  const [companies,setCompanies] = useState([])
+  const [data,setData] = useState([])
 
-  useEffect(() => {    
-    const companyToShow = companies.companies.find(element => element.id === user.name)
-    setCompany(companyToShow.name)
-  }, [user.name])
+  
 
-  const showEvaluation = (name) => {
-    setUserToEvaluate(name)
+  useEffect(() => {
+    const dataFromFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
+    dataFromFirebase.get('/users.json')
+    .then(response => {
+      setData(response.data)
+    })
+    dataFromFirebase.get('/companies.json')
+    .then(response => {
+      setCompanies(response.data)
+    })
+  }, [])
+
+
+  const showEvaluation = (name,type) => {
+    const companyToShow = companies.find(element => element.id === parseInt(user.name))
+    setDataModal({
+      userToEvaluate:name,
+      company:companyToShow.name,
+      typeOfPerson:type
+    })
     setShow(true)
   }
 
@@ -33,14 +53,14 @@ const TableContainer = () => {
       <th className="text-center" >Accion</th>
     </tr>
   </thead>
-  <tbody>
-    { data.users.filter(info => info.company.includes(user.name)).map(person  => (
+  <tbody>  
+    { data.filter(info => info.company.includes(parseInt(user.name))).map(person  => (
          <tr>
          <td className="text-center">{person.name}</td>
          <td className="d-flex justify-content-center"> 
           <Button
                   variant="primary"
-                  onClick={()=>showEvaluation(person.name)}
+                  onClick={()=>showEvaluation(person.name,person.type)}
                   style={{
                     backgroundColor: "#FE3E00",
                     borderBlockColor: "#FE3E00",
@@ -72,9 +92,23 @@ const TableContainer = () => {
             alt="RDF Logo"
           />
           <h1 className="mb-4" > Bienvenido a la evaluacion de pasantes </h1>
-          <h4 className="text-center w-75 mb-4"  >A continuacion podra ver un listado de los pasantes que colaboran en su institucion, para 
-              proceder a evaluarlos, por favor haga click en el boton correspondiente al pasante que desea evaluar
-          </h4>
+          
+          
+            <h4 className="mb-3">Por favor sigue estos sencillos pasos:</h4>
+            <div className="w-75 mb-4 h4">   
+              <ol >
+                <li><strong>Establece la fecha a evaluar:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer 
+                el mes a evaluar y luego debes dar  click en el calendario sobre la semana que deseas evaluar</li>
+                <div className="d-flex justify-content-center">
+                  <Calendar/>
+                </div>
+                <li> <strong>Selecciona persona a evaluar:</strong>  En el siguiente listado, por favor da click en el boton correspondiente al pasante que deseas evaluar</li>
+              </ol>
+            </div>
+
+
+         
+          
            {tableToRender} 
            <Modal
             show={show}
@@ -87,7 +121,7 @@ const TableContainer = () => {
                 <Modal.Title>Evaluar a pasante</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <SurveyContainer hideModal={hideFormShowConfirm} nameToShow={userToEvaluate} company={company} />
+                <SurveyContainer hideModal={hideFormShowConfirm} nameToShow={dataModal.userToEvaluate} company={dataModal.company} typeOfPerson={dataModal.typeOfPerson} />
               </Modal.Body>
              
             </Modal>

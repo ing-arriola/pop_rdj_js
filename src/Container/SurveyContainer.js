@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap"
 import Question from '../Components/Question'
 import data from "./questions.json"
 
-const SurveyContainer= ({hideModal,nameToShow,company}) => {
+const SurveyContainer= ({hideModal,nameToShow,company,typeOfPerson}) => {
   
   const [newAnswer, setNewAnswer] = useState({
     question1: "",
@@ -60,8 +60,6 @@ const SurveyContainer= ({hideModal,nameToShow,company}) => {
   }
 
   const handleOpenQuestion = (e) => {
-    console.log(e.target.value)
-    console.log(e.target.name)
     setNewAnswer({ ...newAnswer, [e.target.name]: e.target.value })
   }
   
@@ -84,13 +82,13 @@ a <strong>{nameToShow}</strong>  en el desempeño de sus actividades como pasant
         <Form className="survey-form-container my-5 p-5" onSubmit={sendData}>
           {
             data.questions.map((question,index) => (
-              question.type === "closed" || question.type === "label"   ? (
-                <Question 
+              (question.type === "closed" || question.type === "label")  ? (
+                question.userType.includes(typeOfPerson)  &&  (<Question 
                   questionText={question.text} 
                   index={index} 
                   type={question.type} 
                   handleAnswer={handleAnswer} 
-                />
+                />)
               ): openQuestion(index,question.text)
             ))
           }
