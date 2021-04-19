@@ -1,11 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import {useAuth0} from '@auth0/auth0-react'
+import axios from 'axios'
 import {Table,Modal,Button} from 'react-bootstrap'
 import SurveyContainer from './SurveyContainer'
 import logoRdf from "../Resources/logo_rjf.png"
-import data from "./users.json"
-
-import companies from "./companies.json"
 import gifTenor from "../Resources/tenor.gif";
 
 const TableContainer = () => {
@@ -14,15 +12,33 @@ const TableContainer = () => {
   const [confirm,setConfirm] = useState(false)
   const [userToEvaluate,setUserToEvaluate] = useState ("")
   const [company,setCompany] = useState("")
+  const [companies,setCompanies] = useState([])
+  const [data,setData] = useState([])
 
-  useEffect(() => {    
-    const companyToShow = companies.companies.find(element => element.id === user.name)
-    setCompany(companyToShow.name)
-  }, [user.name])
+  const setCurrentCompany = () => {
+    if(companies.length > 0 ){
+      const companyToShow = companies.find(element => element.id === parseInt(user.name))
+      setCompany(companyToShow.name)
+    }      
+  }
+
+  useEffect(() => {
+    const dataFromFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
+    dataFromFirebase.get('/users.json')
+    .then(response => {
+      setData(response.data)
+    })
+    dataFromFirebase.get('/companies.json')
+    .then(response => {
+      setCompanies(response.data)
+    })
+  }, [])
+
 
   const showEvaluation = (name) => {
     setUserToEvaluate(name)
     setShow(true)
+    setCurrentCompany()
   }
 
   const tableToRender=(
@@ -33,8 +49,8 @@ const TableContainer = () => {
       <th className="text-center" >Accion</th>
     </tr>
   </thead>
-  <tbody>
-    { data.users.filter(info => info.company.includes(user.name)).map(person  => (
+  <tbody>  
+    { data.filter(info => info.company.includes(parseInt(user.name))).map(person  => (
          <tr>
          <td className="text-center">{person.name}</td>
          <td className="d-flex justify-content-center"> 
