@@ -3,34 +3,33 @@ import moment from 'moment';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
-function getWeekDays(weekStart) {
-  const days = [weekStart];
-  for (let i = 1; i < 7; i += 1) {
-    days.push(
-      moment(weekStart)
-        .add(i, 'days')
-        .toDate()
-    );
-  }
-  return days;
-}
-
-function getWeekRange(date) {
-  return {
-    from: moment(date)
-      .startOf('week')
-      .toDate(),
-    to: moment(date)
-      .endOf('week')
-      .toDate(),
-  };
-}
-
-const  Calendar = () => {
+const  Calendar = ({selectedDays, setSelectedDays }) => {
   
 
   const [hoverRange,setHoverRange] = useState(undefined)
-  const [selectedDays,setSelectedDays] = useState([])
+
+  const getWeekDays = (weekStart) => {
+    const days = [weekStart];
+    for (let i = 1; i < 7; i += 1) {
+      days.push(
+        moment(weekStart)
+          .add(i, 'days')
+          .toDate()
+      );
+    }
+    return days;
+  }
+  
+  const getWeekRange = (date) => {
+    return {
+      from: moment(date)
+        .startOf('week')
+        .toDate(),
+      to: moment(date)
+        .endOf('week')
+        .toDate(),
+    };
+  }
 
   const handleDayChange = (date) => {
     setSelectedDays(getWeekDays(getWeekRange(date).from))
@@ -75,13 +74,7 @@ const  Calendar = () => {
           onDayMouseLeave={handleDayLeave}
           onWeekClick={handleWeekClick}
         />
-        {selectedDays.length === 7 && (
-          <div>
-            {moment(selectedDays[0]).format('LL')} –{' '}
-            {moment(selectedDays[6]).format('LL')}
-          </div>
-        )}
-
+        
       </div>
     );
 
