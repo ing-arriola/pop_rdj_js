@@ -5,22 +5,27 @@ import moment from 'moment';
 import {Table,Modal,Button} from 'react-bootstrap'
 import SurveyContainer from './SurveyContainer'
 import logoRdf from "../Resources/logo_rjf.png"
-import gifTenor from "../Resources/tenor.gif";
+import gifTenor from "../Resources/tenor.gif"
 import Calendar from '../Components/Calendar'
+import SvgWithMessage from '../Components/SvgWithMessage'
+import { ReactComponent as Empty } from './empty.svg'
 
 const TableContainer = () => {
   const {user} = useAuth0()
   const [show, setShow] = useState(false)
+  const [showEmpty,setShowEmpty] = useState(false)
   const [confirm,setConfirm] = useState(false)
   const [dataModal,setDataModal] = useState(
     { company:"",
       userToEvaluate:"",
+      userId:"",
       typeOfPerson:""
     }
   )
   const [selectedDays,setSelectedDays] = useState([])
   const [companies,setCompanies] = useState([])
   const [data,setData] = useState([])
+// const [answers,setAnswers] = useState([])
 
   
 
@@ -37,14 +42,20 @@ const TableContainer = () => {
   }, [])
 
 
-  const showEvaluation = (name,type) => {
-    const companyToShow = companies.find(element => element.id === parseInt(user.name))
-    setDataModal({
-      userToEvaluate:name,
-      company:companyToShow.name,
-      typeOfPerson:type
-    })
-    setShow(true)
+  const showEvaluation = (name,type,id) => {
+    if (selectedDays.length === 7) {
+      const companyToShow = companies.find(element => element.id === parseInt(user.name))
+      setDataModal({
+        userToEvaluate:name,
+        company:companyToShow.name,
+        userId:id,
+        typeOfPerson:type
+      })
+      setShow(true)
+    }else{
+      setShowEmpty(true)
+    }
+    
   }
 
   const tableToRender=(
@@ -62,7 +73,7 @@ const TableContainer = () => {
          <td className="d-flex justify-content-center"> 
           <Button
                   variant="primary"
-                  onClick={()=>showEvaluation(person.name,person.type)}
+                  onClick={()=>showEvaluation(person.name,person.type,person.id)}
                   style={{
                     backgroundColor: "#FE3E00",
                     borderBlockColor: "#FE3E00",
@@ -109,8 +120,8 @@ const TableContainer = () => {
                 {selectedDays.length === 7 ? (
                   <h4 className="bg-success text-white rounded px-4" >
                     <strong>Estas evaluando la semana:</strong>
-                    {moment(selectedDays[0]).format('LL')} –{' '}
-                    {moment(selectedDays[6]).format('LL')}
+                    {moment(selectedDays[1]).format('LL')} –{' '}
+                    {moment(selectedDays[5]).format('LL')}
                   </h4>
                   ):
                   (
@@ -135,7 +146,14 @@ const TableContainer = () => {
                 <Modal.Title>Evaluar a pasante</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <SurveyContainer hideModal={hideFormShowConfirm} nameToShow={dataModal.userToEvaluate} company={dataModal.company} typeOfPerson={dataModal.typeOfPerson} />
+                <SurveyContainer 
+                hideModal={hideFormShowConfirm} 
+                userId={dataModal.userId}
+                nameToShow={dataModal.userToEvaluate} 
+                company={dataModal.company} 
+                typeOfPerson={dataModal.typeOfPerson}
+                weekToEvaluate={[selectedDays[1],selectedDays[5]]}
+                />
               </Modal.Body>
              
             </Modal>
@@ -170,6 +188,55 @@ const TableContainer = () => {
                 </Button>
               </Modal.Footer>
             </Modal>
+
+
+            <Modal
+              show={confirm}
+              onHide={()=>{setConfirm(false)}}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered>
+              <Modal.Header closeButton>
+                <Modal.Title>Formulario enviado</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  Hemos recibido tus datos correctamente.{" "}
+                  <img src={gifTenor} alt="" width={100} />
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="primary"
+                  onClick={()=>{setConfirm(false)}}
+                  style={{
+                    backgroundColor: "#FE3E00",
+                    borderBlockColor: "#FE3E00",
+                    boxShadow: "#FE3E00",
+                    borderBottomColor: "#FE3E00",
+                    borderColor: "#FE3E00",
+                  }}
+                >
+                  Aceptar
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            
+
+            <Modal
+            show={showEmpty}
+            onHide={()=>{setShowEmpty(false)}}
+            aria-labelledby="contained-modal-title-vcenter"
+            size="xl"
+            centered
+            >
+              <Modal.Header closeButton>
+              </Modal.Header>
+              <Modal.Body>
+                  <SvgWithMessage Component={Empty} headMessage="Datos incompletos"  message="Opps!! parece que aun no has seleccionado una semana para evaluar" />
+              </Modal.Body>
+             
+            </Modal>
+
         </div>
     )
 }
