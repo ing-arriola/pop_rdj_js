@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Form, Button } from "react-bootstrap"
 //import {useAuth0} from '@auth0/auth0-react'
+import axios from 'axios'
 import Question from '../Components/Question'
 import data from "./questions.json"
 
-const SurveyContainer= ({hideModal,nameToShow,company,typeOfPerson}) => {
-  
+const SurveyContainer= ({hideModal,nameToShow,company,typeOfPerson,weekToEvaluate,userId}) => {
+
   const [newAnswer, setNewAnswer] = useState({
     question1: "",
     question2: "",
@@ -17,13 +18,22 @@ const SurveyContainer= ({hideModal,nameToShow,company,typeOfPerson}) => {
     question8: "",
     question9: "",
     question10: "",
+    weekToEvaluate:"",
+    userId:""
   })
+
+  useEffect(() => {
+    setNewAnswer({...newAnswer,weekToEvaluate:weekToEvaluate,userId:userId})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  
+ 
 
   const {question9,question10} = newAnswer
 
   const openQuestion = (index,questionText) =>  {
     let question
-    if (index === 9) {
+    if (index === 11) {
         question = (
           <Form.Group className="d-flex flex-column survey-question p-3 rounded">
             <Form.Label className=" h3 text-center mb-3" >{questionText}</Form.Label>
@@ -37,7 +47,7 @@ const SurveyContainer= ({hideModal,nameToShow,company,typeOfPerson}) => {
               />
           </Form.Group>
         )
-    }else{
+    }else if (index === 12){
         question = (
           <Form.Group className="d-flex flex-column survey-question p-3 rounded">
             <Form.Label className=" h3 text-center mb-3" >{questionText}</Form.Label>
@@ -68,6 +78,9 @@ const SurveyContainer= ({hideModal,nameToShow,company,typeOfPerson}) => {
     hideModal()
     //here you just need to send this the newUser Object
     console.log(newAnswer);
+    const dataFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
+    dataFirebase.post('/answers.json', newAnswer)
+      .then(res => console.log(res))
   }
 
   return (
