@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {useAuth0} from '@auth0/auth0-react'
-import axios from 'axios'
-import moment from 'moment';
+import firebaseConfig from '../utils/firebase'
+import moment from 'moment'
 import {Table,Modal,Button} from 'react-bootstrap'
 import SurveyContainer from './SurveyContainer'
 import logoRdf from "../Resources/logo_rjf.png"
@@ -30,7 +30,8 @@ const TableContainer = () => {
   
 
   useEffect(() => {
-    const dataFromFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
+   
+    /*const dataFromFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
     dataFromFirebase.get('/users.json')
     .then(response => {
       setData(response.data)
@@ -38,6 +39,26 @@ const TableContainer = () => {
     dataFromFirebase.get('/companies.json')
     .then(response => {
       setCompanies(response.data)
+    })*/
+
+    const companiesRef= firebaseConfig.database().ref('companies')
+    companiesRef.on('value', (snapshot) => {
+      const companiessFirebase= snapshot.val() 
+       const companiesList = []
+      for(let id in companiessFirebase){
+        companiesList.push(companiessFirebase[id])  
+      }
+      setCompanies(companiesList)
+    })
+   
+    const userRef= firebaseConfig.database().ref('users')
+    userRef.on('value', (snapshot) => {
+      const usersFirebase= snapshot.val() 
+       const usersList = []
+      for(let id in usersFirebase){
+        usersList.push(usersFirebase[id])  
+      }
+      setData(usersList)
     })
   }, [])
 
