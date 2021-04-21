@@ -1,12 +1,12 @@
 import React, { useState,useEffect } from "react";
 import { Form, Button } from "react-bootstrap"
 //import {useAuth0} from '@auth0/auth0-react'
-import axios from 'axios'
+// import axios from 'axios'
 import Question from '../Components/Question'
 import data from "./questions.json"
+import firebaseConfig from '../utils/firebase'
 
 const SurveyContainer= ({hideModal,nameToShow,company,typeOfPerson,weekToEvaluate,userId}) => {
-
   const [newAnswer, setNewAnswer] = useState({
     question1: "",
     question2: "",
@@ -78,9 +78,12 @@ const SurveyContainer= ({hideModal,nameToShow,company,typeOfPerson,weekToEvaluat
     hideModal()
     //here you just need to send this the newUser Object
     console.log(newAnswer);
-    const dataFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
+    /*const dataFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
     dataFirebase.post('/answers.json', newAnswer)
-      .then(res => console.log(res))
+      .then(res => console.log(res))*/
+    const bdRef = firebaseConfig.database().ref('answers')
+    bdRef.push(newAnswer)
+    
   }
 
   return (
