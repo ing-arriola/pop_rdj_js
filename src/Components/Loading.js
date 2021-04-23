@@ -1,5 +1,5 @@
-import React from "react";
-import loading from "./loading.svg";
+import React from "react"
+import loading from "./loading.svg"
 
 const Loading = () => (
   <div className="spinner">
@@ -7,4 +7,4 @@ const Loading = () => (
   </div>
 );
 
-export default Loading;
+export default Loading
