@@ -10,6 +10,7 @@ import {Auth0Provider} from '@auth0/auth0-react'
 import "./App.css"
 import Results from "./Pages/Results";
 import SingleResult from "./Pages/SingleResult";
+import {firebaseConfig} from "./firebase";
 
 const domain=process.env.REACT_APP_AUTH0_DOMAIN
 const id=process.env.REACT_APP_AUTH0_CLIENT_ID
