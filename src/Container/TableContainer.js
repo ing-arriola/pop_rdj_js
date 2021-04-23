@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {useAuth0} from '@auth0/auth0-react'
-import axios from 'axios'
-import moment from 'moment';
+import firebaseConfig from '../utils/firebase'
+import moment from 'moment'
 import {Table,Modal,Button} from 'react-bootstrap'
 import SurveyContainer from './SurveyContainer'
 import logoRdf from "../Resources/logo_rjf.png"
@@ -25,21 +25,63 @@ const TableContainer = () => {
   const [selectedDays,setSelectedDays] = useState([])
   const [companies,setCompanies] = useState([])
   const [data,setData] = useState([])
-// const [answers,setAnswers] = useState([])
-
+  const [answers,setAnswers] = useState([])
+  const [validUsersForcurrentUser,serValidUsersForcurrentUser] = useState([])
   
 
   useEffect(() => {
-    const dataFromFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
-    dataFromFirebase.get('/users.json')
-    .then(response => {
-      setData(response.data)
-    })
-    dataFromFirebase.get('/companies.json')
-    .then(response => {
-      setCompanies(response.data)
-    })
+    writeFirebaseData("companies")
+    writeFirebaseData("users")
+    writeFirebaseData("answers")
   }, [])
+
+  const writeFirebaseData = (refTable) => {
+    const userRef= firebaseConfig.database().ref(refTable)
+    userRef.on('value', (snapshot) => {
+      const usersFirebase= snapshot.val() 
+       const dataList = []
+      for(let id in usersFirebase){
+        dataList.push({ id , ...usersFirebase[id]})  
+      }
+      switch (refTable){
+        case 'users':
+          setData(dataList)
+          break
+        case 'companies':
+          setCompanies(dataList)
+          break
+        default:
+          setAnswers(dataList)
+
+      }
+    })
+  }
+
+  useEffect(()=>{
+    if(selectedDays.length > 0){
+      console.log(validUsersForcurrentUser)
+      console.log(answers)
+      console.log(selectedDays)
+      const validAnswers = []
+      validUsersForcurrentUser.forEach(validUser => {
+        const validAnswer = answers.filter(answer => answer.userId === validUser.id)
+        validAnswer.length > 0 &&  (validAnswers.push(validAnswer)) 
+      })
+      console.log(validAnswers)
+     /* 
+       console.log(answers.weekToEvaluate[0] === selectedDays[1])
+      console.log(answers.weekToEvaluate[1] === selectedDays[5])
+     */
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[selectedDays,answers])
+
+  useEffect(()=>{
+    const validUsers = data.filter( userEvaluated => userEvaluated.company.includes(parseInt(user.name)))
+    console.log(validUsers)
+    serValidUsersForcurrentUser(validUsers)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[data])
 
 
   const showEvaluation = (name,type,id) => {
@@ -67,23 +109,23 @@ const TableContainer = () => {
     </tr>
   </thead>
   <tbody>  
-    { data.filter(info => info.company.includes(parseInt(user.name))).map(person  => (
+    { validUsersForcurrentUser.map(person  => (
          <tr>
          <td className="text-center">{person.name}</td>
          <td className="d-flex justify-content-center"> 
           <Button
-                  variant="primary"
-                  onClick={()=>showEvaluation(person.name,person.type,person.id)}
-                  style={{
-                    backgroundColor: "#FE3E00",
-                    borderBlockColor: "#FE3E00",
-                    boxShadow: "#FE3E00",
-                    borderBottomColor: "#FE3E00",
-                    borderColor: "#FE3E00",
-                  }}
-                >
-                  Evaluar
-                </Button>
+              variant="primary"
+              onClick={()=>showEvaluation(person.name,person.type,person.id)}
+              style={{
+                backgroundColor: "#FE3E00",
+                borderBlockColor: "#FE3E00",
+                boxShadow: "#FE3E00",
+                borderBottomColor: "#FE3E00",
+                borderColor: "#FE3E00",
+              }}
+              >
+              Evaluar
+          </Button>
          </td>
        </tr>
     ))}
