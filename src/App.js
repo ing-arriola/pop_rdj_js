@@ -8,13 +8,25 @@ import "./App.css"
 import Results from "./Pages/Results";
 import SingleResult from "./Pages/SingleResult";
 import LoginPage from "./Pages/LoginPage";
+import {auth} from "./firebase";
 
 const domain=process.env.REACT_APP_AUTH0_DOMAIN
 const id=process.env.REACT_APP_AUTH0_CLIENT_ID
 
 
 const App = () => {
-    return (
+    const [firebaseUser, setFirebaseUser] = React.useState(false)
+    React.useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            console.log(user)
+            if(user){
+                setFirebaseUser(user)
+            }else{
+                setFirebaseUser(null)
+            }
+        })
+    }, [])
+    return firebaseUser !== false ?  (
         <Router>
             <Layout>
                 <Switch>
@@ -26,6 +38,8 @@ const App = () => {
                 </Switch>
             </Layout>
         </Router>
+    ): (
+        <div>Cargando...</div>
     )
 }
 
