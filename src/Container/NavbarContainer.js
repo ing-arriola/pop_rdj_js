@@ -11,11 +11,14 @@ import {auth} from "../firebase";
 export default function NavbarContainer() {
     const [authUser, setUser] = React.useState(null)
     React.useEffect(() => {
-        if(auth.currentUser){
-            setUser(auth.currentUser)
-        }else{
-            setUser(null);
-        }
+        auth.onAuthStateChanged(user => {
+            console.log(user)
+            if(user){
+                setUser(user)
+            }else{
+                setUser(null)
+            }
+        })
     }, [])
     return (
     <Navbar bg="light" expand="lg">
