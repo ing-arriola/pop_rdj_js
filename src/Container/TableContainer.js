@@ -11,7 +11,6 @@ import SvgWithMessage from '../Components/SvgWithMessage'
 import { ReactComponent as Empty } from './empty.svg'
 
 const TableContainer = () => {
-  const {user} = useAuth0()
   const [show, setShow] = useState(false)
   const [showEmpty,setShowEmpty] = useState(false)
   const [confirm,setConfirm] = useState(false)
@@ -44,7 +43,7 @@ const TableContainer = () => {
 
   const showEvaluation = (name,type,id) => {
     if (selectedDays.length === 7) {
-      const companyToShow = companies.find(element => element.id === parseInt(user.name))
+      const companyToShow = companies.find(element => element.id === parseInt(''))
       setDataModal({
         userToEvaluate:name,
         company:companyToShow.name,
@@ -67,7 +66,7 @@ const TableContainer = () => {
     </tr>
   </thead>
   <tbody>  
-    { data.filter(info => info.company.includes(parseInt(user.name))).map(person  => (
+    { data.filter(info => info.company.includes('')).map(person  => (
          <tr>
          <td className="text-center">{person.name}</td>
          <td className="d-flex justify-content-center"> 
