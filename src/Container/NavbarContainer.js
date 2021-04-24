@@ -6,10 +6,18 @@ import {useAuth0} from '@auth0/auth0-react'
 import LoginButton from '../Components/LoginButton'
 import LogoutButton from '../Components/LogoutButton'
 import logo from "../Resources/logo_pop.png";
+import {auth} from "../firebase";
 
 export default function NavbarContainer() {
-  const {isAuthenticated, user} = useAuth0()
-  return (
+    const [authUser, setUser] = React.useState(null)
+    React.useEffect(() => {
+        if(auth.currentUser){
+            setUser(auth.currentUser)
+        }else{
+            setUser(null);
+        }
+    }, [])
+    return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand href="/">
         <img
@@ -24,20 +32,20 @@ export default function NavbarContainer() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
             {
-                isAuthenticated && (
+                authUser && (
                     <NavLink className="nav-item" to="/results" exact >
                         Resultados
                     </NavLink>)
             }
           {
-            isAuthenticated && (
+              authUser && (
               <NavLink className="nav-item" to="/users" exact >
                 Evaluacion
               </NavLink>)
           }
 
          {
-           isAuthenticated ? (<LogoutButton/>) : (<LoginButton/>) 
+             authUser ? (<LogoutButton/>) : (<LoginButton/>)
          }        
         </Nav>
       </Navbar.Collapse>
