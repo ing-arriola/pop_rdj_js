@@ -15,6 +15,7 @@ const TableContainer = () => {
   const [show, setShow] = useState(false)
   const [showEmpty,setShowEmpty] = useState(false)
   const [confirm,setConfirm] = useState(false)
+  const [usersAlreadyEvaluated,setUsersAlreadyEvaluated] = useState([])
   const [dataModal,setDataModal] = useState(
     { company:"",
       userToEvaluate:"",
@@ -59,19 +60,25 @@ const TableContainer = () => {
 
   useEffect(()=>{
     if(selectedDays.length > 0){
-      console.log(validUsersForcurrentUser)
-      console.log(answers)
-      console.log(selectedDays)
       const validAnswers = []
       validUsersForcurrentUser.forEach(validUser => {
-        const validAnswer = answers.filter(answer => answer.userId === validUser.id)
-        validAnswer.length > 0 &&  (validAnswers.push(validAnswer)) 
+        let validAnswer= undefined
+        answers.forEach(answer => {
+          if(answer.userId === validUser.id){
+            validAnswer =   answer
+          }
+        })
+        validAnswer && validAnswers.push(validAnswer)
       })
-      console.log(validAnswers)
-     /* 
-       console.log(answers.weekToEvaluate[0] === selectedDays[1])
-      console.log(answers.weekToEvaluate[1] === selectedDays[5])
-     */
+      const usersToBlock = []
+      validAnswers.forEach(item => {
+        if (item.weekToEvaluate[0] === moment(selectedDays[1]).format('LL') &&
+        item.weekToEvaluate[1] === moment(selectedDays[5]).format('LL') ) {
+          usersToBlock.push(item.userId)
+        }
+      })
+      console.log(usersToBlock)
+      setUsersAlreadyEvaluated(usersToBlock)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[selectedDays,answers])
@@ -113,19 +120,25 @@ const TableContainer = () => {
          <tr>
          <td className="text-center">{person.name}</td>
          <td className="d-flex justify-content-center"> 
+         {usersAlreadyEvaluated.includes(person.id) ? 
+           (<div>Ya se evaluo</div>) 
+         : (
           <Button
-              variant="primary"
-              onClick={()=>showEvaluation(person.name,person.type,person.id)}
-              style={{
-                backgroundColor: "#FE3E00",
-                borderBlockColor: "#FE3E00",
-                boxShadow: "#FE3E00",
-                borderBottomColor: "#FE3E00",
-                borderColor: "#FE3E00",
-              }}
-              >
-              Evaluar
+            variant="primary"
+            onClick={()=>showEvaluation(person.name,person.type,person.id)}
+            style={{
+              backgroundColor: "#FE3E00",
+              borderBlockColor: "#FE3E00",
+              boxShadow: "#FE3E00",
+              borderBottomColor: "#FE3E00",
+              borderColor: "#FE3E00",
+            }}
+          >
+            Evaluar
           </Button>
+         )
+         }
+          
          </td>
        </tr>
     ))}
@@ -194,7 +207,7 @@ const TableContainer = () => {
                 nameToShow={dataModal.userToEvaluate} 
                 company={dataModal.company} 
                 typeOfPerson={dataModal.typeOfPerson}
-                weekToEvaluate={[selectedDays[1],selectedDays[5]]}
+                weekToEvaluate={[moment(selectedDays[1]).format('LL') ,moment(selectedDays[5]).format('LL')]}
                 />
               </Modal.Body>
              
