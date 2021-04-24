@@ -152,3 +152,10 @@ input[type=radio]{
     position: static !important;
   }
 }
+button.rdjf{
+  background-color: #FE3E00;
+  border-block-color:  #FE3E00;
+  box-shadow:  #FE3E00;
+  border-bottom-color: #FE3E00;
+  border-color: #FE3E00;
+}

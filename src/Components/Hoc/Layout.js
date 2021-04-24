@@ -11,7 +11,7 @@ const Layout = (props) => {
             <NavbarContainer />
 
             <> {props.children} </>
-            <div className='footer' style={{position: location==='/login' ? 'Fixed':'Static', bottom: 0, width: '100%'}}>
+            <div className='footer' style={{position: location.includes('login') ? 'Fixed':'Static', bottom: 0, width: '100%'}}>
                 <FooterContainer />
             </div>
         </Aux>
