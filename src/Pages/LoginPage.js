@@ -1,8 +1,15 @@
 import React from "react";
 import LoginContainer from "../Container/LoginContainer";
+import {withRouter} from "react-router-dom";
+import {auth} from "../firebase";
 
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+    React.useEffect(() => {
+        if(auth.currentUser){
+            props.history.push('/')
+        }
+    }, [props.history])
     return (
         <>
             <div className='d-flex justify-content-center pt-5 pb-5'>
@@ -12,4 +19,5 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage)
+
