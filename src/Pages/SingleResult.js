@@ -1,9 +1,16 @@
 import React from "react";
 import ResultsContainer from "../Container/ResultsContainer";
 import SingleResultContainer from "../Container/SingleResultContainer";
+import {withRouter} from "react-router-dom";
+import {auth} from "../firebase";
 
 
-const SingleResult = () => {
+const SingleResult = (props) => {
+    React.useEffect(() => {
+        if(!auth.currentUser){
+            props.history.push('/login')
+        }
+    }, [props.history])
     return (
         <>
             <div>
@@ -13,4 +20,4 @@ const SingleResult = () => {
     );
 };
 
-export default SingleResult;
+export default withRouter(SingleResult)
