@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import firebaseConfig from '../utils/firebase'
+import firebaseConfig, {db} from '../utils/firebase'
 import moment from 'moment'
 import {Table,Modal,Button} from 'react-bootstrap'
 import SurveyContainer from './SurveyContainer'
@@ -88,7 +88,11 @@ const TableContainer = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[data])
 
-
+    useEffect(() => {
+        db.ref("auth").on("value", snapshot => {
+            console.log(snapshot.val());
+        }, (error) => console.log(error));
+    }, [])
     const showEvaluation = (name,type,id) => {
         if (selectedDays.length === 7) {
             const companyToShow = companies.find(element => element.id === parseInt(''))
