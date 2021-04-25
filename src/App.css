@@ -147,3 +147,18 @@ input[type=radio]{
 .SelectedWeekExample .DayPicker-Day--hoverRange:hover {
   border-radius: 0 !important;
 }
+@media screen and (max-width: 991px) {
+  .footer {
+    position: static !important;
+  }
+  .layout{
+    padding-bottom: 0 !important;
+  }
+}
+button.rdjf{
+  background-color: #FE3E00;
+  border-block-color:  #FE3E00;
+  box-shadow:  #FE3E00;
+  border-bottom-color: #FE3E00;
+  border-color: #FE3E00;
+}

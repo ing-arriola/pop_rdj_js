@@ -1,13 +1,17 @@
 import React from 'react'
 import { Button } from "react-bootstrap"
-import {useAuth0} from '@auth0/auth0-react'
+import { withRouter } from "react-router-dom";
+import {auth} from "../utils/firebase";
 
-const LogoutButton = () => {
-    const {logout}=useAuth0()
+const LogoutButton = (props) => {
+    const logOut = () =>{
+        auth.signOut().then(() => {props.history.push('/')
+        })
+    }
     
     return (
         <Button
-        onClick={()=>logout()}
+        onClick={()=>logOut()}
         className="btn btn-lg btn-block hero-button"
         style={{
           backgroundColor: "#FE3E00",
@@ -22,4 +26,4 @@ const LogoutButton = () => {
     )
 }
 
-export default LogoutButton
+export default withRouter(LogoutButton)

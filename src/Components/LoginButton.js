@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button } from "react-bootstrap"
-import {useAuth0} from '@auth0/auth0-react'
+import { withRouter } from "react-router-dom";
 
-const LoginButton = () => {
-    const {loginWithRedirect}=useAuth0()
+const LoginButton = (props) => {
+    const loginWithRedirect = () => {
+        props.history.push('/login')
+    }
     
     return (
         <Button
@@ -22,4 +24,4 @@ const LoginButton = () => {
     )
 }
 
-export default LoginButton
+export default withRouter(LoginButton)

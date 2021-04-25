@@ -47,7 +47,6 @@ const FormContainer = () => {
       .catch(() => {
         alert("Email ya registrado o Campo invalido");
       });
-    console.log(newUser);
   };
 
   return (

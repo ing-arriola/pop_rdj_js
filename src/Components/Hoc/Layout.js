@@ -5,12 +5,12 @@ import FooterContainer from "../../Container/FooterContainer";
 
 const Layout = (props) => {
   return (
-    <div style={{position: "relative", paddingBottom: 270}}>
+    <div className='layout' style={{position: "relative", paddingBottom: 270}}>
         <Aux>
             <NavbarContainer />
 
             <> {props.children} </>
-            <div style={{position: "absolute", bottom: 0, width: "100%"}}>
+            <div className='footer' style={{position: "absolute", bottom: 0, width: "100%"}}>
                 <FooterContainer />
             </div>
         </Aux>
