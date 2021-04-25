@@ -27,7 +27,6 @@ const ResultsContainer = () => {
             setCompanies(companies);
         }
         setCompanies(companies.filter((company) => company.name.toLowerCase().includes(value.toLowerCase())))
-        console.log(arrayCompanies);
     }
     return (
         <>

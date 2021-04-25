@@ -18,7 +18,6 @@ const App = () => {
     const [firebaseUser, setFirebaseUser] = React.useState(false)
     React.useEffect(() => {
         auth.onAuthStateChanged(user => {
-            console.log(user)
             if(user){
                 setFirebaseUser(user)
             }else{

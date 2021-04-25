@@ -12,18 +12,15 @@ const FormLogin = (props) =>{
     const validateForm = (e) => {
         e.preventDefault();
         if (!email.trim()){
-            console.log('Invalid Email')
             setError('Datos vacíos email!')
             return;
         }
         if (!pass.trim()){
-            console.log('Invalid Pass');
             setError('Datos vacíos contraseña!')
 
             return;
         }
         if (pass.length < 6){
-            console.log('Invalid Pass lenght');
             setError('6 o más carácteres en contraseña ')
             return;
         }
@@ -36,8 +33,7 @@ const FormLogin = (props) =>{
             setEmail('')
             setPass('')
             setError(null)
-            console.log('in')
-            props.history.push('/results')
+            props.history.push('/')
         } catch (error) {
             if(error.code === 'auth/user-not-found'){
                 setError('Usuario o contraseña incorrecta')
@@ -45,8 +41,6 @@ const FormLogin = (props) =>{
             if(error.code === 'auth/wrong-password'){
                 setError('Usuario o contraseña incorrecta')
             }
-            console.log(error.code)
-            console.log(error.message)
         }
     }, [email, pass, props.history ])
     return(

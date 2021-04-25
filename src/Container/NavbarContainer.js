@@ -12,7 +12,6 @@ export default function NavbarContainer() {
     const [authUser, setUser] = React.useState(null)
     React.useEffect(() => {
         auth.onAuthStateChanged(user => {
-            console.log(user)
             if(user){
                 setUser(user)
             }else{

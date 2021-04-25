@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7491f86-2544-499e-a260-506618574eac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Container/TableContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/TableContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase.js" afterDir="false" />
-    </list>
+    <list default="true" id="c7491f86-2544-499e-a260-506618574eac" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +67,7 @@
       <workItem from="1619213592204" duration="422000" />
       <workItem from="1619214032269" duration="7602000" />
       <workItem from="1619281912328" duration="5426000" />
-      <workItem from="1619241666814" duration="340000" />
+      <workItem from="1619241666814" duration="489000" />
     </task>
     <servers />
   </component>
