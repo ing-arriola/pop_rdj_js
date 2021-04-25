@@ -3,6 +3,7 @@ import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import data from "./users.json"
 import ModalResults from "../Components/ModalResults";
+import Calendar from "../Components/Calendar";
 const company = {
     name: "Applaudo Studios",
     id: 1,
@@ -10,6 +11,7 @@ const company = {
 };
 
 const SingleResultContainer = () => {
+    const [selectedDays,setSelectedDays] = useState([])
 
     const [arrayUsers, setUsers] = useState(company.participants);
     const [modalShow, setModalShow] = useState(false);
@@ -43,6 +45,13 @@ const SingleResultContainer = () => {
                    <h3>Resultados de {company.name}</h3>
                </div>
                 <div>
+                    <h3>
+                        <strong>Establece la fecha a evaluar:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer
+                        el mes a evaluar y luego debes dar  click en el calendario sobre la semana que deseas ver los resultados
+                    </h3>
+                    <div className="d-flex justify-content-center">
+                        <Calendar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
+                    </div>
                     <Table striped bordered hover className=" mb-5">
                         <thead>
                         <tr>
