@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import firebaseConfig from '../utils/firebase'
+import firebaseConfig, {auth, db} from '../utils/firebase'
 import moment from 'moment'
 import {Table,Modal,Button} from 'react-bootstrap'
 import SurveyContainer from './SurveyContainer'
@@ -8,6 +8,7 @@ import gifTenor from "../Resources/tenor.gif"
 import Calendar from '../Components/Calendar'
 import SvgWithMessage from '../Components/SvgWithMessage'
 import { ReactComponent as Empty } from './empty.svg'
+import firebase from "firebase";
 
 const TableContainer = () => {
     const [show, setShow] = useState(false)
@@ -88,7 +89,13 @@ const TableContainer = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[data])
 
-
+    useEffect(() => {
+        db.ref("auth").on("value", snapshot => {
+            const authUsers = snapshot.val();
+            const currentUser = authUsers.filter((user) => user.email === auth.currentUser.email);
+            console.log(currentUser);
+        }, (error) => console.log(error));
+    }, [])
     const showEvaluation = (name,type,id) => {
         if (selectedDays.length === 7) {
             const companyToShow = companies.find(element => element.id === parseInt(''))
