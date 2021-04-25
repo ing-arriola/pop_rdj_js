@@ -4,9 +4,8 @@ import NavbarContainer from "../../Container/NavbarContainer";
 import FooterContainer from "../../Container/FooterContainer";
 
 const Layout = (props) => {
-    const location = window.location.pathname;
   return (
-    <div style={{position: "relative", paddingBottom: 270}}>
+    <div className='layout' style={{position: "relative", paddingBottom: 270}}>
         <Aux>
             <NavbarContainer />
 
