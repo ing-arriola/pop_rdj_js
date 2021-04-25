@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c7491f86-2544-499e-a260-506618574eac" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/firebase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Container/TableContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/TableContainer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +71,8 @@
       <workItem from="1619214032269" duration="7602000" />
       <workItem from="1619281912328" duration="5426000" />
       <workItem from="1619241666814" duration="489000" />
-      <workItem from="1619319702418" duration="1147000" />
+      <workItem from="1619319702418" duration="1899000" />
+      <workItem from="1619382650223" duration="799000" />
     </task>
     <servers />
   </component>
