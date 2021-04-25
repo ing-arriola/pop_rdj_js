@@ -1,7 +1,7 @@
 import React from "react";
 import {Form, Button} from "react-bootstrap";
-import {auth} from "../firebase";
 import { withRouter } from "react-router-dom";
+import {auth} from "../utils/firebase";
 
 
 const FormLogin = (props) =>{

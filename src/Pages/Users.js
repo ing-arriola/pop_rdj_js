@@ -1,7 +1,7 @@
 import React from 'react'
 import TableContainer from '../Container/TableContainer'
 import { withRouter } from "react-router-dom";
-import {auth} from "../firebase";
+import {auth} from "../utils/firebase";
 
 const Users = (props) => {
 

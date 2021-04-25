@@ -1,7 +1,7 @@
 import React from "react";
 import ResultsContainer from "../Container/ResultsContainer";
 import {withRouter} from "react-router-dom";
-import {auth} from "../firebase";
+import {auth} from "../utils/firebase";
 
 
 const Results = (props) => {

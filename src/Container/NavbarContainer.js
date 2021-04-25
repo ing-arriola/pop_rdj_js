@@ -6,7 +6,7 @@ import {useAuth0} from '@auth0/auth0-react'
 import LoginButton from '../Components/LoginButton'
 import LogoutButton from '../Components/LogoutButton'
 import logo from "../Resources/logo_pop.png";
-import {auth} from "../firebase";
+import {auth} from "../utils/firebase";
 
 export default function NavbarContainer() {
     const [authUser, setUser] = React.useState(null)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from "react-bootstrap"
 import { withRouter } from "react-router-dom";
-import {auth} from "../firebase";
+import {auth} from "../utils/firebase";
 
 const LogoutButton = (props) => {
     const logOut = () =>{

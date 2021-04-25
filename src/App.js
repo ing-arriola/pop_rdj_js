@@ -8,7 +8,7 @@ import "./App.css"
 import Results from "./Pages/Results";
 import SingleResult from "./Pages/SingleResult";
 import LoginPage from "./Pages/LoginPage";
-import {auth} from "./firebase";
+import {auth} from "./utils/firebase";
 
 const domain=process.env.REACT_APP_AUTH0_DOMAIN
 const id=process.env.REACT_APP_AUTH0_CLIENT_ID

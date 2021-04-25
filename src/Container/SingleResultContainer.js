@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import ResultsContainer from "../Container/ResultsContainer";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import data from "./users.json"
