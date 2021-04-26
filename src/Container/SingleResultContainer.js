@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import data from "./users.json"
 import ModalResults from "../Components/ModalResults";
 import Calendar from "../Components/Calendar";
+import moment from "moment";
 const company = {
     name: "Applaudo Studios",
     id: 1,
@@ -44,13 +45,32 @@ const SingleResultContainer = () => {
                    </Link>
                    <h3>Resultados de {company.name}</h3>
                </div>
-                <div>
-                    <h3>
-                        <strong>Establece la fecha a evaluar:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer
-                        el mes a evaluar y luego debes dar  click en el calendario sobre la semana que deseas ver los resultados
-                    </h3>
-                    <div className="d-flex justify-content-center">
-                        <Calendar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
+                <div className='text-center'>
+                    <h1 className="mb-4" > Bienvenido a la evaluacion de pasantes </h1>
+
+                    <h4 className="mb-3">Por favor sigue estos sencillos pasos:</h4>
+                    <div className="w-75 mb-4 h4 m-auto">
+                        <ol >
+                            <li><strong>Establece la fecha a evaluar:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer
+                                el mes a evaluar y luego debes dar  click en el calendario sobre la semana que deseas ver los resultados</li>
+                            <div className="d-flex justify-content-center">
+                                <Calendar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
+                            </div>
+                            <li> <strong>Selecciona persona de la que gusta ver su resultado:</strong>  En el siguiente listado, por favor da click en el boton correspondiente al pasante</li>
+                        </ol>
+                        <div className="d-flex justify-content-center">
+                            {selectedDays.length === 7 ? (
+                                    <h4 className="bg-success text-white rounded px-4" >
+                                        <strong>Estas evaluando la semana:</strong>
+                                        {moment(selectedDays[1]).format('LL')} –{' '}
+                                        {moment(selectedDays[5]).format('LL')}
+                                    </h4>
+                                ):
+                                (
+                                    <h4 className="font-weight-bold bg-danger text-white rounded px-4" >Aun no has establecido una semana para evaluar</h4>
+                                )
+                            }
+                        </div>
                     </div>
                     <Table striped bordered hover className=" mb-5">
                         <thead>
