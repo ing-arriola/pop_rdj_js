@@ -8,6 +8,7 @@ import gifTenor from "../Resources/tenor.gif"
 import Calendar from '../Components/Calendar'
 import SvgWithMessage from '../Components/SvgWithMessage'
 import { ReactComponent as Empty } from './empty.svg'
+import {FaCheckCircle} from 'react-icons/fa'
 
 const TableContainer = () => {
     const [show, setShow] = useState(false)
@@ -108,7 +109,7 @@ const TableContainer = () => {
 
     const showEvaluation = (name,type,id) => {
         if (selectedDays.length === 7) {
-            const companyToShow = companies.find(element => element.id === parseInt(''))
+            const companyToShow = companies.find(element => element.id === currentUserData.idCompany)
             setDataModal({
                 userToEvaluate:name,
                 company:companyToShow.name,
@@ -136,7 +137,7 @@ const TableContainer = () => {
                     <td className="text-center">{person.name}</td>
                     <td className="d-flex justify-content-center">
                         {usersAlreadyEvaluated.includes(person.id) ?
-                            (<div>Ya se evaluo</div>)
+                            (<FaCheckCircle  style={{color:'#28a745',fontSize:37}}/>)
                             : (
                                 <Button
                                     variant="primary"
