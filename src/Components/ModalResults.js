@@ -63,6 +63,7 @@ const userArray = [
 function ModalResults(props) {
     const [weeks, setWeeks] = useState([1]);
     const [active, setActive] = useState(1);
+    // eslint-disable-next-line no-unused-vars
     const handleWeeks = (e) => {
         const value = e.target.value;
         const weeksCounted = [];

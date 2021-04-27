@@ -2,7 +2,6 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import {useAuth0} from '@auth0/auth0-react'
 import LoginButton from '../Components/LoginButton'
 import LogoutButton from '../Components/LogoutButton'
 import logo from "../Resources/logo_pop.png";

@@ -10,10 +10,6 @@ import SingleResult from "./Pages/SingleResult";
 import LoginPage from "./Pages/LoginPage";
 import {auth} from "./utils/firebase";
 
-const domain=process.env.REACT_APP_AUTH0_DOMAIN
-const id=process.env.REACT_APP_AUTH0_CLIENT_ID
-
-
 const App = () => {
     const [firebaseUser, setFirebaseUser] = React.useState(false)
     React.useEffect(() => {
