@@ -32,12 +32,12 @@ export default function NavbarContainer() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-            {
+            {/*
                 authUser && (
                     <NavLink className="nav-item" to="/results" exact >
                         Resultados
                     </NavLink>)
-            }
+                */}
           {
               authUser && (
               <NavLink className="nav-item" to="/users" exact >
