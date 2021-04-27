@@ -24,12 +24,17 @@ const TableContainer = () => {
     )
     const [selectedDays,setSelectedDays] = useState([])
     const [companies,setCompanies] = useState([])
-    const [data,setData] = useState([])
+    const [data,setData] = useState(null)
     const [answers,setAnswers] = useState([])
     const [validUsersForcurrentUser,serValidUsersForcurrentUser] = useState([])
     const [currentUserData,setCurrentUserData] = useState({})
 
-
+    
+    const setUsersOnMount = (currentUser) => {
+        const validUsers = data?.filter( userEvaluated => userEvaluated.company.includes(currentUser.idCompany))
+        serValidUsersForcurrentUser(validUsers)
+    }
+    
     useEffect(() => {
         writeFirebaseData("companies")
         writeFirebaseData("users")
@@ -43,7 +48,9 @@ const TableContainer = () => {
                 }
             })
             setCurrentUserData(currentUser)
+            setUsersOnMount(currentUser)
         }, (error) => console.log(error))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -96,17 +103,7 @@ const TableContainer = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[selectedDays,answers])
 
-    useEffect(()=>{
-        console.log(data)
-        console.log(currentUserData.idCompany)
-        const validUsers = data.filter( userEvaluated => userEvaluated.company.includes(currentUserData.idCompany))
-        console.log(validUsers)
-        serValidUsersForcurrentUser(validUsers)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[currentUserData])
-
-   
-
+ 
     const showEvaluation = (name,type,id) => {
         if (selectedDays.length === 7) {
             const companyToShow = companies.find(element => element.id === currentUserData.idCompany)
@@ -132,7 +129,7 @@ const TableContainer = () => {
             </tr>
             </thead>
             <tbody>
-            { validUsersForcurrentUser.map(person  => (
+            { data?.filter( userEvaluated => userEvaluated.company.includes(currentUserData.idCompany)).map(person  => (
                 <tr>
                     <td className="text-center">{person.name}</td>
                     <td className="d-flex justify-content-center">
