@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import data from "./users.json"
@@ -14,6 +14,7 @@ const SingleResultContainer = (props) => {
     const [selectedDays,setSelectedDays] = useState([])
     const [arrayUsers, setUsers] = useState([]);
     const [arrayAws, setAws] = useState([]);
+    const [userTable, setUserTable] = useState([]);
     const [modalShow, setModalShow] = useState(false);
     const [company, setCompany] = useState({})
     const [userId, setId] = useState(0);
@@ -41,19 +42,40 @@ const SingleResultContainer = (props) => {
             const aws = snapshot.val()
             const auxAws = [];
             for (let key in aws){
-                console.log(aws[key]);
+                auxAws.push(aws[key])
             }
+            setAws(auxAws);
         }, (error) => console.log(error))
 
     }, [])
 
-    const handleSearch = (e) => {
-        const value = e.target.value;
-        if (!value) {
-            setUsers(usersData);
+    useEffect(()=>{
+        if(selectedDays.length > 0){
+            const validAnswers = []
+            arrayUsers.forEach(validUser => {
+                let validAnswer= undefined
+                arrayAws.forEach(answer => {
+                    if(answer.userId === validUser.id){
+                        validAnswer =   answer
+                    }
+                })
+                validAnswer && validAnswers.push(validAnswer)
+            })
+            console.log(validAnswers)
+            const usersToBlock = []
+            validAnswers.forEach(item => {
+                if (item.weekToEvaluate[0] === moment(selectedDays[1]).format('LL') &&
+                    item.weekToEvaluate[1] === moment(selectedDays[5]).format('LL') ) {
+                    const user = arrayUsers.find((data) => data.id === item.userId)
+                    usersToBlock.push(user)
+                }
+            })
+            console.log(usersToBlock)
+            setUserTable(usersToBlock)
         }
-        setUsers(usersData.filter((company) => company.name.toLowerCase().includes(value.toLowerCase())))
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[selectedDays,arrayAws])
+
     return (
         <>
             <div className="container">
@@ -99,13 +121,8 @@ const SingleResultContainer = (props) => {
                             }
                         </div>
                     </div>
+                    {userTable.length === 0 ? <h4>No hay evaluaciones en la fecha seleccionada</h4> :
                     <div className='w-100'>
-                        <Form className='w-75 m-auto'>
-                            <Form.Group controlId="formBasicEmail" className="w-100 d-flex justify-content-center">
-                                <Form.Control className='w-50 mr-3' type="text" placeholder="Search" onChange={handleSearch}/>
-                                <Button className='rdjf'>Buscar</Button>
-                            </Form.Group>
-                        </Form>
                         <Table striped bordered hover className=" mb-5">
                             <thead>
                             <tr>
@@ -116,7 +133,7 @@ const SingleResultContainer = (props) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {arrayUsers.map(user => (
+                            {userTable.map(user => (
                                 <tr>
                                     <td className="text-center">{user.name}</td>
                                     <td className="d-flex justify-content-center">
@@ -141,7 +158,7 @@ const SingleResultContainer = (props) => {
                             ))}
                             </tbody>
                         </Table>
-                    </div>
+                    </div>}
                 </div>
                 <ModalResults
                     show={modalShow}
