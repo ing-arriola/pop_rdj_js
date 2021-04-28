@@ -3,18 +3,26 @@ import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import data from "./users.json"
 import ModalResults from "../Components/ModalResults";
+import {db} from "../utils/firebase";
+import { withRouter } from "react-router-dom";
+
 const company = {
     name: "Applaudo Studios",
     id: 1,
     participants: data.users
 };
 
-const SingleResultContainer = () => {
+const SingleResultContainer = (props) => {
 
     const [arrayUsers, setUsers] = useState(company.participants);
     const [modalShow, setModalShow] = useState(false);
     const [userId, setId] = useState(0);
-
+    React.useEffect(() => {
+        db.ref("users").on("value", snapshot => {
+            const users = snapshot.val()
+            console.log(props.history.location.pathname.substr(9))
+        }, (error) => console.log(error))
+    }, [])
     const handleSearch = (e) => {
         const value = e.target.value;
         if (!value) {
@@ -94,4 +102,4 @@ const SingleResultContainer = () => {
     );
 };
 
-export default SingleResultContainer;
+export default withRouter(SingleResultContainer);
