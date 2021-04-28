@@ -5,30 +5,54 @@ import data from "./users.json"
 import ModalResults from "../Components/ModalResults";
 import {db} from "../utils/firebase";
 import { withRouter } from "react-router-dom";
+import Calendar from "../Components/Calendar";
+import moment from "moment";
 
-const company = {
-    name: "Applaudo Studios",
-    id: 1,
-    participants: data.users
-};
+const usersData = [];
 
 const SingleResultContainer = (props) => {
-
-    const [arrayUsers, setUsers] = useState(company.participants);
+    const [selectedDays,setSelectedDays] = useState([])
+    const [arrayUsers, setUsers] = useState([]);
+    const [arrayAws, setAws] = useState([]);
     const [modalShow, setModalShow] = useState(false);
+    const [company, setCompany] = useState({})
     const [userId, setId] = useState(0);
     React.useEffect(() => {
         db.ref("users").on("value", snapshot => {
             const users = snapshot.val()
             console.log(props.history.location.pathname.substr(9))
+            setUsers(users)
+            usersData.push(...users);
+        }, (error) => console.log(error))
+
+    }, [])
+    React.useEffect(() => {
+        db.ref("companies").on("value", snapshot => {
+            const companies = snapshot.val()
+            companies.forEach((company) => {
+                if (String(company.id) === props.history.location.pathname.substr(9)){
+                    setCompany(company)
+                }
+            })
         }, (error) => console.log(error))
     }, [])
+    React.useEffect(() => {
+        db.ref("answers").on("value", snapshot => {
+            const aws = snapshot.val()
+            const auxAws = [];
+            for (let key in aws){
+                console.log(aws[key]);
+            }
+        }, (error) => console.log(error))
+
+    }, [])
+
     const handleSearch = (e) => {
         const value = e.target.value;
         if (!value) {
-            setUsers(company.participants);
+            setUsers(usersData);
         }
-        setUsers(company.participants.filter((company) => company.name.toLowerCase().includes(value.toLowerCase())))
+        setUsers(usersData.filter((company) => company.name.toLowerCase().includes(value.toLowerCase())))
     }
     return (
         <>
@@ -48,28 +72,54 @@ const SingleResultContainer = (props) => {
                            Regresar
                        </Button>
                    </Link>
-                   <h3>Resultados de {company.name}</h3>
+                   <h3>Resultados de {company.name ? company.name : '...' }</h3>
                </div>
-                <div>
-                    <Table striped bordered hover className=" mb-5">
-                        <thead>
-                        <tr>
-                            <th className="text-center d-flex justify-content-around align-items-center">
-                                <div>Nombre</div>
-                                <Form>
-                                    <Form.Group controlId="formBasicEmail" className="mb-0">
-                                        <Form.Control type="text" placeholder="Search" onChange={handleSearch}/>
-                                    </Form.Group>
-                                </Form>
-                            </th>
-                            <th className="text-center">Accion</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {arrayUsers.map(user => (
+                <div className='d-flex flex-column align-items-center'>
+                    <h4 className="mb-3">Por favor sigue estos sencillos pasos:</h4>
+                    <div className="w-75 mb-4 h4">
+                        <ol >
+                            <li><strong>Establece la fecha de la gusta ver la evaluacion:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer
+                                el mes a ver y luego debes dar  click en el calendario sobre la semana que deseas ver</li>
+                            <div className="d-flex justify-content-center">
+                                <Calendar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
+                            </div>
+                            <li> <strong>Selecciona persona a ver su resultado:</strong>  En el siguiente listado, por favor da click en el boton correspondiente al pasante que deseas ver</li>
+                        </ol>
+                        <div className="d-flex justify-content-center">
+                            {selectedDays.length === 7 ? (
+                                    <h4 className="bg-success text-white rounded px-4" >
+                                        <strong>Estas viendo las evaluaciones de la semana:</strong>
+                                        {moment(selectedDays[1]).format('LL')} –{' '}
+                                        {moment(selectedDays[5]).format('LL')}
+                                    </h4>
+                                ):
+                                (
+                                    <h4 className="font-weight-bold bg-danger text-white rounded px-4" >Aun no has establecido una semana para evaluar</h4>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div className='w-100'>
+                        <Form className='w-75 m-auto'>
+                            <Form.Group controlId="formBasicEmail" className="w-100 d-flex justify-content-center">
+                                <Form.Control className='w-50 mr-3' type="text" placeholder="Search" onChange={handleSearch}/>
+                                <Button className='rdjf'>Buscar</Button>
+                            </Form.Group>
+                        </Form>
+                        <Table striped bordered hover className=" mb-5">
+                            <thead>
                             <tr>
-                                <td className="text-center">{user.name}</td>
-                                <td className="d-flex justify-content-center">
+                                <th className="text-center d-flex justify-content-around align-items-center">
+                                    <div>Nombre</div>
+                                </th>
+                                <th className="text-center">Accion</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {arrayUsers.map(user => (
+                                <tr>
+                                    <td className="text-center">{user.name}</td>
+                                    <td className="d-flex justify-content-center">
                                         <Button
                                             variant="primary"
                                             onClick={() => {
@@ -86,11 +136,12 @@ const SingleResultContainer = (props) => {
                                         >
                                             Ver
                                         </Button>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </Table>
+                    </div>
                 </div>
                 <ModalResults
                     show={modalShow}
