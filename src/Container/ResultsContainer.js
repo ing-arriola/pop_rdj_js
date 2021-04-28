@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {Button, Table, Form, ProgressBar} from 'react-bootstrap'
+import {Button, Table, Form} from 'react-bootstrap'
 import logoRdf from "../Resources/logo_rjf.png";
 import {Link} from "react-router-dom";
-import {auth, db} from "../utils/firebase";
+import {db} from "../utils/firebase";
 
 const companiesData = [];
 const ResultsContainer = () => {
@@ -14,6 +14,7 @@ const ResultsContainer = () => {
             companiesData.push(...companies)
             setCompanies(companies)
         }, (error) => console.log(error))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const handleSearch = (e) => {
         const value = e.target.value;

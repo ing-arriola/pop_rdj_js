@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {Button, Form, Table} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import data from "./users.json"
 import ModalResults from "../Components/ModalResults";
 import {db} from "../utils/firebase";
 import { withRouter } from "react-router-dom";
@@ -15,17 +14,35 @@ const SingleResultContainer = (props) => {
     const [arrayUsers, setUsers] = useState([]);
     const [arrayAws, setAws] = useState([]);
     const [userTable, setUserTable] = useState([]);
+    const [questions,setQuestions] = useState([])
     const [modalShow, setModalShow] = useState(false);
     const [company, setCompany] = useState({})
+    const [awsToShow, setAwsToShow] = useState({})
     const [userId, setId] = useState(0);
+    React.useEffect(() => {
+        db.ref("answers").on("value", snapshot => {
+            const aws = snapshot.val()
+            const auxAws = [];
+            for (let key in aws){
+                auxAws.push(aws[key])
+            }
+            setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
+        }, (error) => console.log(error))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    React.useEffect(() => {
+        db.ref("questions").on("value", snapshot => {
+            const questions = snapshot.val()
+            setQuestions(questions);
+        }, (error) => console.log(error))
+    }, [])
     React.useEffect(() => {
         db.ref("users").on("value", snapshot => {
             const users = snapshot.val()
-            console.log(props.history.location.pathname.substr(9))
             setUsers(users)
             usersData.push(...users);
         }, (error) => console.log(error))
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     React.useEffect(() => {
         db.ref("companies").on("value", snapshot => {
@@ -36,6 +53,7 @@ const SingleResultContainer = (props) => {
                 }
             })
         }, (error) => console.log(error))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     React.useEffect(() => {
         db.ref("answers").on("value", snapshot => {
@@ -61,7 +79,6 @@ const SingleResultContainer = (props) => {
                 })
                 validAnswer && validAnswers.push(validAnswer)
             })
-            console.log(validAnswers)
             const usersToBlock = []
             validAnswers.forEach(item => {
                 if (item.weekToEvaluate[0] === moment(selectedDays[1]).format('LL') &&
@@ -70,7 +87,6 @@ const SingleResultContainer = (props) => {
                     usersToBlock.push(user)
                 }
             })
-            console.log(usersToBlock)
             setUserTable(usersToBlock)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -133,8 +149,8 @@ const SingleResultContainer = (props) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {userTable.map(user => (
-                                <tr>
+                            {userTable.map((user, key) => (
+                                <tr key={key}>
                                     <td className="text-center">{user.name}</td>
                                     <td className="d-flex justify-content-center">
                                         <Button
@@ -150,6 +166,7 @@ const SingleResultContainer = (props) => {
                                                 borderBottomColor: "#FE3E00",
                                                 borderColor: "#FE3E00",
                                             }}
+                                            key={key}
                                         >
                                             Ver
                                         </Button>
@@ -163,7 +180,9 @@ const SingleResultContainer = (props) => {
                 <ModalResults
                     show={modalShow}
                     onHide={() => setModalShow(false)}
-                    idUser={userId}
+                    iduser={userId}
+                    questions={questions.filter((data) => data.userType.includes(userId.type))}
+                    aws={awsToShow}
                 />
             </div>
         </>
