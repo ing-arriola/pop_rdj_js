@@ -63,14 +63,7 @@ const ResultsContainer = () => {
                                 <Link to={{pathname: "/results/"+company.id}}>
                                     <Button
                                         variant="primary"
-                                        onClick={() => console.log(company.name)}
-                                        style={{
-                                            backgroundColor: "#FE3E00",
-                                            borderBlockColor: "#FE3E00",
-                                            boxShadow: "#FE3E00",
-                                            borderBottomColor: "#FE3E00",
-                                            borderColor: "#FE3E00",
-                                        }}
+                                        className='rdjf'
                                     >
                                         Ver
                                     </Button></Link>
