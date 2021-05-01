@@ -83,8 +83,10 @@ const SingleResultContainer = (props) => {
             validAnswers.forEach(item => {
                 if (item.weekToEvaluate[0] === moment(selectedDays[1]).format('LL') &&
                     item.weekToEvaluate[1] === moment(selectedDays[5]).format('LL') ) {
-                    const user = arrayUsers.find((data) => data.id === item.userId)
-                    usersToBlock.push(user)
+                    const user = arrayUsers.find((data) => (data.id === item.userId && data.company.includes(Number(props.history.location.pathname.substr(9)))))
+                    if (user){
+                        usersToBlock.push(user)
+                    }
                 }
             })
             setUserTable(usersToBlock)
