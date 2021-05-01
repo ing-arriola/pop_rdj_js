@@ -20,6 +20,14 @@ export default function NavbarContainer() {
         })
     }, [])
     React.useEffect(() => {
+        auth.onAuthStateChanged(user => {
+            if(user){
+                checkRol();
+            }
+        })
+    }, [])
+
+    const checkRol = () => {
         db.ref("auth").on("value", snapshot => {
             const authUsers = snapshot.val()
             let currentUser=undefined
@@ -30,7 +38,8 @@ export default function NavbarContainer() {
             })
             setCurrentUserData(currentUser)
         }, (error) => console.log(error))
-    }, [])
+    }
+
     return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand href="/">
