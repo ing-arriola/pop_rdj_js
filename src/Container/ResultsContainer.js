@@ -58,7 +58,7 @@ const ResultsContainer = () => {
                     </thead>
                     <tbody>
                     {arrayCompanies.map((company, key) => (
-                        <tr>
+                        <tr key={key}>
                             <td className="text-center">{company.name}</td>
                             <td className="d-flex justify-content-center">
                                 <Link to={{pathname: "/results/"+company.id}}>
