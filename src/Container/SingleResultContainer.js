@@ -27,6 +27,8 @@ const SingleResultContainer = (props) => {
                 auxAws.push(aws[key])
             }
             setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
+            setAws(auxAws);
+
         }, (error) => console.log(error))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -36,37 +38,47 @@ const SingleResultContainer = (props) => {
             setQuestions(questions);
         }, (error) => console.log(error))
     }, [])
-    React.useEffect(() => {
-        db.ref("users").on("value", snapshot => {
-            const users = snapshot.val()
-            setUsers(users)
-            usersData.push(...users);
-        }, (error) => console.log(error))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        const arrRef = [ 'companies', 'users'];
+        arrRef.forEach(ref => {
+            getToFirebase(ref);
+        })
+
     }, [])
-    React.useEffect(() => {
-        db.ref("companies").on("value", snapshot => {
-            const companies = snapshot.val()
-            companies.forEach((company) => {
-                if (String(company.id) === props.history.location.pathname.substr(9)){
-                    setCompany(company)
-                }
-            })
-        }, (error) => console.log(error))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    React.useEffect(() => {
-        db.ref("answers").on("value", snapshot => {
-            const aws = snapshot.val()
-            const auxAws = [];
-            for (let key in aws){
-                auxAws.push(aws[key])
+    const getToFirebase = (ref) => {
+        db.ref(ref).on("value", snapshot => {
+            const response = snapshot.val();
+            switch (ref){
+                case 'answers':
+
+                    const auxAws = [];
+                    for (let key in response){
+                        auxAws.push(response[key])
+                    }
+                    console.log(auxAws)
+                    setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
+                    setAws(auxAws);
+                    break
+                case 'companies':
+                    response.forEach((company) => {
+                        if (String(company.id) === props.history.location.pathname.substr(9)){
+                            setCompany(company)
+                        }
+                    })
+                    break
+                case 'users':
+                    setUsers(response)
+                    usersData.push(...response);
+                    break
+                case 'questions':
+                    console.log(response)
+                    setQuestions(questions);
+                    break
+
             }
-            setAws(auxAws);
-        }, (error) => console.log(error))
-
-    }, [])
-
+        },(error) => console.log(error))
+    }
     useEffect(()=>{
         if(selectedDays.length > 0){
             const validAnswers = []
