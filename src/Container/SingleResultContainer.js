@@ -19,39 +19,12 @@ const SingleResultContainer = (props) => {
     const [company, setCompany] = useState({})
     const [awsToShow, setAwsToShow] = useState({})
     const [userId, setId] = useState(0);
-    React.useEffect(() => {
-        db.ref("answers").on("value", snapshot => {
-            const aws = snapshot.val()
-            const auxAws = [];
-            for (let key in aws){
-                auxAws.push(aws[key])
-            }
-            setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
-            setAws(auxAws);
 
-        }, (error) => console.log(error))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    React.useEffect(() => {
-        db.ref("questions").on("value", snapshot => {
-            const questions = snapshot.val()
-            setQuestions(questions);
-        }, (error) => console.log(error))
-    }, [])
-
-    useEffect(() => {
-        const arrRef = [ 'companies', 'users'];
-        arrRef.forEach(ref => {
-            getToFirebase(ref);
-        })
-
-    }, [])
     const getToFirebase = (ref) => {
         db.ref(ref).on("value", snapshot => {
             const response = snapshot.val();
             switch (ref){
                 case 'answers':
-
                     const auxAws = [];
                     for (let key in response){
                         auxAws.push(response[key])
@@ -69,9 +42,9 @@ const SingleResultContainer = (props) => {
                     break
                 case 'users':
                     setUsers(response)
-                    usersData.push(...response);
+                    usersData.push(response);
                     break
-                case 'questions':
+                default:
                     console.log(response)
                     setQuestions(questions);
                     break
@@ -79,6 +52,24 @@ const SingleResultContainer = (props) => {
             }
         },(error) => console.log(error))
     }
+
+    const getQuestions = () => {
+        db.ref("questions").on("value", snapshot => {
+            const questions = snapshot.val()
+            setQuestions(questions);
+        }, (error) => console.log(error))
+    }
+
+
+
+    useEffect(() => {
+        getQuestions()
+        getToFirebase('companies')
+        getToFirebase('users')
+        getToFirebase('answers')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     useEffect(()=>{
         if(selectedDays.length > 0){
             const validAnswers = []
