@@ -24,14 +24,14 @@ const TableContainer = () => {
     )
     const [selectedDays,setSelectedDays] = useState([])
     const [companies,setCompanies] = useState([])
-    const [data,setData] = useState(null)
+    const [data,setData] = useState([])
     const [answers,setAnswers] = useState([])
     const [validUsersForcurrentUser,serValidUsersForcurrentUser] = useState([])
     const [currentUserData,setCurrentUserData] = useState({})
 
     
-    const setUsersOnMount = (currentUser) => {
-        const validUsers = data?.filter( userEvaluated => userEvaluated.company.includes(currentUser.idCompany))
+    const setUsersOnMount = (currentUser,dataList) => {
+        const validUsers = dataList?.filter( userEvaluated => userEvaluated.company.includes(currentUser.idCompany))
         serValidUsersForcurrentUser(validUsers)
     }
     
@@ -39,17 +39,6 @@ const TableContainer = () => {
         writeFirebaseData("companies")
         writeFirebaseData("users")
         writeFirebaseData("answers")
-        db.ref("auth").on("value", snapshot => {
-            const authUsers = snapshot.val()
-            let currentUser=undefined
-            authUsers.forEach(user => {
-                if(user.email === auth.currentUser.email){
-                    currentUser=user
-                }
-            })
-            setCurrentUserData(currentUser)
-            setUsersOnMount(currentUser)
-        }, (error) => console.log(error))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -66,6 +55,17 @@ const TableContainer = () => {
             switch (refTable){
                 case 'users':
                     setData(dataList)
+                    db.ref("auth").on("value", snapshot => {
+                        const authUsers = snapshot.val()
+                        let currentUser=undefined
+                        authUsers.forEach(user => {
+                            if(user.email === auth.currentUser.email){
+                                currentUser=user
+                            }
+                        })
+                        setCurrentUserData(currentUser)
+                        setUsersOnMount(currentUser,dataList)
+                    }, (error) => console.log(error))
                     break
                 case 'companies':
                     setCompanies(dataList)
@@ -84,10 +84,10 @@ const TableContainer = () => {
                 let validAnswer= undefined
                 answers.forEach(answer => {
                     if(answer.userId === validUser.id){
-                        validAnswer =   answer
+                        validAnswer = answer
+                        validAnswer && validAnswers.push(validAnswer)
                     }
                 })
-                validAnswer && validAnswers.push(validAnswer)
             })
             console.log(validAnswers)
             const usersToBlock = []
