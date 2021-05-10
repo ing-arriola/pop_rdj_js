@@ -30,7 +30,8 @@ const SingleResultContainer = (props) => {
                         auxAws.push(response[key])
                     }
                     console.log(auxAws)
-                    setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
+                    //setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
+                    
                     setAws(auxAws);
                     break
                 case 'companies':
@@ -83,11 +84,13 @@ const SingleResultContainer = (props) => {
                 validAnswer && validAnswers.push(validAnswer)
             })
             const usersToBlock = []
-            validAnswers.forEach(item => {
+            arrayAws.forEach(item => {
                 if (item.weekToEvaluate[0] === moment(selectedDays[1]).format('LL') &&
                     item.weekToEvaluate[1] === moment(selectedDays[5]).format('LL') ) {
+                    setAwsToShow(item)
                     const user = arrayUsers.find((data) => (data.id === item.userId && data.company.includes(Number(props.history.location.pathname.substr(9)))))
                     if (user){
+                        
                         usersToBlock.push(user)
                     }
                 }
@@ -121,28 +124,27 @@ const SingleResultContainer = (props) => {
                     <h4 className="mb-3">Por favor sigue estos sencillos pasos:</h4>
                     <div className="w-75 mb-4 h4">
                         <ol >
-                            <li><strong>Establece la fecha de la gusta ver la evaluacion:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer
-                                el mes a ver y luego debes dar  click en el calendario sobre la semana que deseas ver</li>
+                            <li><strong>Establece la fecha de la gusta ver la evaluación:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer el mes a ver y luego debes dar  clic en el calendario sobre la semana que deseas ver.</li>
                             <div className="d-flex justify-content-center">
                                 <Calendar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
                             </div>
-                            <li> <strong>Selecciona persona a ver su resultado:</strong>  En el siguiente listado, por favor da click en el boton correspondiente al pasante que deseas ver</li>
+                            <li> <strong>Selecciona persona a ver su resultado:</strong>  En el siguiente listado, por favor da clic en el botón correspondiente al pasante que deseas ver.</li>
                         </ol>
                         <div className="d-flex justify-content-center">
                             {selectedDays.length === 7 ? (
                                     <h4 className="bg-success text-white rounded px-4" >
-                                        <strong>Estas viendo las evaluaciones de la semana:</strong>
+                                        <strong>Estás viendo las evaluaciones de la semana:</strong>
                                         {moment(selectedDays[1]).format('LL')} –{' '}
                                         {moment(selectedDays[5]).format('LL')}
                                     </h4>
                                 ):
                                 (
-                                    <h4 className="font-weight-bold bg-danger text-white rounded px-4" >Aun no has establecido una semana para evaluar</h4>
+                                    <h4 className="font-weight-bold bg-danger text-white rounded px-4" >Aún no has establecido una semana para evaluar</h4>
                                 )
                             }
                         </div>
                     </div>
-                    {userTable.length === 0 ? <h4>No hay evaluaciones en la fecha seleccionada</h4> :
+                    {userTable.length === 0 ? <h4>No hay evaluaciones en la fecha seleccionada.</h4> :
                     <div className='w-100'>
                         <Table striped bordered hover className=" mb-5">
                             <thead>
@@ -182,13 +184,15 @@ const SingleResultContainer = (props) => {
                         </Table>
                     </div>}
                 </div>
-                <ModalResults
+             
+                    <ModalResults
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     iduser={userId}
                     questions={questions.filter((data) => data.userType.includes(userId.type))}
                     aws={awsToShow}
                 />
+            
             </div>
         </>
     );

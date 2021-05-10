@@ -36,9 +36,7 @@ const ResultsContainer = () => {
                         alt="RDF Logo"
                     />
                     <h1 className="mb-4"> Bienvenido a los resultados de las evaluaciones </h1>
-                    <h4 className="text-center w-75 mb-4">A continuacion podra ver un listado de las instituciones afiliadas,
-                        por favor haga click en el boton correspondiente a la institucion que desea
-                        ver su resultado
+                    <h4 className="text-center w-75 mb-4">A continuación podrá ver un listado de las instituciones afiliadas,  por favor haga clic en el botón correspondiente a la institución que desea ver su resultado.
                     </h4>
                 </div>
                 <Form className='w-75'>

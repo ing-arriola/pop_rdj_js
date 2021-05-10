@@ -172,28 +172,27 @@ const TableContainer = () => {
                 className="p-3 img-fluid"
                 alt="RDF Logo"
             />
-            <h1 className="mb-4" > Bienvenido a la evaluacion de pasantes </h1>
+            <h1 className="mb-4" > Bienvenido a la evaluación de pasantes </h1>
 
             <h4 className="mb-3">Por favor sigue estos sencillos pasos:</h4>
             <div className="w-75 mb-4 h4">
                 <ol >
-                    <li><strong>Establece la fecha a evaluar:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer
-                        el mes a evaluar y luego debes dar  click en el calendario sobre la semana que deseas evaluar</li>
+                    <li><strong>Establece la fecha a evaluar:</strong> Para esto, puedes navegar con las fechas en el calendario para establecer el mes a evaluar y luego debes dar  click en el calendario sobre la semana que deseas evaluar.</li>
                     <div className="d-flex justify-content-center">
                         <Calendar selectedDays={selectedDays} setSelectedDays={setSelectedDays} />
                     </div>
-                    <li> <strong>Selecciona persona a evaluar:</strong>  En el siguiente listado, por favor da click en el boton correspondiente al pasante que deseas evaluar</li>
+                    <li> <strong>Selecciona persona a evaluar:</strong>  En el siguiente listado, por favor da click en el botón correspondiente al pasante que deseas evaluar.</li>
                 </ol>
                 <div className="d-flex justify-content-center">
                     {selectedDays.length === 7 ? (
                             <h4 className="bg-success text-white rounded px-4" >
-                                <strong>Estas evaluando la semana:</strong>
+                                <strong>Estás evaluando la semana:</strong>
                                 {moment(selectedDays[1]).format('LL')} –{' '}
                                 {moment(selectedDays[5]).format('LL')}
                             </h4>
                         ):
                         (
-                            <h4 className="font-weight-bold bg-danger text-white rounded px-4" >Aun no has establecido una semana para evaluar</h4>
+                            <h4 className="font-weight-bold bg-danger text-white rounded px-4" >Aún no has establecido una semana para evaluar                            </h4>
                         )
                     }
                 </div>
@@ -236,7 +235,7 @@ const TableContainer = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="d-flex flex-column justify-content-center align-items-center">
-                        Hemos recibido tus datos correctamente.{" "}
+                    Hemos recibido tus datos correctamente.{" "}
                         <img src={gifTenor} alt="" width={100} />
                     </div>
                 </Modal.Body>

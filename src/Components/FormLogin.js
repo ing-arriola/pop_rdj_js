@@ -62,14 +62,12 @@ const FormLogin = (props) =>{
                         </Form.Text>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group controlId="formBasicPassword" >
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" required placeholder="Password" onChange={e => setPass(e.target.value)}/>
                     </Form.Group>
-                    <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
-                    <div className='d-flex justify-content-center'>
+                
+                    <div className='d-flex justify-content-center pb-4'>
                         <Button variant="primary" type="submit" className='w-100 rdjf'>
                             Login
                         </Button>
