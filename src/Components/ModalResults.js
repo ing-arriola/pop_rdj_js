@@ -1,5 +1,5 @@
 import {Modal, Button, Table } from "react-bootstrap";
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 
 function ModalResults(props) {
