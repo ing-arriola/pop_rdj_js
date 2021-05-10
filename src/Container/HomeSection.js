@@ -19,13 +19,14 @@ export default function HomeSection() {
     "Psicología",
     "Idiomas",
     "Administración de empresas turísticas",
-    "Salud",
+    "Salud"
   ];
 
   const benefits = [
     "Podrás poner en práctica tu conocimiento, competencias y habilidades",
     "Adquirirás experiencia laboral y competencias profesionales",
-    "Al finalizar tu pasantía, recibirás carta de recomendación y diploma de participación del Programa de Oportunidades Profesionales.",
+    "Al finalizar tu pasantía, recibirás carta de recomendación y diploma de participación del Programa de Oportunidades Profesionales"
+
   ];
 
   const whoCan = listProfessions.map((profession) => (
@@ -46,13 +47,14 @@ export default function HomeSection() {
         <Row>
           <div className="col-md-6 d-flex flex-column align-items-center justify-content-center m-4 m-auto">
             <h1 className="text-center heading">
-              Programa de oportunidades profesionales (POP)
+            Programa de oportunidades profesionales (POP)
             </h1>
             <p className=" text-justify lead">
-              Este projecto busca dar respuesta a la falta de oportunidades y
+            Este proyecto busca dar respuesta a la falta de oportunidades y
               experiencia laboral a jóvenes con estudios superiores de El
               Salvador. Apostando a la reducción de desigualdades, fomentando el
-              trabajo decente y crecimiento económico en el país
+              trabajo decente y crecimiento económico en el país.
+
             </p>
             <a className="no-undeline" href='https://rdjfuturo.netlify.app/contactus/' target="_blank" rel="noreferrer" style={{ width: 300 }}>
               <Button
@@ -87,9 +89,9 @@ export default function HomeSection() {
       <Container className="pt-5 mb-5 pb-5">
         <Row>
           <div className="col-md d-flex flex-column align-items-center justify-content-center">
-            <h2 className="sub-title">¿Quiénes puede participar?</h2>
+            <h2 className="sub-title">¿Quiénes pueden participar?</h2>
             <p className="lead">
-              Estudiantes, egresados y graduados de:
+            Estudiantes, egresados y graduados de:
               <ul className="list-unstyled">{whoCan}</ul>
             </p>
           </div>
@@ -130,13 +132,13 @@ export default function HomeSection() {
               <li>
                 <FaCheckCircle color={"#FE3E00"} />
                 <strong> Pasantías virtuales:</strong> La cual podrás realizar
-                de forma remota desde tu hogar
+  de forma remota desde tu hogar
               </li>
               <li>
                 <FaCheckCircle color={"#FE3E00"} />
                 <strong> Pasantías presenciales:</strong> Asistiendo a las
-                instalaciones de instituciones públicas, privadas y no
-                gubernamentales.
+ instalaciones de instituciones públicas, privadas y no  gubernamentales.
+
               </li>
             </ul>
           </div>
