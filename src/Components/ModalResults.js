@@ -1,5 +1,5 @@
 import {Modal, Button, Table } from "react-bootstrap";
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 
 function ModalResults(props) {
@@ -33,7 +33,7 @@ function ModalResults(props) {
                     {props.questions.map((question, keyData) => (
                         <tr key={keyData}>
                             <td className="text-center">{question.text}</td>
-                            <td className="text-center">{props.aws[0]["question"+(keyData)].toString()}</td>
+                            <td className="text-center">{props.aws["question"+(keyData)].toString()}</td>
                         </tr>
                     ))}
 

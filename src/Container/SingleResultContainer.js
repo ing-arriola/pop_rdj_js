@@ -30,7 +30,8 @@ const SingleResultContainer = (props) => {
                         auxAws.push(response[key])
                     }
                     console.log(auxAws)
-                    setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
+                    //setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
+                    
                     setAws(auxAws);
                     break
                 case 'companies':
@@ -83,11 +84,13 @@ const SingleResultContainer = (props) => {
                 validAnswer && validAnswers.push(validAnswer)
             })
             const usersToBlock = []
-            validAnswers.forEach(item => {
+            arrayAws.forEach(item => {
                 if (item.weekToEvaluate[0] === moment(selectedDays[1]).format('LL') &&
                     item.weekToEvaluate[1] === moment(selectedDays[5]).format('LL') ) {
+                    setAwsToShow(item)
                     const user = arrayUsers.find((data) => (data.id === item.userId && data.company.includes(Number(props.history.location.pathname.substr(9)))))
                     if (user){
+                        
                         usersToBlock.push(user)
                     }
                 }
@@ -181,13 +184,15 @@ const SingleResultContainer = (props) => {
                         </Table>
                     </div>}
                 </div>
-                <ModalResults
+             
+                    <ModalResults
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     iduser={userId}
                     questions={questions.filter((data) => data.userType.includes(userId.type))}
                     aws={awsToShow}
                 />
+            
             </div>
         </>
     );
