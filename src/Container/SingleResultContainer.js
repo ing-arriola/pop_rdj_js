@@ -8,7 +8,6 @@ import Calendar from "../Components/Calendar";
 import moment from "moment";
 
 const usersData = [];
-
 const SingleResultContainer = (props) => {
     const [selectedDays,setSelectedDays] = useState([])
     const [arrayUsers, setUsers] = useState([]);
