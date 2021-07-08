@@ -163,3 +163,9 @@ button.rdjf{
   border-color: #FE3E00;
   color: #EFEFEF;
 }
+.rdjf:hover{
+  color: #EFEFEF;
+}
+.rdjf:disabled:hover{
+  color: #EFEFEF;
+}
