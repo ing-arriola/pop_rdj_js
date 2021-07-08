@@ -9,6 +9,7 @@ import Results from "./Pages/Results";
 import SingleResult from "./Pages/SingleResult";
 import LoginPage from "./Pages/LoginPage";
 import {auth} from "./utils/firebase";
+import AdminSettings from "./Pages/AdminSettings";
 
 const App = () => {
     const [firebaseUser, setFirebaseUser] = React.useState(false)
@@ -29,6 +30,8 @@ const App = () => {
                     <Route path="/users" component={Users}/>
                     <Route path="/results/:id" component={SingleResult}/>
                     <Route path="/results" component={Results}/>
+                    <Route path="/settings" component={AdminSettings}/>
+
                     <Route path="/" component={HomePage}/>
                 </Switch>
             </Layout>
