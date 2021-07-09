@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from "react";
+import React, {useEffect} from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import imgLop from "../Resources/hero_section.svg";
 import imtAbout from "../Resources/participants.svg";
@@ -8,9 +8,12 @@ import Mode from "../Resources/kinda.svg";
 import AOS from "aos";
 import { FaRegCheckCircle, FaCheck, FaCheckCircle } from "react-icons/fa";
 import "aos/dist/aos.css";
+import firebaseConfig from "../utils/firebase";
+import {Link} from "react-router-dom";
 
 AOS.init();
 export default function HomeSection() {
+
   const listProfessions = [
     "Periodismo",
     "Publicidad",
@@ -28,7 +31,15 @@ export default function HomeSection() {
     "Al finalizar tu pasantía, recibirás carta de recomendación y diploma de participación del Programa de Oportunidades Profesionales"
 
   ];
-
+  const [stateRegister, setStateRegister] = React.useState(null);
+    useEffect(()=>{
+        const bdRef = firebaseConfig.database()
+        bdRef.ref('systemSettings').on("value", snapshot => {
+            const config = snapshot.val()
+            setStateRegister(config.register);
+            console.log(config.register)
+        }, (error) => console.log(error))
+    },[])
   const whoCan = listProfessions.map((profession) => (
     <li>
       <FaRegCheckCircle color={"#FE3E00"} /> {profession}
@@ -56,20 +67,35 @@ export default function HomeSection() {
               trabajo decente y crecimiento económico en el país.
 
             </p>
-            <a className="no-undeline" href='https://rdjfuturo.netlify.app/contactus/' target="_blank" rel="noreferrer" style={{ width: 300 }}>
-              <Button
-                className="btn btn-lg btn-block hero-button"
-                style={{
-                  backgroundColor: "#FE3E00",
-                  borderBlockColor: "#FE3E00",
-                  boxShadow: "#FE3E00",
-                  borderBottomColor: "#FE3E00",
-                  borderColor: "#FE3E00",
-                }}
-              >
-                Unirme
-              </Button>
-            </a>
+              {stateRegister==="false"? <a className="no-undeline" href='https://rdjfuturo.netlify.app/contactus/' target="_blank" rel="noreferrer" style={{ width: 300 }}>
+                  <Button
+                      className="btn btn-lg btn-block hero-button"
+                      style={{
+                          backgroundColor: "#FE3E00",
+                          borderBlockColor: "#FE3E00",
+                          boxShadow: "#FE3E00",
+                          borderBottomColor: "#FE3E00",
+                          borderColor: "#FE3E00",
+                      }}
+                  >
+                      Unirme
+                  </Button>
+              </a>:<Link to="/register">
+                  <Button
+                      className="btn btn-lg btn-block hero-button"
+                      style={{
+                          backgroundColor: "#FE3E00",
+                          borderBlockColor: "#FE3E00",
+                          boxShadow: "#FE3E00",
+                          borderBottomColor: "#FE3E00",
+                          borderColor: "#FE3E00",
+                          width: 300
+                      }}
+                  >
+                      Unirme
+                  </Button>
+              </Link>}
+
             {/*<p>
               ¿Ya tienes cuenta?<Link> Iniciar Sesion</Link>
             </p>*/}

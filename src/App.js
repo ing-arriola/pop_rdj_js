@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./Components/Hoc/Layout"
 import HomePage from "./Pages/HomePage"
-// import Register from "./Pages/Register"
+import Register from "./Pages/Register"
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Users from './Pages/Users'
 import "./App.css"
@@ -31,7 +31,7 @@ const App = () => {
                     <Route path="/results/:id" component={SingleResult}/>
                     <Route path="/results" component={Results}/>
                     <Route path="/settings" component={AdminSettings}/>
-
+                    <Route path="/register" component={Register}/>
                     <Route path="/" component={HomePage}/>
                 </Switch>
             </Layout>

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import AuthServices from "../configs/AuthServices";
 import gifTenor from "../Resources/tenor.gif";
+import firebaseConfig from "../utils/firebase";
 const FormContainer = () => {
   const [show, setShow] = useState(false);
 
@@ -39,14 +40,12 @@ const FormContainer = () => {
 
   const sendData = (e) => {
     e.preventDefault();
-    //here you just need to send this the newUser Object
-    AuthServices.register(newUser)
-      .then(() => {
-        handleShow();
-      })
-      .catch(() => {
-        alert("Email ya registrado o Campo invalido");
-      });
+    const bdRef = firebaseConfig.database()
+    bdRef.ref('candidates').push(newUser).then(()=>{
+      handleShow();
+    }, error =>{
+      alert("Has an error")
+    });
   };
 
   return (
