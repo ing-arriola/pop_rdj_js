@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { Form, Button, Modal } from "react-bootstrap";
-import AuthServices from "../configs/AuthServices";
-import gifTenor from "../Resources/tenor.gif";
+import { Form, Button, Modal } from 'react-bootstrap';
+import gifTenor from '../Resources/tenor.gif';
+import firebaseConfig, { auth, db } from '../utils/firebase';
+import { Link } from 'react-router-dom';
+
 const FormContainer = () => {
   const [show, setShow] = useState(false);
-
+  const [authUsers, setAuthUsers] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [newUser, setNewUser] = useState({
-    name: "",
-    lastname: "",
-    age: "",
-    location: "",
-    phone: "",
-    phone2: "",
-    email: "",
-    education: "",
-    profession: "",
-    about: "",
+    name: '',
+    lastname: '',
+    age: '',
+    location: '',
+    phone: '',
+    phone2: '',
+    password: '',
+    email: '',
+    education: '',
+    profession: '',
+    about: ''
   });
 
   const {
@@ -29,9 +32,10 @@ const FormContainer = () => {
     phone,
     phone2,
     email,
+    password,
     education,
     profession,
-    about,
+    about
   } = newUser;
 
   const onChange = (e) =>
@@ -39,131 +43,162 @@ const FormContainer = () => {
 
   const sendData = (e) => {
     e.preventDefault();
-    //here you just need to send this the newUser Object
-    AuthServices.register(newUser)
-      .then(() => {
-        handleShow();
-      })
-      .catch(() => {
-        alert("Email ya registrado o Campo invalido");
+    const user = {
+      name: newUser.name,
+      email: newUser.email,
+      rol: 'intern'
+    };
+    auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
+      const data = db.ref('auth');
+      authUsers.push(user);
+      data.update(authUsers).then(r => {
+        const bdRef = firebaseConfig.database();
+        bdRef.ref('candidates').push(newUser).then(() => {
+          handleShow();
+        }, error => {
+
+        });
       });
+    }).catch(() => {
+      alert('Email ya registrado.');
+    });
   };
+  useEffect(() => {
+    const data = db.ref('auth').on('value', data => {
+      const authUsersList = data.val();
+      setAuthUsers(authUsersList);
+    });
+  }, []);
 
   return (
     <>
-      <Form className="mx-5 px-5" onSubmit={sendData}>
-        <Form.Group controlId="formName">
+      <Form className='mx-5 px-5' onSubmit={sendData}>
+        <Form.Group controlId='formName'>
           <Form.Label>Nombres</Form.Label>
           <Form.Control
-            name="name"
+            name='name'
             value={name}
-            type="text"
-            placeholder="Escribe tus nombres"
+            type='text'
+            placeholder='Escribe tus nombres'
             onChange={onChange}
             required
           />
         </Form.Group>
-        <Form.Group controlId="formLastname">
+        <Form.Group controlId='formLastname'>
           <Form.Label>Apellidos</Form.Label>
           <Form.Control
-            name="lastname"
+            name='lastname'
             value={lastname}
-            type="text"
-            placeholder="Escribe tus apellidos"
+            type='text'
+            placeholder='Escribe tus apellidos'
             onChange={onChange}
             required
           />
         </Form.Group>
-        <Form.Group controlId="formage">
+        <Form.Group controlId='formage'>
           <Form.Label>Edad</Form.Label>
           <Form.Control
-            name="age"
+            name='age'
             value={age}
-            type="text"
-            placeholder="Ingresa tu edad"
+            type='text'
+            placeholder='Ingresa tu edad'
             onChange={onChange}
             required
           />
         </Form.Group>
-        <Form.Group controlId="formLocation">
+        <Form.Group controlId='formLocation'>
           <Form.Label>Departamento de residencia</Form.Label>
           <Form.Control
-            as="select"
-            name="location"
+            as='select'
+            name='location'
             value={location}
             onChange={onChange}
             required
           >
-            <option value="" selected hidden>
+            <option value='' selected hidden>
               Selecciona tu departamento
             </option>
-            <option value="Ahuchapan">Ahuchapán</option>
-            <option value="Cabañas">Cabañas</option>
-            <option value="Chalatenango">Chalatenango</option>
-            <option value="Cuscatlan">Cuscatlan</option>
-            <option value="La Libertad">La Libertad</option>
-            <option value="La Paz">La Paz</option>
-            <option value="La Union">La Unión</option>
-            <option value="Morazan">Morazan</option>
-            <option value="Santa Ana">Santa Ana</option>
-            <option value="San Salvador">San Salvador</option>
-            <option value="San Miguel">San Miguel</option>
-            <option value="San Vicente">San Vicente</option>
-            <option value="Sonsonate">Sonsonate</option>
-            <option value="Usulutan">Usulutan</option>
+            <option value='Ahuchapan'>Ahuchapán</option>
+            <option value='Cabañas'>Cabañas</option>
+            <option value='Chalatenango'>Chalatenango</option>
+            <option value='Cuscatlan'>Cuscatlan</option>
+            <option value='La Libertad'>La Libertad</option>
+            <option value='La Paz'>La Paz</option>
+            <option value='La Union'>La Unión</option>
+            <option value='Morazan'>Morazan</option>
+            <option value='Santa Ana'>Santa Ana</option>
+            <option value='San Salvador'>San Salvador</option>
+            <option value='San Miguel'>San Miguel</option>
+            <option value='San Vicente'>San Vicente</option>
+            <option value='Sonsonate'>Sonsonate</option>
+            <option value='Usulutan'>Usulutan</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId="formPhone">
+        <Form.Group controlId='formPhone'>
           <Form.Label>Teléfono</Form.Label>
           <Form.Control
-            name="phone"
+            name='phone'
             value={phone}
-            type="number"
-            placeholder="Ejemplo:71715555"
+            type='number'
+            placeholder='Ejemplo:71715555'
             onChange={onChange}
             required
           />
         </Form.Group>
-        <Form.Group controlId="formPhone2">
+        <Form.Group controlId='formPhone2'>
           <Form.Label>Teléfono secundario</Form.Label>
           <Form.Control
-            name="phone2"
+            name='phone2'
             value={phone2}
-            type="number"
-            placeholder="Ejemplo:71715555"
+            type='number'
+            placeholder='Ejemplo:71715555'
             onChange={onChange}
             required
           />
-          <Form.Text className="text-muted">
+          <Form.Text className='text-muted'>
             Telefono de respaldo donde se te contactara si no puedes atenter a
             tu telefono principal
           </Form.Text>
         </Form.Group>
-        <Form.Group controlId="formEmail">
+        <Form.Group controlId='formEmail'>
           <Form.Label>Correo electrónico</Form.Label>
           <Form.Control
-            name="email"
+            name='email'
             value={email}
-            type="email"
-            placeholder="Ejemplo: johndoe@gmail.com"
+            type='email'
+            placeholder='Ejemplo: johndoe@gmail.com'
             onChange={onChange}
             required
           />
-          <Form.Text className="text-muted">
+          <Form.Text className='text-muted'>
             Utiliza un email con aspecto profesional
           </Form.Text>
         </Form.Group>
+        <Form.Group controlId='formPassword'>
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control
+            name='password'
+            minLength='8'
+            value={password}
+            type='password'
+            onChange={onChange}
+            required
+          />
+          <Form.Text className='text-muted'>
+            8 caracteres minimo.
+          </Form.Text>
+        </Form.Group>
 
-        <Form.Group controlId="formEducation">
+        <Form.Group controlId='formEducation'>
           <Form.Label>Respecto a la universidad eres</Form.Label>
           <Form.Control
-            name="education"
-            as="select"
+            name='education'
+            as='select'
             value={education}
             onChange={onChange}
             required
           >
-            <option value="" selected hidden>
+            <option value='' selected hidden>
               Elige una opción
             </option>
             <option>Estudiante activo</option>
@@ -172,16 +207,16 @@ const FormContainer = () => {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="formProfession">
+        <Form.Group controlId='formProfession'>
           <Form.Label>Selecciona tu área de estudios </Form.Label>
           <Form.Control
-            name="profession"
-            as="select"
+            name='profession'
+            as='select'
             value={profession}
             onChange={onChange}
             required
           >
-            <option value="" selected hidden>
+            <option value='' selected hidden>
               Selecciona tu área de estudios
             </option>
             <option>Adminstración de empresas turísticas</option>
@@ -196,13 +231,13 @@ const FormContainer = () => {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="formAbout">
+        <Form.Group controlId='formAbout'>
           <Form.Label>
             Cuentanos un poco sobre ti y de tu interes en POP
           </Form.Label>
           <Form.Control
-            as="textarea"
-            name="about"
+            as='textarea'
+            name='about'
             value={about}
             rows={4}
             onChange={onChange}
@@ -211,26 +246,26 @@ const FormContainer = () => {
         </Form.Group>
 
         <Button
-          className="btn btn-lg btn-block btn-form mx-auto"
-          variant="primary"
-          type="submit"
+          className='btn btn-lg btn-block btn-form mx-auto'
+          variant='primary'
+          type='submit'
           style={{
-            backgroundColor: "#FE3E00",
-            borderBlockColor: "#FE3E00",
-            boxShadow: "#FE3E00",
-            borderBottomColor: "#FE3E00",
-            borderColor: "#FE3E00",
+            backgroundColor: '#FE3E00',
+            borderBlockColor: '#FE3E00',
+            boxShadow: '#FE3E00',
+            borderBottomColor: '#FE3E00',
+            borderColor: '#FE3E00'
           }}
         >
           Enviar
         </Button>
-        <p className="mt-3">
+        <p className='mt-3'>
           ¿Dudas, problemas o sugerencias?
           <p>
             <a
-              href="https://rdjfuturo.netlify.app/contactus/"
-              target="_blank"
-              rel="noreferrer"
+              href='https://rdjfuturo.netlify.app/contactus/'
+              target='_blank'
+              rel='noreferrer'
             >
               Contactacnos 😁✉️
             </a>
@@ -240,32 +275,35 @@ const FormContainer = () => {
       <Modal
         show={show}
         onHide={handleClose}
-        aria-labelledby="contained-modal-title-vcenter"
+        aria-labelledby='contained-modal-title-vcenter'
         centered
       >
         <Modal.Header closeButton>
           <Modal.Title>Formulario enviado</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="d-flex flex-column justify-content-center align-items-center">
-            Hemos recibido tus datos correctamente.{" "}
-            <img src={gifTenor} alt="" width={100} />
+          <div className='d-flex flex-column justify-content-center align-items-center'>
+            Hemos recibido tus datos correctamente.{' '}
+            <img src={gifTenor} alt='' width={100} />
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={handleClose}
-            style={{
-              backgroundColor: "#FE3E00",
-              borderBlockColor: "#FE3E00",
-              boxShadow: "#FE3E00",
-              borderBottomColor: "#FE3E00",
-              borderColor: "#FE3E00",
-            }}
-          >
-            Aceptar
-          </Button>
+          <Link to='/'>
+
+
+            <Button
+              variant='primary'
+              onClick={handleClose}
+              style={{
+                backgroundColor: '#FE3E00',
+                borderBlockColor: '#FE3E00',
+                boxShadow: '#FE3E00',
+                borderBottomColor: '#FE3E00',
+                borderColor: '#FE3E00'
+              }}
+            >
+              Aceptar
+            </Button></Link>
         </Modal.Footer>
       </Modal>
     </>

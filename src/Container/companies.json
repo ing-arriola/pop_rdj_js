@@ -1,8 +1,20 @@
 {
-    "companies": [
-        {"id":"1","name":"C.E Profesor Francisco Adolfo Blandón"},
-        {"id":"2","name":"Instituto Nacional de San Miguel Tepezontes"},
-        {"id":"3","name":"Instituto Nacional de San Juan Tepezontes"},
-        {"id":"4","name":"Grupo Resurrecion"}
-    ]
+  "companies": [
+    {
+      "id": "1",
+      "name": "C.E Profesor Francisco Adolfo Blandón"
+    },
+    {
+      "id": "2",
+      "name": "Instituto Nacional de San Miguel Tepezontes"
+    },
+    {
+      "id": "3",
+      "name": "Instituto Nacional de San Juan Tepezontes"
+    },
+    {
+      "id": "4",
+      "name": "Grupo Resurrecion"
+    }
+  ]
 }
