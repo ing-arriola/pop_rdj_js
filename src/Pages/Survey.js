@@ -1,12 +1,12 @@
-import React from 'react'
-import SurveyContainer from  '../Container/SurveyContainer'
+import React from 'react';
+import SurveyContainer from '../Container/SurveyContainer';
 
 const Survey = () => {
-    return (
-        <div>
-            <SurveyContainer/>
-        </div>
-    )
-}
+  return (
+    <div>
+      <SurveyContainer />
+    </div>
+  );
+};
 
-export default Survey
+export default Survey;
