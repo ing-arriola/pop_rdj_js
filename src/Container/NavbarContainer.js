@@ -67,7 +67,7 @@ export default function NavbarContainer() {
                                 </NavLink></>)
                     }
                     {
-                        authUser && currentUserData.rol !== "admin" && (
+                        authUser && currentUserData.rol === "company" && (
                             <NavLink className="nav-item" to="/users" exact>
                                 Evaluacion
                             </NavLink>)

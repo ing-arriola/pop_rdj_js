@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 
 import { Form, Button, Modal } from "react-bootstrap";
-import AuthServices from "../configs/AuthServices";
 import gifTenor from "../Resources/tenor.gif";
-import firebaseConfig from "../utils/firebase";
+import firebaseConfig, {auth, db} from "../utils/firebase";
+import {Link} from "react-router-dom";
 const FormContainer = () => {
   const [show, setShow] = useState(false);
-
+  const [authUsers, setAuthUsers] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [newUser, setNewUser] = useState({
@@ -16,6 +16,7 @@ const FormContainer = () => {
     location: "",
     phone: "",
     phone2: "",
+    password: "",
     email: "",
     education: "",
     profession: "",
@@ -30,6 +31,7 @@ const FormContainer = () => {
     phone,
     phone2,
     email,
+    password,
     education,
     profession,
     about,
@@ -40,13 +42,32 @@ const FormContainer = () => {
 
   const sendData = (e) => {
     e.preventDefault();
-    const bdRef = firebaseConfig.database()
-    bdRef.ref('candidates').push(newUser).then(()=>{
-      handleShow();
-    }, error =>{
-      alert("Has an error")
-    });
+    const user = {
+      name: newUser.name,
+      email: newUser.email,
+      rol: "intern"
+    }
+    auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(()=>{
+      const data = db.ref("auth");
+      authUsers.push(user);
+      data.update(authUsers).then(r => {
+        const bdRef = firebaseConfig.database()
+        bdRef.ref('candidates').push(newUser).then(()=>{
+          handleShow();
+        }, error =>{
+
+        });
+      });
+    }).catch(()=>{
+      alert("Email ya registrado.")
+    })
   };
+  useEffect(()=>{
+    const data = db.ref("auth").on("value",data => {
+      const authUsersList = data.val()
+      setAuthUsers(authUsersList);
+    });
+  },[])
 
   return (
     <>
@@ -152,6 +173,20 @@ const FormContainer = () => {
             Utiliza un email con aspecto profesional
           </Form.Text>
         </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control
+              name="password"
+              minLength="8"
+              value={password}
+              type="password"
+              onChange={onChange}
+              required
+          />
+          <Form.Text className="text-muted">
+            8 caracteres minimo.
+          </Form.Text>
+        </Form.Group>
 
         <Form.Group controlId="formEducation">
           <Form.Label>Respecto a la universidad eres</Form.Label>
@@ -252,6 +287,9 @@ const FormContainer = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
+          <Link to="/">
+
+
           <Button
             variant="primary"
             onClick={handleClose}
@@ -264,7 +302,7 @@ const FormContainer = () => {
             }}
           >
             Aceptar
-          </Button>
+          </Button></Link>
         </Modal.Footer>
       </Modal>
     </>
