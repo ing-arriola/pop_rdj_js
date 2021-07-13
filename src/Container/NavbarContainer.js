@@ -72,7 +72,16 @@ export default function NavbarContainer() {
                 Evaluacion
               </NavLink>)
           }
-
+          {
+            authUser && currentUserData.rol === 'intern' && (
+              <><NavLink className='nav-item' to='/dashboard' exact>
+                Panel
+              </NavLink>
+                <NavLink className='nav-item' to='/internships' exact>
+                  Ofertas
+                </NavLink></>
+            )
+          }
           {
             authUser ? (<LogoutButton />) : (<LoginButton />)
           }
