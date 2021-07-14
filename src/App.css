@@ -178,3 +178,8 @@ button.rdjf {
 .rdjf:disabled:hover {
     color: #EFEFEF;
 }
+.pickersContainer{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
