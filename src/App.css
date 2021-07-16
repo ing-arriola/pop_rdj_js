@@ -183,3 +183,10 @@ button.rdjf {
     margin: auto;
     justify-content: center;
 }
+.photoProfile{
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+}
