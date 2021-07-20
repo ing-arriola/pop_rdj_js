@@ -178,12 +178,14 @@ button.rdjf {
 .rdjf:disabled:hover {
     color: #EFEFEF;
 }
-.pickersContainer{
+
+.pickersContainer {
     display: flex;
     margin: auto;
     justify-content: center;
 }
-.photoProfile{
+
+.photoProfile {
     width: 250px;
     height: 250px;
     overflow: hidden;

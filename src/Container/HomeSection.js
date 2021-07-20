@@ -76,7 +76,7 @@ export default function HomeSection() {
               trabajo decente y crecimiento económico en el país.
 
             </p>
-            {!authUser? stateRegister === 'false' ?
+            {!authUser ? stateRegister === 'false' ?
               <a className='no-undeline' href='https://rdjfuturo.netlify.app/contactus/' target='_blank'
                  rel='noreferrer' style={{ width: 300 }}>
                 <Button
@@ -105,7 +105,7 @@ export default function HomeSection() {
                 >
                   Unirme
                 </Button>
-              </Link>:""}
+              </Link> : ''}
 
             {/*<p>
               ¿Ya tienes cuenta?<Link> Iniciar Sesion</Link>
