@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { db } from '../utils/firebase';
 
 
 const InternshipsPage = (props) => {
+  const [internships, setInternships] = useState([]);
+  useEffect(() => {
+    db.ref('internships').on('value', data => {
+      const internships = data.val();
+      const setOportinities = [];
+      for (let intern of Object.keys(internships)) {
+        internships[intern].id = intern;
+        setOportinities.push(internships[intern]);
+      }
+      console.log(setOportinities);
+      setInternships(setOportinities);
+      //setInternships(setOptionsCompanies);
+    });
+  }, []);
   return (
     <>
       <Container>
@@ -14,34 +29,23 @@ const InternshipsPage = (props) => {
           </Link>
         </div>
         <hr/>
-        <Card className="mb-4">
-          <Card.Header>Remoto</Card.Header>
-          <Card.Body className="d-flex justify-content-between">
-            <div>
-              <Card.Title>Asistente administrativo</Card.Title>
-              <Card.Text>
-                <h6>Red de jovenes del futuro</h6>
-                <p>5 horas a la semana</p>
-              </Card.Text>
-            </div>
-            <Button style={{height: "38px",
-              alignSelf: "flex-end"}} variant="primary">Ver mas</Button>
-          </Card.Body>
-        </Card>
-        <Card className="mb-4">
-          <Card.Header>Presencial</Card.Header>
-          <Card.Body className="d-flex justify-content-between">
-            <div>
-              <Card.Title>Asistente de medicina</Card.Title>
-              <Card.Text>
-                <h6>Analiza labs</h6>
-                <p>Medio tiempo</p>
-              </Card.Text>
-            </div>
-            <Button style={{height: "38px",
-              alignSelf: "flex-end"}} variant="primary">Ver mas</Button>
-          </Card.Body>
-        </Card>
+        {internships.map(intern => (
+          <Card className="mb-4">
+            <Card.Header>{intern.modality}</Card.Header>
+            <Card.Body className="d-flex justify-content-between">
+              <div>
+                <Card.Title>{intern.name}</Card.Title>
+                <Card.Text>
+                  <h6>{intern.institution.label}</h6>
+                  <p>Duracion de {intern.duration} meses.</p>
+                </Card.Text>
+              </div>
+              <Button style={{height: "38px",
+                alignSelf: "flex-end"}} variant="primary">Ver mas</Button>
+            </Card.Body>
+          </Card>
+        ))}
+
       </Container>
     </>
   );
