@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Container, Form } from 'react-bootstrap';
+import { Alert, Button, Container, Form, Modal } from 'react-bootstrap';
 import Select from 'react-select'
-import { db } from '../utils/firebase';
+import firebaseConfig, { db } from '../utils/firebase';
+import gifTenor from '../Resources/tenor.gif';
+import { Link } from 'react-router-dom';
 
 const InternshipsForm = () =>{
   const [newInternship, setNewInternship] = useState({
@@ -10,6 +12,9 @@ const InternshipsForm = () =>{
     duration: '',
     description: ''
   });
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [institutions, setInstitutios] = useState([]);
   const [interInstitutions, setInterInstitutions] = useState(false);
   const [error,setError] = useState(false);
@@ -35,6 +40,10 @@ const InternshipsForm = () =>{
     }else{
       setError(false);
       newInternship.institution = interInstitutions;
+      const dbRef = firebaseConfig.database();
+      dbRef.ref('internships').push(newInternship).then(()=>{
+        handleShow();
+      }, (error)=> alert("Algo salio mal."))
     }
   }
   return(<>
@@ -87,6 +96,40 @@ const InternshipsForm = () =>{
         </div>
       </Form>
     </Container>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      aria-labelledby='contained-modal-title-vcenter'
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>Pasantia creada</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className='d-flex flex-column justify-content-center align-items-center'>
+          La pasantia ha sido publicada.{' '}
+          <img src={gifTenor} alt='' width={100} />
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Link to='/internships'>
+
+
+          <Button
+            variant='primary'
+            onClick={handleClose}
+            style={{
+              backgroundColor: '#FE3E00',
+              borderBlockColor: '#FE3E00',
+              boxShadow: '#FE3E00',
+              borderBottomColor: '#FE3E00',
+              borderColor: '#FE3E00'
+            }}
+          >
+            Aceptar
+          </Button></Link>
+      </Modal.Footer>
+    </Modal>
   </>);
 }
 export default InternshipsForm;
