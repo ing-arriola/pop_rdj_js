@@ -11,6 +11,7 @@ import LoginPage from './Pages/LoginPage';
 import { auth } from './utils/firebase';
 import AdminSettings from './Pages/AdminSettings';
 import InternshipsPage from './Pages/InternshipsPage';
+import InternshipsForm from './Container/InternshipsForm';
 
 const App = () => {
   const [firebaseUser, setFirebaseUser] = React.useState(false);
@@ -33,8 +34,8 @@ const App = () => {
           <Route path='/results' component={Results} />
           <Route path='/settings' component={AdminSettings} />
           <Route path='/register' component={Register} />
+          <Route path='/internships/new' component={InternshipsForm} />
           <Route path='/internships' component={InternshipsPage} />
-
           <Route path='/' component={HomePage} />
         </Switch>
       </Layout>

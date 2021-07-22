@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 const InternshipsPage = (props) => {
@@ -7,7 +8,11 @@ const InternshipsPage = (props) => {
     <>
       <Container>
         <h2 className="text-center">Crear pasantias</h2>
-        <div style={{height:"35px"}}><button className="btn rdjf float-right">Agregar</button></div>
+        <div style={{height:"35px"}}>
+          <Link to="internships/new">
+            <button className="btn rdjf float-right">Agregar</button>
+          </Link>
+        </div>
         <hr/>
         <Card className="mb-4">
           <Card.Header>Remoto</Card.Header>
