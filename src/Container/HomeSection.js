@@ -8,11 +8,12 @@ import Mode from '../Resources/kinda.svg';
 import AOS from 'aos';
 import { FaRegCheckCircle, FaCheck, FaCheckCircle } from 'react-icons/fa';
 import 'aos/dist/aos.css';
-import firebaseConfig from '../utils/firebase';
+import firebaseConfig, { auth } from '../utils/firebase';
 import { Link } from 'react-router-dom';
 
 AOS.init();
 export default function HomeSection() {
+  const [authUser, setUser] = React.useState(null);
 
   const listProfessions = [
     'Periodismo',
@@ -37,8 +38,16 @@ export default function HomeSection() {
     bdRef.ref('systemSettings').on('value', snapshot => {
       const config = snapshot.val();
       setStateRegister(config.register);
-      console.log(config.register);
     }, (error) => console.log(error));
+  }, []);
+  React.useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
   }, []);
   const whoCan = listProfessions.map((profession) => (
     <li>
@@ -67,7 +76,7 @@ export default function HomeSection() {
               trabajo decente y crecimiento económico en el país.
 
             </p>
-            {stateRegister === 'false' ?
+            {!authUser ? stateRegister === 'false' ?
               <a className='no-undeline' href='https://rdjfuturo.netlify.app/contactus/' target='_blank'
                  rel='noreferrer' style={{ width: 300 }}>
                 <Button
@@ -96,7 +105,7 @@ export default function HomeSection() {
                 >
                   Unirme
                 </Button>
-              </Link>}
+              </Link> : ''}
 
             {/*<p>
               ¿Ya tienes cuenta?<Link> Iniciar Sesion</Link>
