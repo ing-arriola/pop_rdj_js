@@ -40,8 +40,11 @@ const InternshipsPage = (props) => {
                   <p>Duracion de {intern.duration} meses.</p>
                 </Card.Text>
               </div>
-              <Button style={{height: "38px",
-                alignSelf: "flex-end"}} variant="primary">Ver mas</Button>
+              <Link to={`internships/${intern.id}`}>
+                <Button style={{height: "38px",
+                  alignSelf: "flex-end"}} variant="primary">Ver mas</Button>
+              </Link>
+
             </Card.Body>
           </Card>
         ))}
