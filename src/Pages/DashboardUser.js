@@ -7,6 +7,8 @@ import { auth, db } from '../utils/firebase';
 
 const DashboardUser = () => {
   const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [selectedFile, setSelectedFile] = useState();
   const [errorFile, setErrorFile] = useState(false);
   const [errorFileProfile, setErrorFileProfile] = useState(false);
@@ -14,8 +16,7 @@ const DashboardUser = () => {
   const [isFilePicked, setIsFilePicked] = useState();
   const [authUser, setUser] = React.useState(null);
   const [currentKey, setCurrentKey] = React.useState(null);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
   const [newUser, setNewUser] = useState({
     name: '',
     lastname: '',
