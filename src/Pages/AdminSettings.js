@@ -13,7 +13,6 @@ const AdminSettings = () => {
     bdRef.ref('systemSettings').on('value', snapshot => {
       const config = snapshot.val();
       setStateRegister(config.register);
-      console.log(config.register);
     }, (error) => console.log(error));
   }, []);
   const saveSettings = () => {
@@ -23,11 +22,9 @@ const AdminSettings = () => {
         register: registerOn
       })
       .then(() => {
-        console.log('Data updated.');
         setDisableSave(true);
       });
 
-    console.log(registerOn);
   };
   return (
     <>

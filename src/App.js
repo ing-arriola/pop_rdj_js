@@ -14,6 +14,7 @@ import InternshipsPage from './Pages/InternshipsPage';
 import InternshipsForm from './Container/InternshipsForm';
 import SingleInternshipPage from './Pages/SingleInternshipPage';
 import DashboardUser from './Pages/DashboardUser';
+import CandidatesPage from './Pages/CandidatesPage';
 
 const App = () => {
   const [firebaseUser, setFirebaseUser] = React.useState(false);
@@ -40,6 +41,7 @@ const App = () => {
           <Route path='/internships/:id' component={SingleInternshipPage} />
           <Route path='/internships' component={InternshipsPage} />
           <Route path='/dashboard' component={DashboardUser}/>
+          <Route path='/candidates' component={CandidatesPage}/>
           <Route path='/' component={HomePage} />
         </Switch>
       </Layout>

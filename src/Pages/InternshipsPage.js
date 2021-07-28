@@ -14,7 +14,6 @@ const InternshipsPage = (props) => {
         internships[intern].id = intern;
         setOportinities.push(internships[intern]);
       }
-      console.log(setOportinities);
       setInternships(setOportinities);
       //setInternships(setOptionsCompanies);
     });

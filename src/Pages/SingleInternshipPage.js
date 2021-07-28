@@ -17,7 +17,7 @@ const SingleInternshipPage = () => {
     const todoRef = db.ref('internships').child(String(currentLoc));
     if (!intership.candidates){
       const candidates = [];
-      const interCandidate = {email: currentUserData.email, resume: candidate.resume};
+      const interCandidate = {email: currentUserData.email, resume: candidate.resume, name: currentUserData.name};
       candidates.push(interCandidate);
       const intershipToUpdate = intership;
       intershipToUpdate.candidates = candidates;
@@ -59,7 +59,6 @@ const SingleInternshipPage = () => {
       for (let intern of Object.keys(candidates)) {
         if (candidates[intern].email === currentUser.email){
           setCandidate(candidates[intern]);
-          console.log(candidates[intern]);
         }
       }
     });
@@ -71,7 +70,6 @@ const SingleInternshipPage = () => {
       authUsers.forEach(user => {
         if (user.email === auth.currentUser.email) {
           currentUser = user;
-          console.log(auth.currentUser);
           getCandidateResume(currentUser);
         }
       });
