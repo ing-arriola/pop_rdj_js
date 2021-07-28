@@ -40,8 +40,8 @@ const App = () => {
           <Route path='/internships/new' component={InternshipsForm} />
           <Route path='/internships/:id' component={SingleInternshipPage} />
           <Route path='/internships' component={InternshipsPage} />
-          <Route path='/dashboard' component={DashboardUser}/>
-          <Route path='/candidates' component={CandidatesPage}/>
+          <Route path='/dashboard' component={DashboardUser} />
+          <Route path='/candidates' component={CandidatesPage} />
           <Route path='/' component={HomePage} />
         </Switch>
       </Layout>

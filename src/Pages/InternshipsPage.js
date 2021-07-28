@@ -21,17 +21,17 @@ const InternshipsPage = (props) => {
   return (
     <>
       <Container>
-        <h2 className="text-center">Crear pasantias</h2>
-        <div style={{height:"35px"}}>
-          <Link to="internships/new">
-            <button className="btn rdjf float-right">Agregar</button>
+        <h2 className='text-center'>Crear pasantias</h2>
+        <div style={{ height: '35px' }}>
+          <Link to='internships/new'>
+            <button className='btn rdjf float-right'>Agregar</button>
           </Link>
         </div>
-        <hr/>
+        <hr />
         {internships.map(intern => (
-          <Card className="mb-4">
+          <Card className='mb-4'>
             <Card.Header>{intern.modality}</Card.Header>
-            <Card.Body className="d-flex justify-content-between">
+            <Card.Body className='d-flex justify-content-between'>
               <div>
                 <Card.Title>{intern.name}</Card.Title>
                 <Card.Text>
@@ -40,8 +40,10 @@ const InternshipsPage = (props) => {
                 </Card.Text>
               </div>
               <Link to={`internships/${intern.id}`}>
-                <Button style={{height: "38px",
-                  alignSelf: "flex-end"}} variant="primary">Ver mas</Button>
+                <Button style={{
+                  height: '38px',
+                  alignSelf: 'flex-end'
+                }} variant='primary'>Ver mas</Button>
               </Link>
 
             </Card.Body>
@@ -53,5 +55,5 @@ const InternshipsPage = (props) => {
   );
 };
 
-export default(InternshipsPage);
+export default (InternshipsPage);
 

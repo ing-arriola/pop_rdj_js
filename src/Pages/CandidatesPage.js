@@ -3,6 +3,7 @@ import { Button, Card, Container, Modal } from 'react-bootstrap';
 import { auth, db } from '../utils/firebase';
 import { Link } from 'react-router-dom';
 import gifTenor from '../Resources/tenor.gif';
+
 const CandidatesPage = () => {
   const [currentUserData, setCurrentUserData] = useState({});
   const [internshipList, setIntershipList] = useState([]);
@@ -13,7 +14,7 @@ const CandidatesPage = () => {
   const handleShow = (item) => {
     setCurrentIntern(item);
     setShow(true);
-  }
+  };
   useEffect(() => {
     db.ref('auth').on('value', snapshot => {
       const authUsers = snapshot.val();
@@ -21,7 +22,7 @@ const CandidatesPage = () => {
       authUsers.forEach(user => {
         if (user.email === auth.currentUser.email) {
           currentUser = user;
-          getListIntern(currentUser.idCompany)
+          getListIntern(currentUser.idCompany);
         }
       });
       setCurrentUserData(currentUser);
@@ -32,32 +33,34 @@ const CandidatesPage = () => {
       const internships = data.val();
       const listOportinuties = [];
       for (let intern of Object.keys(internships)) {
-        if (internships[intern].institution.value === id){
+        if (internships[intern].institution.value === id) {
           listOportinuties.push((internships[intern]));
         }
       }
       setIntershipList(listOportinuties);
     });
-  }
+  };
   const saveCV = () => {
 
-  }
-  return(<Container>
+  };
+  return (<Container>
     {internshipList.length === 0 ? <h2>No hay candidatos</h2> : internshipList.map(item => (
-      <Card className="mb-4">
+      <Card className='mb-4'>
         <Card.Header>{item.modality}</Card.Header>
-        <Card.Body className="d-flex justify-content-between">
+        <Card.Body className='d-flex justify-content-between'>
           <div>
             <Card.Title>{item.name}</Card.Title>
             <Card.Text>
               <h6>{item.institution.label}</h6>
               <p>Duracion de {item.duration} meses.</p>
             </Card.Text>
-            <p>Numero de candidatos: {item.candidates ? item.candidates.length: 0}</p>
+            <p>Numero de candidatos: {item.candidates ? item.candidates.length : 0}</p>
           </div>
           {
-            item.candidates? <Button style={{height: "38px",
-              alignSelf: "flex-end"}} variant="primary" onClick={() => handleShow(item.candidates)}>Ver mas</Button>: ""
+            item.candidates ? <Button style={{
+              height: '38px',
+              alignSelf: 'flex-end'
+            }} variant='primary' onClick={() => handleShow(item.candidates)}>Ver mas</Button> : ''
           }
         </Card.Body>
       </Card>
@@ -80,7 +83,7 @@ const CandidatesPage = () => {
               <Card.Text>
                 {item.email}
               </Card.Text>
-              <a href={item.resume} className="btn btn-primary float-right" download={item.name}>Descargar CV</a>
+              <a href={item.resume} className='btn btn-primary float-right' download={item.name}>Descargar CV</a>
             </Card.Body>
           </Card>
         ))}
@@ -103,5 +106,5 @@ const CandidatesPage = () => {
       </Modal.Footer>
     </Modal>
   </Container>);
-}
+};
 export default CandidatesPage;

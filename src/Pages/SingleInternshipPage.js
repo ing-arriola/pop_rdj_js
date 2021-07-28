@@ -8,23 +8,23 @@ const SingleInternshipPage = () => {
   const [intership, setInternship] = useState(null);
   const [lastApply, setLastApply] = useState(false);
   const [currentUserData, setCurrentUserData] = useState({});
-  const [candidate, setCandidate] = useState({resume:undefined, imageURL: undefined, flag: false});
+  const [candidate, setCandidate] = useState({ resume: undefined, imageURL: undefined, flag: false });
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const applyInternship = () => {
     const currentLoc = window.location.pathname.substr(13);
     const todoRef = db.ref('internships').child(String(currentLoc));
-    if (!intership.candidates){
+    if (!intership.candidates) {
       const candidates = [];
-      const interCandidate = {email: currentUserData.email, resume: candidate.resume, name: currentUserData.name};
+      const interCandidate = { email: currentUserData.email, resume: candidate.resume, name: currentUserData.name };
       candidates.push(interCandidate);
       const intershipToUpdate = intership;
       intershipToUpdate.candidates = candidates;
       todoRef.update(intershipToUpdate).then(() => handleShow()).catch((error) => alert('error'));
-    }else{
+    } else {
       const candidates = intership.candidates;
-      const interCandidate = {email: currentUserData.email, resume: candidate.resume};
+      const interCandidate = { email: currentUserData.email, resume: candidate.resume };
       candidates.push(interCandidate);
       const intershipToUpdate = intership;
       intershipToUpdate.candidates = candidates;
@@ -32,17 +32,17 @@ const SingleInternshipPage = () => {
     }
     //
     //todoRef.update(newUser).then(() => handleShow()).catch((error) => alert('error'));
-  }
+  };
   useEffect(() => {
     db.ref('internships').on('value', data => {
       const internships = data.val();
       for (let intern of Object.keys(internships)) {
         const curretnLoc = window.location.pathname.substr(13);
-        if (curretnLoc === intern){
-          setInternship(internships[intern])
-          if (internships[intern].candidates){
-            for (let candidateA of internships[intern].candidates){
-              if (candidateA.email === auth.currentUser.email){
+        if (curretnLoc === intern) {
+          setInternship(internships[intern]);
+          if (internships[intern].candidates) {
+            for (let candidateA of internships[intern].candidates) {
+              if (candidateA.email === auth.currentUser.email) {
                 setLastApply(true);
               }
             }
@@ -57,12 +57,12 @@ const SingleInternshipPage = () => {
     db.ref('candidates').on('value', data => {
       const candidates = data.val();
       for (let intern of Object.keys(candidates)) {
-        if (candidates[intern].email === currentUser.email){
+        if (candidates[intern].email === currentUser.email) {
           setCandidate(candidates[intern]);
         }
       }
     });
-  }
+  };
   const checkRol = () => {
     db.ref('auth').on('value', snapshot => {
       const authUsers = snapshot.val();
@@ -76,25 +76,28 @@ const SingleInternshipPage = () => {
       setCurrentUserData(currentUser);
     }, (error) => console.log(error));
   };
-  return(<Container>
-    {intership?<div>
-      <h2 className="text-center">{intership.name}</h2>
+  return (<Container>
+    {intership ? <div>
+      <h2 className='text-center'>{intership.name}</h2>
       <h5>{intership.institution.label}</h5>
       <p>Duracion: {intership.duration} meses.</p>
       <p>Modalidad: {intership.modality}</p>
 
       <strong>Descripcion: </strong>
       <p>{intership.description}</p>
-      <div className="d-flex justify-content-center mb-2">
-        {currentUserData.rol==="admin"?
-          <Button variant="danger">Eliminar</Button>:
-          <div className="box-container">
-            <button disabled={candidate.flag===false || !candidate.resume || !candidate.photoSettings || lastApply} onClick={applyInternship} className="btn rdjf">Aplicar</button>
-            {candidate.flag===false ? "":candidate.resume && candidate.photoSettings? "":<p>Necesitas agregar tu CV y una foto de ti antes de aplicar a una pasantía.</p> }
-            {lastApply ? <p>Ya has aplicado a esta pasantia.</p>:""}
+      <div className='d-flex justify-content-center mb-2'>
+        {currentUserData.rol === 'admin' ?
+          <Button variant='danger'>Eliminar</Button> :
+          <div className='box-container'>
+            <button disabled={candidate.flag === false || !candidate.resume || !candidate.photoSettings || lastApply}
+                    onClick={applyInternship} className='btn rdjf'>Aplicar
+            </button>
+            {candidate.flag === false ? '' : candidate.resume && candidate.photoSettings ? '' :
+              <p>Necesitas agregar tu CV y una foto de ti antes de aplicar a una pasantía.</p>}
+            {lastApply ? <p>Ya has aplicado a esta pasantia.</p> : ''}
           </div>}</div>
 
-    </div>: ""}
+    </div> : ''}
     <Modal
       show={show}
       onHide={handleClose}
@@ -128,5 +131,5 @@ const SingleInternshipPage = () => {
       </Modal.Footer>
     </Modal>
   </Container>);
-}
+};
 export default SingleInternshipPage;

@@ -192,7 +192,8 @@ button.rdjf {
     border-radius: 50%;
     position: relative;
 }
-.box-container{
+
+.box-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
