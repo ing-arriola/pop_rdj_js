@@ -7,6 +7,8 @@ import { auth, db } from '../utils/firebase';
 
 const DashboardUser = () => {
   const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [selectedFile, setSelectedFile] = useState();
   const [errorFile, setErrorFile] = useState(false);
   const [errorFileProfile, setErrorFileProfile] = useState(false);
@@ -14,8 +16,7 @@ const DashboardUser = () => {
   const [isFilePicked, setIsFilePicked] = useState();
   const [authUser, setUser] = React.useState(null);
   const [currentKey, setCurrentKey] = React.useState(null);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
   const [newUser, setNewUser] = useState({
     name: '',
     lastname: '',
@@ -112,9 +113,9 @@ const DashboardUser = () => {
   return (<>
     <Container>
       <h1 className='text-center'>Panel de configuracion</h1>
-      <div className='d-flex justify-content-around align-content-center pt-4'>
+      <div className='d-flex justify-content-around align-content-center pt-4 flex-wrap'>
         {newUser.photoSettings && (<div style={{ width: '250px' }}>
-          <div className='photoProfile'>
+          <div className='photoProfile  mb-4'>
             <img src={newUser.imageURL} style={{
               width: '250px',
               position: 'absolute',
@@ -129,7 +130,7 @@ const DashboardUser = () => {
           </div>
         </div>)}
       </div>
-      <Form className='mx-5 px-5' onSubmit={saveNewData}>
+      <Form className='px-5' onSubmit={saveNewData}>
 
         <Form.Group controlId='formCv' className='pt-3'>
           <Form.Label>Imagen de Perfil</Form.Label>

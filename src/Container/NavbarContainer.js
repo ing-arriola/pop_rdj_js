@@ -68,9 +68,11 @@ export default function NavbarContainer() {
           }
           {
             authUser && currentUserData.rol === 'company' && (
-              <NavLink className='nav-item' to='/users' exact>
+              <><NavLink className='nav-item' to='/users' exact>
                 Evaluacion
-              </NavLink>)
+              </NavLink><NavLink className='nav-item' to='/candidates' exact>
+                Candidatos
+              </NavLink></>)
           }
           {
             authUser && currentUserData.rol === 'intern' && (
