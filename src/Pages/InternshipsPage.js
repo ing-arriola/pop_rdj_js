@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { db } from '../utils/firebase';
+import { auth, db } from '../utils/firebase';
 
 
 const InternshipsPage = (props) => {
   const [internships, setInternships] = useState([]);
+  const [currentUserData, setCurrentUserData] = useState({});
+
   useEffect(() => {
     db.ref('internships').on('value', data => {
       const internships = data.val();
@@ -14,18 +16,32 @@ const InternshipsPage = (props) => {
         internships[intern].id = intern;
         setOportinities.push(internships[intern]);
       }
+      checkRol();
+      setOportinities.reverse();
       setInternships(setOportinities);
       //setInternships(setOptionsCompanies);
     });
   }, []);
+  const checkRol = () => {
+    db.ref('auth').on('value', snapshot => {
+      const authUsers = snapshot.val();
+      let currentUser = undefined;
+      authUsers.forEach(user => {
+        if (user.email === auth.currentUser.email) {
+          currentUser = user;
+        }
+      });
+      setCurrentUserData(currentUser);
+    }, (error) => console.log(error));
+  };
   return (
     <>
       <Container>
         <h2 className='text-center'>Crear pasantias</h2>
         <div style={{ height: '35px' }}>
-          <Link to='internships/new'>
+          {currentUserData.rol === "admin" &&  <Link to='internships/new'>
             <button className='btn rdjf float-right'>Agregar</button>
-          </Link>
+          </Link>}
         </div>
         <hr />
         {internships.map(intern => (
