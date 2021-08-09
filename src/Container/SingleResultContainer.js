@@ -28,7 +28,7 @@ const SingleResultContainer = (props) => {
           for (let key in response) {
             auxAws.push(response[key]);
           }
-          console.log(auxAws);
+          //console.log(auxAws);
           //setAwsToShow(auxAws.filter((data) => data.iduser === userId.id));
 
           setAws(auxAws);

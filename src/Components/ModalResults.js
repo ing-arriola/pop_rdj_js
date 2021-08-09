@@ -4,6 +4,7 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 
 function ModalResults(props) {
+  console.log(props);
   return (
     <Modal
       {...props}
@@ -24,7 +25,7 @@ function ModalResults(props) {
             id="test-xls-button"
             className="btn btn-success"
             table="result-id"
-            filename="tablexls"
+            filename={props.aws.weekToEvaluate}
             sheet="tablexls"
             buttonText="Exportar como Excel"/>
         </div>
