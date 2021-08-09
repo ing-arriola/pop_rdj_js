@@ -1,5 +1,6 @@
 import { Modal, Button, Table } from 'react-bootstrap';
 import React from 'react';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 
 function ModalResults(props) {
@@ -10,6 +11,7 @@ function ModalResults(props) {
       centered
       animation={false}
     >
+
       <Modal.Header closeButton>
         <Modal.Title id='contained-modal-title-vcenter'>
           {props.iduser.name}
@@ -18,8 +20,15 @@ function ModalResults(props) {
       <Modal.Body>
         <div className='d-flex justify-content-between pb-3'>
           <h4>Resultados</h4>
+          <ReactHTMLTableToExcel
+            id="test-xls-button"
+            className="btn btn-success"
+            table="result-id"
+            filename="tablexls"
+            sheet="tablexls"
+            buttonText="Exportar como Excel"/>
         </div>
-        <Table striped bordered hover className=' mb-5'>
+        <Table id="result-id" striped bordered hover className=' mb-5'>
           <thead>
           <tr>
             <th className='text-center d-flex justify-content-around align-items-center'>
@@ -41,6 +50,7 @@ function ModalResults(props) {
         </Table>
       </Modal.Body>
       <Modal.Footer>
+
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
