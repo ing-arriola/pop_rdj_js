@@ -25,12 +25,18 @@ function ModalResults(props) {
             id="test-xls-button"
             className="btn btn-success"
             table="result-id"
-            filename={props.aws.weekToEvaluate}
+            filename={props.iduser.name+' '+props.aws.weekToEvaluate}
             sheet="tablexls"
             buttonText="Exportar como Excel"/>
         </div>
         <Table id="result-id" striped bordered hover className=' mb-5'>
           <thead>
+          <tr style={{position: 'absolute',
+            top: '-9999px',
+            left: '-9999px'}}>
+            <th className='text-center'>{props.iduser.name}</th>
+            <th className='text-center'>{props.aws.weekToEvaluate}</th>
+          </tr>
           <tr>
             <th className='text-center d-flex justify-content-around align-items-center'>
               <div>Preguntas</div>
