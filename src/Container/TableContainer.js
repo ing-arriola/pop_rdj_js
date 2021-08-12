@@ -89,7 +89,6 @@ const TableContainer = () => {
           }
         });
       });
-      console.log(validAnswers);
       const usersToBlock = [];
       validAnswers.forEach(item => {
         if (item.weekToEvaluate[0] === moment(selectedDays[1]).format('LL') &&
@@ -97,7 +96,6 @@ const TableContainer = () => {
           usersToBlock.push(item.userId);
         }
       });
-      console.log(usersToBlock);
       setUsersAlreadyEvaluated(usersToBlock);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

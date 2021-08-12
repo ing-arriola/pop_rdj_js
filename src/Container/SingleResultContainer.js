@@ -45,7 +45,6 @@ const SingleResultContainer = (props) => {
           usersData.push(response);
           break;
         default:
-          console.log(response);
           setQuestions(questions);
           break;
 

@@ -4,7 +4,6 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 
 function ModalResults(props) {
-  console.log(props);
   return (
     <Modal
       {...props}

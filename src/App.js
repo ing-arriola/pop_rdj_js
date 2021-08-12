@@ -39,7 +39,6 @@ const App = () => {
           currentUser = user;
         }
       });
-      console.log(currentUser);
       setRole(currentUser.rol);
     }, (error) => console.log(error));
   };

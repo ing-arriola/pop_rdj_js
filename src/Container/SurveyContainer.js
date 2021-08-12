@@ -76,7 +76,6 @@ const SurveyContainer = ({ hideModal, nameToShow, company, typeOfPerson, weekToE
     e.preventDefault();
     hideModal();
     //here you just need to send this the newUser Object
-    console.log(newAnswer);
     /*const dataFirebase = axios.create({baseURL: process.env.REACT_APP_FIREBASE_URL})
     dataFirebase.post('/answers.json', newAnswer)
       .then(res => console.log(res))*/
