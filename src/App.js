@@ -47,19 +47,20 @@ const App = () => {
       <Layout>
         <Switch>
           <Route path='/login' component={LoginPage} />
-          {role ==='company' && <Route path='/users' component={Users} />}
+          {role === 'company' && <Route path='/users' component={Users} />}
           <Route path='/results/:id' component={SingleResult} />
           <Route path='/results' component={Results} />
-          {role==='admin' && <Route path='/settings' component={AdminSettings} />}
-          {role==='admin' && <Route path='/internships/new' component={InternshipsForm} />}
+          {role === 'admin' && <Route path='/settings' component={AdminSettings} />}
+          {role === 'admin' && <Route path='/internships/new' component={InternshipsForm} />}
           {!role && <Route path='/register' component={Register} />}
 
 
-          {(role==='admin' || role==='intern') && <Route path='/internships/:id' component={SingleInternshipPage} />}
-          {(role==='admin' || role==='intern') && <Route path='/internships' component={InternshipsPage} />}
+          {(role === 'admin' || role === 'intern') &&
+          <Route path='/internships/:id' component={SingleInternshipPage} />}
+          {(role === 'admin' || role === 'intern') && <Route path='/internships' component={InternshipsPage} />}
 
-          {role==='intern' && <Route path='/dashboard' component={DashboardUser} />}
-          {role==='company' && <Route path='/candidates' component={CandidatesPage} />}
+          {role === 'intern' && <Route path='/dashboard' component={DashboardUser} />}
+          {role === 'company' && <Route path='/candidates' component={CandidatesPage} />}
           <Route path='/' component={HomePage} />
         </Switch>
       </Layout>

@@ -39,7 +39,7 @@ const InternshipsPage = (props) => {
       <Container>
         <h2 className='text-center'>Crear pasantias</h2>
         <div style={{ height: '35px' }}>
-          {currentUserData.rol === "admin" &&  <Link to='internships/new'>
+          {currentUserData.rol === 'admin' && <Link to='internships/new'>
             <button className='btn rdjf float-right'>Agregar</button>
           </Link>}
         </div>
