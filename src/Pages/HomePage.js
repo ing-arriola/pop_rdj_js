@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import HomeSection from '../Container/HomeSection';
+import HomeSection from "../Container/HomeSection";
 
 const HomePage = () => {
   return (
