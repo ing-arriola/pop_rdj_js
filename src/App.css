@@ -1,164 +1,201 @@
 .heading {
-  font-size: 3rem;
+    font-size: 3rem;
 }
 
 .sub-title {
-  font-size: 2.5rem;
+    font-size: 2.5rem;
 }
 
 .nav-item {
-  text-decoration: none;
-  border-radius: 5px;
-  padding: 12px;
-  margin-right: 20px;
-  background: #3f3d56;
-  color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 12px;
+    margin-right: 20px;
+    background: #3f3d56;
+    color: #fff;
 }
 
-.nav-item:hover{
-  color: #fff;
+.nav-item:hover {
+    color: #fff;
 }
 
 .spinner {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: white;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 
 .weight-300 {
-  font-weight: 300;
+    font-weight: 300;
 }
 
 .no-undeline:hover {
-  text-decoration: none;
-  transform: scale(1.08);
-  transition: transform 330ms ease-in-out;
+    text-decoration: none;
+    transform: scale(1.08);
+    transition: transform 330ms ease-in-out;
 }
 
 .survey-form-container {
-  background: rgb(230, 228, 228);
-  /*background: rgba(255, 64, 0, 0.9);*/
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px;
+    background: rgb(230, 228, 228);
+    /*background: rgba(255, 64, 0, 0.9);*/
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .survey-question {
-  background:rgb(255, 255, 255);
-  /*background:rgba(255, 255, 255, 0.90);*/
-  color:rgba(248, 116, 72, 0.863);
-  border-color: rgb(197, 197, 197);
-  border-width: 1px;
-  border-style: solid;
-  /*color:rgba(254, 62, 0);*/
+    background: rgb(255, 255, 255);
+    /*background:rgba(255, 255, 255, 0.90);*/
+    color: rgba(248, 116, 72, 0.863);
+    border-color: rgb(197, 197, 197);
+    border-width: 1px;
+    border-style: solid;
+    /*color:rgba(254, 62, 0);*/
 }
 
 .survey-label {
-  color:rgba(248, 116, 72, 0.863);
+    color: rgba(248, 116, 72, 0.863);
 }
 
-input[type=radio]{
-  transform:scale(1.5);
+input[type=radio] {
+    transform: scale(1.5);
 }
 
 .form-container {
-  animation: moveFromBottom 0.7s ease-in;
+    animation: moveFromBottom 0.7s ease-in;
 }
 
 .btn-form {
-  width: 40%;
+    width: 40%;
 }
 
 .btn-form:hover {
-  transform: scale(1.08);
-  transition: transform 330ms ease-in-out;
+    transform: scale(1.08);
+    transition: transform 330ms ease-in-out;
 }
 
 .main-footer__social {
-  margin-right: 2rem;
+    margin-right: 2rem;
 }
 
 .main-footer__social > a {
-  margin-right: 2rem;
-  color: #fff;
+    margin-right: 2rem;
+    color: #fff;
 }
 
 .main-footer__social > a > svg:hover {
-  transform: scale(1.3);
-  transition: 0.3s transform ease-in;
+    transform: scale(1.3);
+    transition: 0.3s transform ease-in;
 }
 
 @keyframes moveFromBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(4rem);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(4rem);
+    }
 
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
 }
 
 .SelectedWeekExample .DayPicker-Month {
-  border-collapse: separate;
+    border-collapse: separate;
 }
+
 .SelectedWeekExample .DayPicker-WeekNumber {
-  outline: none;
+    outline: none;
 }
+
 .SelectedWeekExample .DayPicker-Day {
-  outline: none;
-  border: 1px solid transparent;
+    outline: none;
+    border: 1px solid transparent;
 }
+
 .SelectedWeekExample .DayPicker-Day--hoverRange {
-  background-color: #EFEFEF !important;
+    background-color: #EFEFEF !important;
 }
 
 .SelectedWeekExample .DayPicker-Day--selectedRange {
-  background-color: #fff7ba !important;
-  border-top-color: #FFEB3B;
-  border-bottom-color: #FFEB3B;
-  border-left-color: #fff7ba;
-  border-right-color: #fff7ba;
+    background-color: #fff7ba !important;
+    border-top-color: #FFEB3B;
+    border-bottom-color: #FFEB3B;
+    border-left-color: #fff7ba;
+    border-right-color: #fff7ba;
 }
 
 .SelectedWeekExample .DayPicker-Day--selectedRangeStart {
-  background-color: #FFEB3B !important;
-  border-left: 1px solid #FFEB3B;
+    background-color: #FFEB3B !important;
+    border-left: 1px solid #FFEB3B;
 }
 
 .SelectedWeekExample .DayPicker-Day--selectedRangeEnd {
-  background-color: #FFEB3B !important;
-  border-right: 1px solid #FFEB3B;
+    background-color: #FFEB3B !important;
+    border-right: 1px solid #FFEB3B;
 }
 
 .SelectedWeekExample .DayPicker-Day--selectedRange:not(.DayPicker-Day--outside).DayPicker-Day--selected,
 .SelectedWeekExample .DayPicker-Day--hoverRange:not(.DayPicker-Day--outside).DayPicker-Day--selected {
-  border-radius: 0 !important;
-  color: black !important;
+    border-radius: 0 !important;
+    color: black !important;
 }
+
 .SelectedWeekExample .DayPicker-Day--hoverRange:hover {
-  border-radius: 0 !important;
+    border-radius: 0 !important;
 }
+
 @media screen and (max-width: 991px) {
-  .footer {
-    position: static !important;
-  }
-  .layout{
-    padding-bottom: 0 !important;
-  }
+    .footer {
+        position: static !important;
+    }
+
+    .layout {
+        padding-bottom: 0 !important;
+    }
 }
-button.rdjf{
-  background-color: #FE3E00;
-  border-block-color:  #FE3E00;
-  box-shadow:  #FE3E00;
-  border-bottom-color: #FE3E00;
-  border-color: #FE3E00;
+
+button.rdjf {
+    background-color: #FE3E00;
+    border-block-color: #FE3E00;
+    box-shadow: #FE3E00;
+    border-bottom-color: #FE3E00;
+    border-color: #FE3E00;
+    color: #EFEFEF;
+}
+
+.rdjf:hover {
+    color: #EFEFEF;
+}
+
+.rdjf:disabled:hover {
+    color: #EFEFEF;
+}
+
+.pickersContainer {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
+
+.photoProfile {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+}
+
+.box-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

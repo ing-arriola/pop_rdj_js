@@ -1,19 +1,20 @@
-import React from "react";
-import Aux from "./_Aux";
-import NavbarContainer from "../../Container/NavbarContainer";
-import FooterContainer from "../../Container/FooterContainer";
+import React from 'react';
+import Aux from './_Aux';
+import NavbarContainer from '../../Container/NavbarContainer';
+import FooterContainer from '../../Container/FooterContainer';
 
 const Layout = (props) => {
   return (
-    <div className='layout' style={{position: "relative", paddingBottom: 270}}>
-        <Aux>
-            <NavbarContainer />
+    <div className='layout'
+         style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Aux>
+        <NavbarContainer />
 
-            <> {props.children} </>
-            <div className='footer' style={{position: "absolute", bottom: 0, width: "100%"}}>
-                <FooterContainer />
-            </div>
-        </Aux>
+        <> {props.children} </>
+        <div className='footer'>
+          <FooterContainer />
+        </div>
+      </Aux>
     </div>
   );
 };

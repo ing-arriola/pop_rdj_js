@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
-
-import { Form, Button, Modal } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Alert, Button, Container, Form, Modal } from 'react-bootstrap';
 import gifTenor from '../Resources/tenor.gif';
-import firebaseConfig, { auth, db } from '../utils/firebase';
 import { Link } from 'react-router-dom';
+import AvatarEditor from 'react-avatar-editor';
+import { auth, db } from '../utils/firebase';
 
-const FormContainer = () => {
+const DashboardUser = () => {
   const [show, setShow] = useState(false);
-  const [authUsers, setAuthUsers] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [selectedFile, setSelectedFile] = useState();
+  const [errorFile, setErrorFile] = useState(false);
+  const [errorFileProfile, setErrorFileProfile] = useState(false);
+  const [positionPhoto, setPositionPhoto] = useState({ x: 0.5, y: 0.5 });
+  const [isFilePicked, setIsFilePicked] = useState();
+  const [authUser, setUser] = React.useState(null);
+  const [currentKey, setCurrentKey] = React.useState(null);
+
   const [newUser, setNewUser] = useState({
     name: '',
     lastname: '',
@@ -24,6 +31,28 @@ const FormContainer = () => {
     about: ''
   });
 
+  React.useEffect(() => {
+    db.ref('candidates').on('value', snapshot => {
+      const authUsers = snapshot.val();
+      let currentUser = undefined;
+      if (authUsers) {
+        let claves = Object.keys(authUsers);
+        for (let i = 0; i < claves.length; i++) {
+          let clave = claves[i];
+          if (authUsers[clave].email === auth.currentUser.email) {
+            currentUser = authUsers[clave];
+            currentUser.password = '';
+            setNewUser(currentUser);
+            setCurrentKey(clave);
+            newUser.password = '';
+          }
+        }
+      }
+      setUser(currentUser);
+    }, (error) => console.log(error));
+  }, []);
+
+
   const {
     name,
     lastname,
@@ -32,7 +61,6 @@ const FormContainer = () => {
     phone,
     phone2,
     email,
-    password,
     education,
     profession,
     about
@@ -40,39 +68,111 @@ const FormContainer = () => {
 
   const onChange = (e) =>
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
-
-  const sendData = (e) => {
-    e.preventDefault();
-    const user = {
-      name: newUser.name,
-      email: newUser.email,
-      rol: 'intern'
-    };
-    auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
-      const data = db.ref('auth');
-      authUsers.push(user);
-      data.update(authUsers).then(r => {
-        const bdRef = firebaseConfig.database();
-        bdRef.ref('candidates').push(newUser).then(() => {
-          handleShow();
-        }, error => {
-
-        });
-      });
-    }).catch(() => {
-      alert('Email ya registrado.');
-    });
+  const changeHandler = async (event) => {
+    const file = event.target.files[0];
+    const extBasic = event.target.value.substr(event.target.value.length - 4);
+    const extComplex = event.target.value.substr(event.target.value.length - 5);
+    if (extBasic === '.jpg' || extBasic === '.png' || extComplex === '.jpeg') {
+      setErrorFileProfile(false);
+      setIsFilePicked(await toBase64(file));
+    } else {
+      setErrorFileProfile(true);
+    }
   };
-  useEffect(() => {
-    const data = db.ref('auth').on('value', data => {
-      const authUsersList = data.val();
-      setAuthUsers(authUsersList);
-    });
-  }, []);
+  const changeHandlerPDF = async (event) => {
+    const file = event.target.files[0];
+    const validExt = '.pdf';
+    const ext = event.target.value.substr(event.target.value.length - 4);
+    if (ext === validExt) {
+      setErrorFile(false);
+      setSelectedFile(await toBase64(file));
+    } else {
+      setErrorFile(true);
+    }
+  };
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+  const saveNewData = (e) => {
+    e.preventDefault();
+    if (isFilePicked) {
+      newUser.imageURL = isFilePicked;
+      newUser.photoSettings = positionPhoto;
 
-  return (
-    <>
-      <Form className='mx-5 px-5' onSubmit={sendData}>
+    }
+    if (selectedFile) {
+      newUser.resume = selectedFile;
+
+    }
+    const todoRef = db.ref('candidates').child(String(currentKey));
+    todoRef.update(newUser).then(() => handleShow()).catch((error) => alert('error'));
+  };
+  return (<>
+    <Container>
+      <h1 className='text-center'>Panel de configuracion</h1>
+      <div className='d-flex justify-content-around align-content-center pt-4 flex-wrap'>
+        {newUser.photoSettings && (<div style={{ width: '250px' }}>
+          <div className='photoProfile  mb-4'>
+            <img src={newUser.imageURL} style={{
+              width: '250px',
+              position: 'absolute',
+              bottom: (-((50 - (newUser.photoSettings.y * 100)) / 50) * 100) + '%'
+            }} alt='' />
+          </div>
+        </div>)}
+        {newUser.resume && (<div style={{ width: '250px' }}>
+          <div>
+            <embed src={newUser.resume} style={{ width: '250xp', height: '250px' }} />
+            <p className='text-center'>Curriculum Vitae (CV).</p>
+          </div>
+        </div>)}
+      </div>
+      <Form className='px-5' onSubmit={saveNewData}>
+
+        <Form.Group controlId='formCv' className='pt-3'>
+          <Form.Label>Imagen de Perfil</Form.Label>
+          <Form.Control
+            name='photo'
+            type='file'
+            onChange={changeHandler}
+            required={!newUser.imageURL}
+          />
+        </Form.Group>
+        {isFilePicked ? <div className='pickersContainer'>
+          <AvatarEditor image={isFilePicked} width={250}
+                        height={250}
+                        border={10}
+                        borderRadius={100}
+                        rotate={0} scale={1} onPositionChange={(e) => {
+            setPositionPhoto(e);
+          }} />
+
+        </div> : errorFileProfile && (<Alert key={1} variant={'danger'}>
+          El formato de la imagen es invalido, solo se admite JPG/JPEG y PNG.
+        </Alert>)}
+
+        <hr />
+        <Form.Group controlId='formCv' className='pt-3'>
+          <Form.Label>Agregar CV (PDF)</Form.Label>
+          <Form.Control
+            name='resume'
+            type='file'
+            onChange={changeHandlerPDF}
+            required={!newUser.resume}
+          />
+        </Form.Group>
+        {selectedFile ? <div className='pickersContainer'>
+          <div>
+            <embed src={selectedFile} style={{ width: 'auto' }} />
+            <p className='text-center'>Vista previa.</p></div>
+        </div> : errorFile && (<Alert key={1} variant={'danger'}>
+          El formato de el documento es invalido.
+        </Alert>)}
+
+        <hr />
         <Form.Group controlId='formName'>
           <Form.Label>Nombres</Form.Label>
           <Form.Control
@@ -164,6 +264,7 @@ const FormContainer = () => {
           <Form.Label>Correo electrónico</Form.Label>
           <Form.Control
             name='email'
+            disabled={true}
             value={email}
             type='email'
             placeholder='Ejemplo: johndoe@gmail.com'
@@ -174,21 +275,6 @@ const FormContainer = () => {
             Utiliza un email con aspecto profesional
           </Form.Text>
         </Form.Group>
-        <Form.Group controlId='formPassword'>
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            name='password'
-            minLength='8'
-            value={password}
-            type='password'
-            onChange={onChange}
-            required
-          />
-          <Form.Text className='text-muted'>
-            8 caracteres minimo.
-          </Form.Text>
-        </Form.Group>
-
         <Form.Group controlId='formEducation'>
           <Form.Label>Respecto a la universidad eres</Form.Label>
           <Form.Control
@@ -257,7 +343,7 @@ const FormContainer = () => {
             borderColor: '#FE3E00'
           }}
         >
-          Enviar
+          Guardar cambios
         </Button>
         <p className='mt-3'>
           ¿Dudas, problemas o sugerencias?
@@ -283,14 +369,12 @@ const FormContainer = () => {
         </Modal.Header>
         <Modal.Body>
           <div className='d-flex flex-column justify-content-center align-items-center'>
-            Hemos recibido tus datos correctamente.{' '}
+            Datos guardados correctamente.{' '}
             <img src={gifTenor} alt='' width={100} />
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Link to='/'>
-
-
             <Button
               variant='primary'
               onClick={handleClose}
@@ -306,28 +390,7 @@ const FormContainer = () => {
             </Button></Link>
         </Modal.Footer>
       </Modal>
-    </>
-  );
+    </Container>
+  </>);
 };
-
-export default FormContainer;
-
-/*
-NO YET MY FRIEND :(
-<Form.Row>
-        <Form.Label>Habilidades</Form.Label>
-      </Form.Row>
-  <Form.Row>
-        <Col>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Control type="text" placeholder="Excel, Word, Ingles,etc" />
-          </Form.Group>
-        </Col>
-
-        <Col>
-          <Button variant="primary">+</Button>
-        </Col>
-      </Form.Row>
-
-
-*/
+export default DashboardUser;
