@@ -49,14 +49,14 @@ export default function HomeSection() {
       }
     });
   }, []);
-  const whoCan = listProfessions.map((profession) => (
-    <li>
+  const whoCan = listProfessions.map((profession, index) => (
+    <li key={index}>
       <FaRegCheckCircle color={'#FE3E00'} /> {profession}
     </li>
   ));
 
-  const popBenefits = benefits.map((benefit) => (
-    <li>
+  const popBenefits = benefits.map((benefit, index) => (
+    <li key={index}>
       <FaCheck color={'#FE3E00'} /> {benefit}
     </li>
   ));
@@ -127,10 +127,10 @@ export default function HomeSection() {
         <Row>
           <div className='col-md d-flex flex-column align-items-center justify-content-center'>
             <h2 className='sub-title'>¿Quiénes pueden participar?</h2>
-            <p className='lead'>
+            <div className='lead'>
               Estudiantes, egresados y graduados de:
               <ul className='list-unstyled'>{whoCan}</ul>
-            </p>
+            </div>
           </div>
           <div className='col-md '>
             <img
@@ -148,9 +148,9 @@ export default function HomeSection() {
           <div className='col-md order-md-2 d-flex flex-column align-items-center justify-content-center'>
             <h2 className='sub-title'>¿Cuáles son los beneficios?</h2>
 
-            <p className='lead'>
+            <div className='lead'>
               <ul className='list-unstyled'>{popBenefits}</ul>
-            </p>
+            </div>
           </div>
           <div className='col-md order-md-1'>
             <img
